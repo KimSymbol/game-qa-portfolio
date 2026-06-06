@@ -1,5 +1,5 @@
 "BROKEN","EPIC","FAILED","FEATURE","PASSED","SKIPPED","STORY","UNKNOWN"
-"0","Flappy Bird QA","0","게임 시작","1","0","FB-001 시작화면 표시","0"
-"0","Flappy Bird QA","0","게임오버","1","0","FB-004 게임오버 후 재시작","0"
 "0","Flappy Bird QA","0","게임오버","1","0","FB-003 게임오버 화면 표시","0"
+"0","Flappy Bird QA","0","게임오버","1","0","FB-004 게임오버 후 재시작","0"
+"0","Flappy Bird QA","0","게임 시작","1","0","FB-001 시작화면 표시","0"
 "0","Flappy Bird QA","0","게임 시작","1","0","FB-002 게임 시작","0"
