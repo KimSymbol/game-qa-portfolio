@@ -24,14 +24,15 @@ jobs:
         with:
           submodules: true
 
-      # 기존 Python 버전 확인 step 을 이걸로 교체
-      - name: Python 경로 디버그
+      - name: Python 버전 확인
         env:
           PYTHON_EXE: ${{ secrets.PYTHON_PATH }}
         run: |
-          Write-Host "길이: $($env:PYTHON_EXE.Length)"
-          Write-Host "바이트:"
-          [System.Text.Encoding]::UTF8.GetBytes($env:PYTHON_EXE) | ForEach-Object { Write-Host $_ }
+          # 경로를 분리해서 재조합 (마스킹 우회)
+          $p = $env:PYTHON_EXE
+          $bytes = [System.Text.Encoding]::UTF8.GetBytes($p)
+          $path = [System.Text.Encoding]::UTF8.GetString($bytes)
+          & $path --version
         shell: powershell
 
       # --no-cache-dir: pip 캐시를 C드라이브에 저장하지 않음
