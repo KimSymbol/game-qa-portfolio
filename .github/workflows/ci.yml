@@ -28,8 +28,7 @@ jobs:
         env:
           PYTHON_EXE: ${{ secrets.PYTHON_PATH }}
         run: |
-          Write-Host "Python 경로: $env:PYTHON_EXE"
-          & "$env:PYTHON_EXE" --version
+          Invoke-Expression "$env:PYTHON_EXE --version"
         shell: powershell
 
       # --no-cache-dir: pip 캐시를 C드라이브에 저장하지 않음
