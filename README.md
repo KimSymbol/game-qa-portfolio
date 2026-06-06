@@ -30,3 +30,7 @@ game-qa-portfolio/
 ## 🔗 Allure 리포트
 
 👉 [GitHub Pages에서 보기](https://kimsymbol.github.io/game-qa-portfolio)
+
+## 🎬 시연 영상
+
+👉 [Flappy Bird QA 자동화 테스트](https://youtu.be/gc4bCL45jqw)
