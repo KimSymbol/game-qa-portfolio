@@ -3,6 +3,10 @@
 오픈소스 Flappy Bird 클론([FlapPyBird](https://github.com/sourabhv/FlapPyBird))을
 대상으로 PyAutoGUI + OpenCV + pytest 기반 자동화 테스트를 구현했습니다.
 
+## 🎬 시연 영상
+
+👉 [YouTube에서 보기](https://youtu.be/gc4bCL45jqw)
+
 ## 🛠️ 기술 스택
 
 | 분류 | 기술 | 용도 |
