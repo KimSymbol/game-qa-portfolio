@@ -42,12 +42,10 @@ jobs:
       # Start-Sleep 5초: 게임이 완전히 실행될 때까지 충분히 대기
       - name: FlapPyBird 실행
         run: |
-          # FlapPyBird 폴더로 이동 후 실행 (assets 경로 문제 해결)
           $gamePath = "${{ github.workspace }}\FlapPyBird"
-          Start-Process python -ArgumentList "main.py" -WorkingDirectory $gamePath -RedirectStandardOutput "game_log.txt" -RedirectStandardError "game_error.txt" -NoNewWindow
-          Start-Sleep -Seconds 5
-          if (Test-Path "game_log.txt") { Get-Content "game_log.txt" }
-          if (Test-Path "game_error.txt") { Get-Content "game_error.txt" }
+          Start-Process python -ArgumentList "main.py" -WorkingDirectory $gamePath -RedirectStandardOutput "$gamePath\game_log.txt" -RedirectStandardError "$gamePath\game_error.txt" -NoNewWindow -Wait
+          if (Test-Path "$gamePath\game_log.txt") { Get-Content "$gamePath\game_log.txt" }
+          if (Test-Path "$gamePath\game_error.txt") { Get-Content "$gamePath\game_error.txt" }
         shell: powershell
 
       # 게임 창이 실제로 떴는지 확인
