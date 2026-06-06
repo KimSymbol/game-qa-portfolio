@@ -12,6 +12,11 @@ jobs:
   test:
     runs-on: self-hosted  # 내 PC(self-hosted runner)에서 실행
 
+    env:
+      # CI 환경 한글 깨짐 방지
+      PYTHONIOENCODING: utf-8
+      PYTHONUTF8: 1
+
     steps:
       # submodules: true → FlapPyBird submodule 도 같이 체크아웃
       - name: 코드 체크아웃
@@ -34,11 +39,29 @@ jobs:
         shell: powershell
 
       # github.workspace: 레포 루트 경로 (하드코딩 대신 사용)
-      # Start-Sleep: 게임이 완전히 실행될 때까지 3초 대기
+      # Start-Sleep 5초: 게임이 완전히 실행될 때까지 충분히 대기
       - name: FlapPyBird 실행
         run: |
           Start-Process python -ArgumentList "${{ github.workspace }}\FlapPyBird\main.py"
-          Start-Sleep -Seconds 3
+          Start-Sleep -Seconds 5
+        shell: powershell
+
+      # 게임 창이 실제로 떴는지 확인
+      # 창을 못 찾으면 에러 메시지 출력 후 종료
+      - name: 게임 창 확인
+        run: |
+          Add-Type -AssemblyName System.Windows.Forms
+          $hwnd = [System.IntPtr]::Zero
+          $hwnd = [System.Windows.Forms.NativeWindow]::new()
+          python -c "
+          import win32gui
+          hwnd = win32gui.FindWindow(None, 'Flappy Bird')
+          if hwnd == 0:
+              print('ERROR: Flappy Bird 창을 찾을 수 없음')
+              exit(1)
+          else:
+              print(f'OK: Flappy Bird 창 발견 (hwnd={hwnd})')
+          "
         shell: powershell
 
       # --alluredir: Allure 결과물 저장 경로 지정
