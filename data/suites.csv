@@ -1,0 +1,29 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"
+        FB-001: 게임 실행 시 시작화면이 정상적으로 표시되는지 확인
+
+        전제조건: 게임이 실행된 상태
+        테스트 단계: 현재 화면에서 시작 화면 요소 확인
+        기대 결과: title, get_ready, tap 템플릿이 모두 발견됨
+        ","77","test_FB001_시작화면_표시","tests","2026-06-07","passed","2026-06-07","TestStart","test_1_start","",""
+"
+        FB-004: 게임오버 후 TAP 시 재시작 가능한지 확인
+
+        전제조건: game_over fixture 가 게임오버 상태 준비
+        테스트 단계: TAP 입력 후 시작 화면 복귀 확인
+        기대 결과: 시작 화면(get_ready)으로 돌아옴
+        ","895","test_FB004_게임오버_후_재시작","tests","2026-06-07","passed","2026-06-07","TestGameOver","test_2_gameover","",""
+"
+        FB-003: 새가 추락/충돌 시 게임오버 화면이 표시되는지 확인
+
+        전제조건: game_over fixture 가 자동으로 게임오버 유발
+        테스트 단계: 게임오버 템플릿 감지
+        기대 결과: gameover.png 템플릿 발견
+        ","63","test_FB003_게임오버_화면_표시","tests","2026-06-07","passed","2026-06-07","TestGameOver","test_2_gameover","",""
+"
+        FB-002: TAP 입력 시 게임이 정상적으로 시작되는지 확인
+
+        전제조건: 시작 대기 화면 상태
+        테스트 단계: TAP 입력 (스페이스바)
+        기대 결과: 게임이 시작됨 (get_ready 사라짐)
+        ","67","test_FB002_게임시작","tests","2026-06-07","passed","2026-06-07","TestStart","test_1_start","",""
