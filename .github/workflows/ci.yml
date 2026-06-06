@@ -7,6 +7,11 @@ name: Game QA Automation CI
 on:
   push:
     branches: [ main ]  # main 브랜치에 push 할 때마다 실행
+    paths-ignore:
+      - '**.md'                # 문서 변경 시 CI/CD 제외
+      - '.gitignore'           # gitignore 변경 시 CI/CD 제외
+      - 'assets/templates/**'  # 템플릿 이미지 변경 시 CI/CD 제외
+      - '.github/**'           # 워크플로우 파일 변경 시 무한 루프 방지
 
 jobs:
   test:
