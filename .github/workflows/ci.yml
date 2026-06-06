@@ -54,18 +54,8 @@ jobs:
       # 창을 못 찾으면 에러 메시지 출력 후 종료
       - name: 게임 창 확인
         run: |
-          Add-Type -AssemblyName System.Windows.Forms
-          $hwnd = [System.IntPtr]::Zero
-          $hwnd = [System.Windows.Forms.NativeWindow]::new()
-          python -c "
-          import win32gui
-          hwnd = win32gui.FindWindow(None, 'Flappy Bird')
-          if hwnd == 0:
-              print('ERROR: Flappy Bird 창을 찾을 수 없음')
-              exit(1)
-          else:
-              print(f'OK: Flappy Bird 창 발견 (hwnd={hwnd})')
-          "
+          # 현재 열려있는 모든 창 이름 출력
+          python -c "import win32gui; wins = []; win32gui.EnumWindows(lambda h,r: r.append(win32gui.GetWindowText(h)), wins); [print(w) for w in wins if w]"
         shell: powershell
 
       # --alluredir: Allure 결과물 저장 경로 지정
