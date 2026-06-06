@@ -10,7 +10,12 @@ on:
 
 jobs:
   test:
-    runs-on: self-hosted  # 내 PC에서 실행
+    runs-on: self-hosted
+
+    env:
+      # GitHub Secrets 에서 Python 경로 읽어옴
+      # PC 바뀌면 Secrets 값만 수정하면 됨 (ci.yml 수정 불필요)
+      PYTHON: ${{ secrets.PYTHON_PATH }}
 
     steps:
       # submodules: true → FlapPyBird submodule 도 같이 체크아웃
@@ -20,7 +25,7 @@ jobs:
           submodules: true
 
       - name: Python 버전 확인
-        run: python --version
+        run: & "$env:PYTHON" --version
         shell: powershell
 
       # --no-cache-dir: pip 캐시를 C드라이브에 저장하지 않음
@@ -28,21 +33,21 @@ jobs:
       - name: 의존성 설치
         run: |
           cd 01.game-automation/01.flappy-bird
-          python -m pip install -r requirements.txt --no-cache-dir
+          & "$env:PYTHON" -m pip install -r requirements.txt --no-cache-dir
         shell: powershell
 
       # github.workspace = 레포 루트 경로 (하드코딩 대신 사용)
       # Start-Sleep: 게임이 완전히 실행될 때까지 3초 대기
       - name: FlapPyBird 실행
         run: |
-          Start-Process python -ArgumentList "${{ github.workspace }}\FlapPyBird\main.py"
+          Start-Process "$env:PYTHON" -ArgumentList "${{ github.workspace }}\FlapPyBird\main.py"
           Start-Sleep -Seconds 3
         shell: powershell
 
       - name: pytest 실행
         run: |
           cd 01.game-automation/01.flappy-bird
-          python -m pytest tests/ -v --alluredir=allure-results
+          & "$env:PYTHON" -m pytest tests/ -v --alluredir=allure-results
         shell: powershell
 
       # --clean: 이전 리포트 삭제 후 새로 생성
