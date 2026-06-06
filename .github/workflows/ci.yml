@@ -1,13 +1,16 @@
 # .github/workflows/ci.yml
+# 역할: self-hosted runner에서 pytest 실행 후 Allure 리포트를 GitHub Pages에 배포
+# self-hosted runner: 내 PC에서 직접 실행 (게임 GUI 환경 필요)
+
 name: Game QA Automation CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main ]  # main 브랜치에 push 할 때마다 실행
 
 jobs:
   test:
-    runs-on: self-hosted
+    runs-on: self-hosted  # 내 PC에서 실행
 
     steps:
       # submodules: true → FlapPyBird submodule 도 같이 체크아웃
@@ -20,13 +23,16 @@ jobs:
         run: python --version
         shell: powershell
 
+      # --no-cache-dir: pip 캐시를 C드라이브에 저장하지 않음
+      # 매번 push 할 때마다 C드라이브 용량 부족 방지
       - name: 의존성 설치
         run: |
           cd 01.game-automation/01.flappy-bird
-          python -m pip install -r requirements.txt
+          python -m pip install -r requirements.txt --no-cache-dir
         shell: powershell
 
       # github.workspace = 레포 루트 경로 (하드코딩 대신 사용)
+      # Start-Sleep: 게임이 완전히 실행될 때까지 3초 대기
       - name: FlapPyBird 실행
         run: |
           Start-Process python -ArgumentList "${{ github.workspace }}\FlapPyBird\main.py"
@@ -39,6 +45,7 @@ jobs:
           python -m pytest tests/ -v --alluredir=allure-results
         shell: powershell
 
+      # --clean: 이전 리포트 삭제 후 새로 생성
       - name: Allure 리포트 생성
         run: |
           cd 01.game-automation/01.flappy-bird
@@ -50,3 +57,12 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: 01.game-automation/01.flappy-bird/allure-report
+
+      # if: always() → 테스트 실패해도 항상 실행
+      # 용량 큰 allure 결과물 삭제
+      - name: 작업 폴더 정리
+        if: always()
+        run: |
+          Remove-Item -Path "01.game-automation/01.flappy-bird/allure-results" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item -Path "01.game-automation/01.flappy-bird/allure-report" -Recurse -Force -ErrorAction SilentlyContinue
+        shell: powershell
