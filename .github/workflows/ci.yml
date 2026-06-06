@@ -25,9 +25,11 @@ jobs:
           submodules: true
 
       - name: Python 버전 확인
+        env:
+          PYTHON_EXE: ${{ secrets.PYTHON_PATH }}
         run: |
-          $python = '${{ secrets.PYTHON_PATH }}'
-          & $python --version
+          Write-Host "Python 경로: $env:PYTHON_EXE"
+          & "$env:PYTHON_EXE" --version
         shell: powershell
 
       # --no-cache-dir: pip 캐시를 C드라이브에 저장하지 않음
