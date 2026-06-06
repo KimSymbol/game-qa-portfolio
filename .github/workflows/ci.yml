@@ -25,7 +25,9 @@ jobs:
           submodules: true
 
       - name: Python 버전 확인
-        run: & "$env:PYTHON" --version
+        run: |
+          $python = "$env:PYTHON"
+          & $python --version
         shell: powershell
 
       # --no-cache-dir: pip 캐시를 C드라이브에 저장하지 않음
