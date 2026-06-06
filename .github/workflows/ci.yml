@@ -1,53 +1,50 @@
 # .github/workflows/ci.yml
-# 역할: self-hosted runner에서 pytest 실행 후 Allure 리포트를 GitHub Pages에 배포
-
 name: Game QA Automation CI
 
 on:
   push:
-    branches: [ main ]  # main 브랜치에 push 할 때마다 실행
+    branches: [ main ]
 
 jobs:
   test:
-    runs-on: self-hosted  # 내 PC에서 실행
+    runs-on: self-hosted
 
     steps:
-      # 1. 코드 체크아웃
+      # submodules: true → FlapPyBird submodule 도 같이 체크아웃
       - name: 코드 체크아웃
         uses: actions/checkout@v3
+        with:
+          submodules: true
 
-      # 2. Python 설치 확인
       - name: Python 버전 확인
         run: python --version
+        shell: powershell
 
-      # 3. 의존성 설치
       - name: 의존성 설치
         run: |
           cd 01.game-automation/01.flappy-bird
-          pip install -r requirements.txt
-
-      # 4. 게임 실행 (백그라운드)
-      - name: FlapPyBird 실행
-        run: |
-          Start-Process python -ArgumentList "D:\바탕화면\study\03.portfolio\01.flappy\FlapPyBird\main.py"
-          Start-Sleep -Seconds 3  # 게임 실행 대기
+          python -m pip install -r requirements.txt
         shell: powershell
 
-      # 5. pytest 실행 + Allure 결과 저장
+      # github.workspace = 레포 루트 경로 (하드코딩 대신 사용)
+      - name: FlapPyBird 실행
+        run: |
+          Start-Process python -ArgumentList "${{ github.workspace }}\FlapPyBird\main.py"
+          Start-Sleep -Seconds 3
+        shell: powershell
+
       - name: pytest 실행
         run: |
           cd 01.game-automation/01.flappy-bird
-          pytest tests/ -v --alluredir=allure-results
+          python -m pytest tests/ -v --alluredir=allure-results
         shell: powershell
 
-      # 6. Allure 리포트 생성
       - name: Allure 리포트 생성
         run: |
           cd 01.game-automation/01.flappy-bird
           allure generate allure-results -o allure-report --clean
         shell: powershell
 
-      # 7. GitHub Pages 에 배포
       - name: GitHub Pages 배포
         uses: peaceiris/actions-gh-pages@v3
         with:
