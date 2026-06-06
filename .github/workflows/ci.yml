@@ -26,7 +26,7 @@ jobs:
 
       - name: Python 버전 확인
         run: |
-          $python = "$env:PYTHON"
+          $python = '${{ secrets.PYTHON_PATH }}'
           & $python --version
         shell: powershell
 
