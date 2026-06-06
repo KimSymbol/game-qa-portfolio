@@ -39,23 +39,23 @@ jobs:
         shell: powershell
 
       # github.workspace: 레포 루트 경로 (하드코딩 대신 사용)
+      # WorkingDirectory: FlapPyBird 폴더에서 실행해야 assets 경로 정상 인식
       # Start-Sleep 5초: 게임이 완전히 실행될 때까지 충분히 대기
       - name: FlapPyBird 실행
         run: |
           $gamePath = "${{ github.workspace }}\FlapPyBird"
           Start-Process python -ArgumentList "main.py" -WorkingDirectory $gamePath
           Start-Sleep -Seconds 5
-          # 현재 열린 창 이름 중 pygame 관련만 출력
-          python -c "import win32gui; wins = []; win32gui.EnumWindows(lambda h,r: r.append(win32gui.GetWindowText(h)), wins); [print(repr(w)) for w in wins if w and len(w) < 50]"
         shell: powershell
 
+
       # 게임 창이 실제로 떴는지 확인
-      # 창을 못 찾으면 에러 메시지 출력 후 종료
+      # hwnd 가 0이면 창을 못 찾은 것 → 에러 출력 후 종료
       - name: 게임 창 확인
         run: |
-          # 현재 열려있는 모든 창 이름 출력
-          python -c "import win32gui; wins = []; win32gui.EnumWindows(lambda h,r: r.append(win32gui.GetWindowText(h)), wins); [print(w) for w in wins if w]"
+          python -c "import win32gui; hwnd = win32gui.FindWindow(None, 'Flappy Bird'); print('OK: Flappy Bird 창 발견 (hwnd={})'.format(hwnd)) if hwnd != 0 else (print('ERROR: Flappy Bird 창을 찾을 수 없음'), exit(1))"
         shell: powershell
+
 
       # --alluredir: Allure 결과물 저장 경로 지정
       - name: pytest 실행
