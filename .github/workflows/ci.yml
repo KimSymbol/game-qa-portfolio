@@ -42,10 +42,14 @@ jobs:
       # Start-Sleep 5초: 게임이 완전히 실행될 때까지 충분히 대기
       - name: FlapPyBird 실행
         run: |
-          Start-Process python -ArgumentList "${{ github.workspace }}\FlapPyBird\main.py"
+          # 게임 실행 후 로그 파일에 출력 저장
+          Start-Process python -ArgumentList "${{ github.workspace }}\FlapPyBird\main.py" -RedirectStandardOutput "game_log.txt" -RedirectStandardError "game_error.txt" -NoNewWindow
           Start-Sleep -Seconds 5
+          # 로그 출력
+          if (Test-Path "game_log.txt") { Get-Content "game_log.txt" }
+          if (Test-Path "game_error.txt") { Get-Content "game_error.txt" }
         shell: powershell
-
+        
       # 게임 창이 실제로 떴는지 확인
       # 창을 못 찾으면 에러 메시지 출력 후 종료
       - name: 게임 창 확인
