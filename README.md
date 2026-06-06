@@ -4,10 +4,12 @@
 PC 게임 및 모바일 게임을 대상으로 자동화 테스트를 구현했습니다.
 
 ## 📁 프로젝트 구조
+```
 game-qa-portfolio/
 ├── 01.game-automation/
 │   └── 01.flappy-bird/   # Flappy Bird QA 자동화
 └── 02.분석서/             # 게임 분석 문서 (예정)
+```
 
 ## 🛠️ 기술 스택
 

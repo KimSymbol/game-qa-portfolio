@@ -44,6 +44,7 @@ TAP → 재시작
 - **session scope fixture**: 테스트 간 게임 상태를 이어받아 자연스러운 플레이 사이클 재현
 
 ## 📁 프로젝트 구조
+```
 01.flappy-bird/
 ├── assets/
 │   └── templates/          # OpenCV 템플릿 이미지
@@ -60,6 +61,7 @@ TAP → 재시작
 │   └── screen_utils.py     # 캡처, 템플릿 매칭, Wait 함수
 ├── conftest.py             # pytest fixture
 └── requirements.txt
+```
 
 ## 🔧 트러블슈팅
 
