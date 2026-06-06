@@ -43,9 +43,10 @@ jobs:
       - name: FlapPyBird 실행
         run: |
           $gamePath = "${{ github.workspace }}\FlapPyBird"
-          Start-Process python -ArgumentList "main.py" -WorkingDirectory $gamePath -RedirectStandardOutput "$gamePath\game_log.txt" -RedirectStandardError "$gamePath\game_error.txt" -NoNewWindow -Wait
-          if (Test-Path "$gamePath\game_log.txt") { Get-Content "$gamePath\game_log.txt" }
-          if (Test-Path "$gamePath\game_error.txt") { Get-Content "$gamePath\game_error.txt" }
+          Start-Process python -ArgumentList "main.py" -WorkingDirectory $gamePath
+          Start-Sleep -Seconds 5
+          # 현재 열린 창 이름 중 pygame 관련만 출력
+          python -c "import win32gui; wins = []; win32gui.EnumWindows(lambda h,r: r.append(win32gui.GetWindowText(h)), wins); [print(repr(w)) for w in wins if w and len(w) < 50]"
         shell: powershell
 
       # 게임 창이 실제로 떴는지 확인
