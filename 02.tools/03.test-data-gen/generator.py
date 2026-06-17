@@ -99,7 +99,7 @@ def 버그리포트_생성(건수=20):
     헤더 = ["버그ID", "제목", "심각도", "우선순위", "플랫폼",
             "버전", "상태", "발견자", "발견일", "해결일", "재현율"]
 
-    with open(파일명, "w", newline="", encoding="utf-8") as f:
+    with open(파일명, "w", newline="", encoding="utf-8-sig") as f:
         writer = csv.writer(f)
         writer.writerow(헤더)
 
@@ -220,7 +220,7 @@ def 유저계정_생성(건수=30):
     헤더 = ["유저ID", "닉네임", "이메일", "가입일",
             "최종접속일", "레벨", "플랫폼", "국가", "계정상태"]
 
-    with open(파일명, "w", newline="", encoding="utf-8") as f:
+    with open(파일명, "w", newline="", encoding="utf-8-sig") as f:
         writer = csv.writer(f)
         writer.writerow(헤더)
 
@@ -291,7 +291,7 @@ def 테스트케이스_생성(건수=20):
             "테스트단계", "예상결과", "실제결과", "결과",
             "심각도", "우선순위", "플랫폼", "발견자", "발견일"]
 
-    with open(파일명, "w", newline="", encoding="utf-8") as f:
+    with open(파일명, "w", newline="", encoding="utf-8-sig") as f:
         writer = csv.writer(f)
         writer.writerow(헤더)
 
@@ -358,7 +358,7 @@ def 캐릭터스탯_생성(건수=30):
             "HP", "MP", "공격력", "방어력", "속도",
             "현재맵", "플레이타임(시간)"]
 
-    with open(파일명, "w", newline="", encoding="utf-8") as f:
+    with open(파일명, "w", newline="", encoding="utf-8-sig") as f:
         writer = csv.writer(f)
         writer.writerow(헤더)
 
@@ -432,7 +432,7 @@ def 서버응답_생성(건수=100):
     헤더 = ["요청ID", "API명", "요청시간", "응답시간(ms)",
             "상태코드", "성공여부", "서버", "지역"]
 
-    with open(파일명, "w", newline="", encoding="utf-8") as f:
+    with open(파일명, "w", newline="", encoding="utf-8-sig") as f:
         writer = csv.writer(f)
         writer.writerow(헤더)
 

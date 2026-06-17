@@ -55,7 +55,7 @@ def 데이터_읽기(파일명):
         print("❌ 파일이 없어요:", 경로)
         return None
 
-    df = pd.read_csv(경로, encoding="utf-8")
+    df = pd.read_csv(경로, encoding="utf-8-sig")
 
     # 해결일 - 미해결/진행중이면 비어있을 수 있음
     # NaN → 빈 문자열로 변환 (엑셀에 "nan" 방지)
