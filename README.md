@@ -58,4 +58,4 @@ game-qa-portfolio/
 | **대상 서비스** | AI 헬피챗 웹 서비스 |
 | **기술 스택** | Selenium · pytest · GitLab CI/CD · Allure · Jira API |
 | **주요 구현** | 회원가입(SI) · 로그인(LI) · 수업지도안(TS) 플로우 UI 자동화 |
-| **특이사항** | Jira REST API v3 연동으로 버그 티켓 자동 생성 및 중복 방지 처리 |
+| **특이사항** | Jira REST API v3 연동으로 버그 티켓 자동 생성 및 중복 방지 처리, 실 서비스 품질 향상에 영향을 줌 |
