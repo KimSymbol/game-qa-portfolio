@@ -6,10 +6,13 @@ PC 게임 및 모바일 게임을 대상으로 자동화 테스트를 구현했�
 ## 📁 프로젝트 구조
 ```
 game-qa-portfolio/
+├── .github/workflows...  # 깃허브 액션 CI/CD 설정
 ├── 01.game-automation/
-│   └── 01.flappy-bird/   # Flappy Bird QA 자동화
+│    ├── 01.flappy-bird/  # Flappy Bird QA 자동화
+│    └── 02.flare-rpg/    # Flare Rpg QA 자동화
 ├── 02.tools/             # QA 도구 모음
-└── 03.추가 예정          # 분석서, 테스트케이스 등(추가 예정)
+├── 03.추가 예정          # 분석서, 테스트케이스 등(추가 예정)
+└── .gitmodules           # 서브 모듈 (FlapPybird)
 ```
 
 ## 🛠️ 기술 스택

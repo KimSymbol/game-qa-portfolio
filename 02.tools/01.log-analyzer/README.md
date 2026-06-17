@@ -12,6 +12,7 @@
 ├── bug_log.txt          # 분석할 로그 파일 (기본값)
 ├── qa_tools.py          # 핵심 분석 모듈
 ├── main.py              # 실행 파일
+├── scheduler.py         # 자동 실행 스케줄러
 ├── README.md
 └── 결과/
     ├── bug_report_YYYY-MM-DD.xlsx   # 엑셀 리포트
@@ -23,7 +24,7 @@
 ## ⚙️ 설치
 
 ```bash
-pip install openpyxl
+pip install openpyxl schedule
 ```
 
 ---
@@ -42,6 +43,9 @@ python main.py a.txt b.txt c.txt
 
 # 4. 폴더 지정 → 안의 txt 파일 전부 분석
 python main.py logs/
+
+# 5. 자동 스케줄러 실행 (매일 09:00 자동 분석)
+python scheduler.py
 ```
 
 > 상위 폴더에서 실행할 때
@@ -103,6 +107,20 @@ ERROR: 서버 응답 없음 BUG-007 at 16:00:11
 
 ---
 
+## 🔗 도구 연동
+
+`test-data-gen` 으로 생성한 로그 파일을 바로 분석할 수 있어요.
+
+```bash
+# 1. test-data-gen 으로 로그 생성
+python 03.test-data-gen/main.py logs
+
+# 2. 생성된 로그 파일 분석
+python 01.log-analyzer/main.py 03.test-data-gen/결과/logs_2026-06-17.txt
+```
+
+---
+
 ## 🛠️ 기술 스택
 
 | 기술 | 용도 |
@@ -113,3 +131,4 @@ ERROR: 서버 응답 없음 BUG-007 at 16:00:11
 | `json` | 버그 히스토리 저장 |
 | `datetime` | 날짜별 파일명 자동 생성 |
 | `collections` | 중복 버그 카운팅 |
+| `schedule` | 자동 실행 스케줄러 |
