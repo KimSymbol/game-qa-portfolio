@@ -9,9 +9,6 @@ from utils.screen_utils import attach_screenshot
 @allure.epic("Flare RPG QA")
 @allure.feature("캐릭터 이동")
 class TestMovement:
-
-    @allure.story("FR-004 캐릭터 이동")
-    @allure.severity(allure.severity_level.CRITICAL)
     def test_FR004_캐릭터_이동(self, game_playing):
         """
         FR-004: 방향키 입력 시 캐릭터가 정상적으로 이동하는지 확인

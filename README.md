@@ -8,7 +8,8 @@ PC 게임 및 모바일 게임을 대상으로 자동화 테스트를 구현했�
 game-qa-portfolio/
 ├── 01.game-automation/
 │   └── 01.flappy-bird/   # Flappy Bird QA 자동화
-└── 02.분석서/             # 게임 분석 문서 (예정)
+├── 02.tools/             # QA 도구 모음
+└── 03.추가 예정          # 분석서, 테스트케이스 등(추가 예정)
 ```
 
 ## 🛠️ 기술 스택
@@ -16,16 +17,26 @@ game-qa-portfolio/
 | 분류 | 기술 |
 |------|------|
 | **언어** | Python 3.12 |
-| **PC 자동화** | PyAutoGUI, pydirectinput, OpenCV, pygetwindow |
-| **테스트** | pytest, Allure |
+| **게임 자동화** | PyAutoGUI · pydirectinput · OpenCV · pywin32 |
+| **테스트** | pytest · Allure |
+| **데이터 분석** | re · pandas · openpyxl |
 | **CI/CD** | GitHub Actions (self-hosted runner) |
 | **리포트** | Allure Report (GitHub Pages 자동 배포) |
 
 ## 📊 프로젝트 목록
 
-| # | 프로젝트 | 플랫폼 | 상태 |
-|---|---------|--------|------|
-| 01 | [Flappy Bird QA 자동화](./01.game-automation/01.flappy-bird) | PC | ✅ 완료 |
+### 🎮 01. Game Automation
+
+| # | 프로젝트 | 기술 스택 | 상태 |
+|---|---------|----------|------|
+| 01 | [Flappy Bird QA 자동화](./01.game-automation/01.flappy-bird) | PyAutoGUI · OpenCV · pytest · Allure | ✅ 완료 |
+| 02 | [Flare RPG QA 자동화](./01.game-automation/02.flare-rpg) | PyAutoGUI · OpenCV · pytest · Allure | ✅ 완료 |
+
+### 🛠️ 02. Tools
+
+| # | 프로젝트 | 기술 스택 | 상태 |
+|---|---------|----------|------|
+| 01 | [로그 자동 분석 시스템](./02.tools/01.log-analyzer) | re · openpyxl · schedule · json | ✅ 완료 |
 
 ## 🔗 Allure 리포트
 

@@ -1,0 +1,8 @@
+ERROR: 캐릭터 충돌 BUG-001 at 14:30:22
+INFO: 서버 연결 정상
+ERROR: 프레임 드랍 BUG-042 at 15:10:05
+INFO: 데이터 로딩 완료
+WARNING: 메모리 사용량 80%
+ERROR: 서버 응답 없음 BUG-007 at 16:00:11
+INFO: 유저 로그인 성공
+WARNING: 네트워크 지연

@@ -3,10 +3,12 @@
 #                 테스트 간 게임 상태를 이어받아 자연스러운 플레이 사이클 재현
 
 import pytest
+import re
 import time
 import sys
 sys.path.insert(0, ".")  # 프로젝트 루트를 모듈 탐색 경로에 추가
 from pages.game_page import GamePage
+from utils.jira_reporter import JiraReporter
 
 
 def pytest_runtest_teardown(item, nextitem):
@@ -135,3 +137,51 @@ def game_gameover(game_combat):
     # FR-008, FR-009 후 이미 좀비랑 전투 중이므로 시간이 지나면 자연스럽게 사망
     assert game_combat.wait_until_dead(timeout=60), "사망 상태 만들기 실패"
     return game_combat
+
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    """
+    pytest hook: 각 테스트의 각 단계(setup/call/teardown) 종료 후 자동 실행
+    실패 감지 시 Jira 티켓 생성/댓글 추가
+
+    hookwrapper=True 의미:
+    pytest 가 만든 report 객체를 가로채서 우리가 추가 처리 가능
+
+    동작:
+    1. 테스트 실행 단계(call) 에서 실패 발생 시에만 처리
+    2. 테스트 ID 와 이름을 함수명에서 추출
+    3. JiraReporter 호출
+    """
+    # pytest 기본 동작 수행 후 결과 받기
+    outcome = yield
+    report = outcome.get_result()
+
+    # call 단계(실제 테스트 실행) 실패만 처리
+    # setup/teardown 실패는 제외 (fixture 문제는 별도 이슈)
+    if report.when != "call" or not report.failed:
+        return
+
+    # 테스트 함수명에서 ID 추출
+    # 예: test_FR008_몬스터_공격 → "FR-008", "몬스터 공격"
+    func_name = item.name
+    match = re.match(r"test_FR(\d+)_(.+)", func_name)
+    if match:
+        test_id = f"FR-{match.group(1)}"
+        test_name = match.group(2).replace("_", " ")
+    else:
+        # 매칭 안 되면 함수명 그대로
+        test_id = "UNKNOWN"
+        test_name = func_name
+
+    # 에러 정보 추출
+    error_short = str(call.excinfo.value) if call.excinfo else "Unknown error"
+    error_full = report.longreprtext  # traceback 전체
+
+    # Jira 전송
+    try:
+        reporter = JiraReporter()
+        reporter.report_failure(test_id, test_name, error_short, error_full)
+    except Exception as e:
+        # Jira 전송 실패해도 pytest 자체는 계속 진행
+        print(f"[Jira] 전송 중 오류: {e}")

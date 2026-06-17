@@ -4,3 +4,4 @@ venv/
 *.pyc
 allure-results/
 debug/
+.env
