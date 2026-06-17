@@ -12,7 +12,7 @@ from pathlib import Path
 
 # qa_tools.py 가 있는 폴더를 Python 경로에 추가
 # → main.py 와 같은 폴더에 있는 qa_tools.py 를 import 할 수 있게 됨
-sys.path.append(str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).parent))
 
 import qa_tools
 

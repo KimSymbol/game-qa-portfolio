@@ -30,23 +30,25 @@ pip install pandas openpyxl
 ## 🚀 실행 방법
 
 ```bash
-# 기본 파일 (bugs.csv) 분석
-python main.py
-
 # 파일 지정
-python main.py june_bugs.csv
+python main.py bugs.csv
 
-# 파일 여러 개 → 리포트도 여러 개 생성
+# 여러 파일
 python main.py june.csv july.csv
 
-# 폴더 지정 → 안의 csv 파일 전부 리포트 생성
+# 폴더 지정 → 안의 csv 파일 전부 분석
 python main.py data/
 ```
 
-> 상위 폴더에서 실행할 때
+> ⚠️ 파일을 반드시 지정해야 합니다.
+>
+> **test-data-gen 과 연동 시**
 > ```bash
-> python 02.excel-reporter/main.py
-> python 02.excel-reporter/main.py data/
+> # 1. test-data-gen 으로 데이터 생성
+> python 03.test-data-gen/main.py bugs
+>
+> # 2. 생성된 파일로 리포트 생성
+> python 02.excel-reporter/main.py 03.test-data-gen/결과/bugs_2026-06-17.csv
 > ```
 
 ---
