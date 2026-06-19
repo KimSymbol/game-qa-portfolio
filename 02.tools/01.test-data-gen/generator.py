@@ -1,4 +1,6 @@
 # 역할: QA 테스트에 필요한 더미 데이터를 자동으로 생성하는 모듈
+# 공통 모듈: common.file_io 사용
+#
 # 생성 가능한 데이터:
 #   - 버그 리포트 (CSV)
 #   - 게임 로그 (TXT)
@@ -6,16 +8,26 @@
 #   - 테스트 케이스 (CSV)
 #   - 캐릭터 스탯 (CSV)
 #   - 서버 응답 시간 (CSV)
+#   - 아이템 (CSV)        ← 기획 데이터
+#   - 스킬 (CSV)          ← 기획 데이터
+#   - 몬스터 (CSV)        ← 기획 데이터
 
+import sys
 import csv
 import random
 from pathlib import Path
 from datetime import datetime, timedelta
 from faker import Faker
 
+# 02.tools 폴더를 Python 경로에 추가
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+# 공통 모듈
+from common.file_io import 결과폴더_생성, 타임스탬프, Latest_복사
+
 # 한국어 + 영어 faker 동시 사용
-fake_ko = Faker("ko_KR")   # 한국어 데이터 (이름, 날짜 등)
-fake_en = Faker("en_US")   # 영어 데이터 (이메일, ID 등)
+fake_ko = Faker("ko_KR")
+fake_en = Faker("en_US")
 
 # generator.py 가 있는 폴더를 기준 경로로 설정
 기준경로 = Path(__file__).parent
@@ -52,83 +64,78 @@ fake_en = Faker("en_US")   # 영어 데이터 (이메일, ID 등)
     "네트워크 패킷 손실",
 ]
 
+# 기획 데이터 풀
+아이템타입목록 = ["무기", "방어구", "소비", "재료", "장신구"]
+아이템등급목록 = ["일반", "고급", "희귀", "영웅", "전설"]
+스킬타입목록   = ["공격", "방어", "회복", "버프", "디버프"]
+몬스터등급목록 = ["일반", "정예", "보스", "레이드"]
+
+무기이름목록 = ["검", "도끼", "활", "지팡이", "단검", "창", "둔기"]
+방어구이름목록 = ["갑옷", "투구", "장갑", "신발", "망토"]
+소비이름목록  = ["체력 포션", "마나 포션", "해독제", "부활약"]
+스킬이름목록  = ["파이어볼", "힐", "방어막", "기절", "광역공격", "강타", "이동속도증가"]
+몬스터이름목록 = ["슬라임", "고블린", "오크", "드래곤", "리치", "골렘", "데몬"]
+
 
 def 날짜_생성(시작일="2026-01-01", 범위=180):
-    """
-    시작일로부터 범위 내 랜덤 날짜 생성
-
-    매개변수:
-    - 시작일: 기준 날짜 문자열 (YYYY-MM-DD)
-    - 범위  : 시작일로부터 최대 며칠 이후까지 (기본 180일)
-
-    반환값:
-    - 날짜 문자열 (YYYY-MM-DD)
-    """
+    """시작일로부터 범위 내 랜덤 날짜 생성"""
     기준 = datetime.strptime(시작일, "%Y-%m-%d")
     랜덤날짜 = 기준 + timedelta(days=random.randint(0, 범위))
     return 랜덤날짜.strftime("%Y-%m-%d")
 
 
-def 결과폴더_생성():
-    """결과 폴더가 없으면 자동 생성"""
-    폴더 = 기준경로 / "결과"
-    폴더.mkdir(exist_ok=True)
-    return 폴더
+def CSV_쓰기(파일명, 헤더, 데이터):
+    """
+    CSV 파일 쓰기 공통 함수
+    UTF-8-BOM 인코딩으로 엑셀 한글 정상 표시
+
+    매개변수:
+    - 파일명: 저장할 파일 경로
+    - 헤더  : 컬럼명 리스트
+    - 데이터: 행 데이터 리스트의 리스트
+    """
+    with open(파일명, "w", newline="", encoding="utf-8-sig") as f:
+        writer = csv.writer(f)
+        writer.writerow(헤더)
+        writer.writerows(데이터)
 
 
 # ────────────────────────────────────────
 # ① 버그 리포트 생성 (CSV)
 # ────────────────────────────────────────
 def 버그리포트_생성(건수=20):
-    """
-    버그 리포트 더미 데이터를 CSV로 생성
-
-    매개변수:
-    - 건수: 생성할 버그 리포트 수 (기본 20건)
-
-    컬럼:
-    - 버그ID, 제목, 심각도, 우선순위, 플랫폼, 버전
-    - 상태, 발견자, 발견일, 해결일, 재현율
-
-    파일 위치: 결과/bugs_YYYY-MM-DD.csv
-    """
-    폴더   = 결과폴더_생성()
-    오늘   = datetime.now().strftime("%Y-%m-%d")
-    파일명 = 폴더 / f"bugs_{오늘}.csv"
+    """버그 리포트 더미 데이터를 CSV로 생성"""
+    폴더   = 결과폴더_생성(기준경로)
+    시각   = 타임스탬프()
+    파일명 = 폴더 / f"bugs_{시각}.csv"
 
     헤더 = ["버그ID", "제목", "심각도", "우선순위", "플랫폼",
             "버전", "상태", "발견자", "발견일", "해결일", "재현율"]
 
-    with open(파일명, "w", newline="", encoding="utf-8-sig") as f:
-        writer = csv.writer(f)
-        writer.writerow(헤더)
+    데이터 = []
+    for i in range(1, 건수 + 1):
+        발견일 = 날짜_생성()
+        상태   = random.choice(상태목록)
+        해결일 = 날짜_생성(발견일, 30) if 상태 == "해결" else ""
+        재현횟수 = random.randint(1, 10)
 
-        for i in range(1, 건수 + 1):
-            발견일 = 날짜_생성()
-            상태   = random.choice(상태목록)
+        데이터.append([
+            f"BUG-{i:03d}",
+            random.choice(버그제목목록),
+            random.choice(심각도목록),
+            random.choice(우선순위목록),
+            random.choice(플랫폼목록),
+            f"v1.{random.randint(0, 9)}.{random.randint(0, 99)}",
+            상태,
+            fake_ko.name(),
+            발견일,
+            해결일,
+            f"{재현횟수}/10",
+        ])
 
-            # 해결 상태면 해결일 추가, 아니면 빈 값
-            해결일 = 날짜_생성(발견일, 30) if 상태 == "해결" else ""
-
-            # 재현율: 1~10 중 랜덤
-            재현횟수 = random.randint(1, 10)
-            재현율   = f"{재현횟수}/10"
-
-            writer.writerow([
-                f"BUG-{i:03d}",                    # BUG-001 형식
-                random.choice(버그제목목록),
-                random.choice(심각도목록),
-                random.choice(우선순위목록),
-                random.choice(플랫폼목록),
-                f"v1.{random.randint(0, 9)}.{random.randint(0, 99)}",
-                상태,
-                fake_ko.name(),                    # 한국어 이름
-                발견일,
-                해결일,
-                재현율,
-            ])
-
+    CSV_쓰기(파일명, 헤더, 데이터)
     print(f"✅ 버그 리포트 {건수}건 생성 완료: {파일명}")
+    Latest_복사(파일명, "bugs")
     return 파일명
 
 
@@ -136,47 +143,22 @@ def 버그리포트_생성(건수=20):
 # ② 게임 로그 생성 (TXT)
 # ────────────────────────────────────────
 def 게임로그_생성(건수=50):
-    """
-    게임 서버 로그 더미 데이터를 TXT로 생성
-    log-analyzer 도구로 바로 분석 가능한 형식으로 생성
+    """게임 서버 로그 더미 데이터를 TXT로 생성"""
+    폴더   = 결과폴더_생성(기준경로)
+    시각   = 타임스탬프()
+    파일명 = 폴더 / f"logs_{시각}.txt"
 
-    매개변수:
-    - 건수: 생성할 로그 줄 수 (기본 50줄)
-
-    형식: [로그유형]: [내용] [버그ID(에러일때만)] at [HH:MM:SS]
-    파일 위치: 결과/logs_YYYY-MM-DD.txt
-    """
-    폴더   = 결과폴더_생성()
-    오늘   = datetime.now().strftime("%Y-%m-%d")
-    파일명 = 폴더 / f"logs_{오늘}.txt"
-
-    에러내용목록 = [
-        "캐릭터 충돌 감지",
-        "서버 응답 없음",
-        "프레임 드랍 발생",
-        "메모리 누수 감지",
-        "네트워크 패킷 손실",
-    ]
-    정보내용목록 = [
-        "서버 연결 정상",
-        "유저 로그인 성공",
-        "데이터 로딩 완료",
-        "세션 유지 중",
-        "캐시 업데이트 완료",
-    ]
-    경고내용목록 = [
-        "메모리 사용량 80%",
-        "CPU 사용량 높음",
-        "네트워크 지연 감지",
-        "디스크 용량 부족",
-    ]
+    에러내용목록 = ["캐릭터 충돌 감지", "서버 응답 없음", "프레임 드랍 발생",
+                  "메모리 누수 감지", "네트워크 패킷 손실"]
+    정보내용목록 = ["서버 연결 정상", "유저 로그인 성공", "데이터 로딩 완료",
+                  "세션 유지 중", "캐시 업데이트 완료"]
+    경고내용목록 = ["메모리 사용량 80%", "CPU 사용량 높음",
+                  "네트워크 지연 감지", "디스크 용량 부족"]
 
     with open(파일명, "w", encoding="utf-8") as f:
         버그번호 = 1
         for _ in range(건수):
             유형 = random.choice(로그유형목록)
-
-            # 랜덤 시간 생성 (HH:MM:SS)
             시간 = f"{random.randint(0,23):02d}:{random.randint(0,59):02d}:{random.randint(0,59):02d}"
 
             if 유형 == "ERROR":
@@ -192,6 +174,7 @@ def 게임로그_생성(건수=50):
                 f.write(f"INFO: {내용}\n")
 
     print(f"✅ 게임 로그 {건수}줄 생성 완료: {파일명}")
+    Latest_복사(파일명, "logs")
     return 파일명
 
 
@@ -199,48 +182,36 @@ def 게임로그_생성(건수=50):
 # ③ 유저 계정 생성 (CSV)
 # ────────────────────────────────────────
 def 유저계정_생성(건수=30):
-    """
-    게임 유저 계정 더미 데이터를 CSV로 생성
-
-    매개변수:
-    - 건수: 생성할 유저 수 (기본 30명)
-
-    컬럼:
-    - 유저ID, 닉네임, 이메일, 가입일, 최종접속일
-    - 레벨, 플랫폼, 국가, 계정상태
-
-    파일 위치: 결과/users_YYYY-MM-DD.csv
-    """
-    폴더   = 결과폴더_생성()
-    오늘   = datetime.now().strftime("%Y-%m-%d")
-    파일명 = 폴더 / f"users_{오늘}.csv"
+    """게임 유저 계정 더미 데이터를 CSV로 생성"""
+    폴더   = 결과폴더_생성(기준경로)
+    시각   = 타임스탬프()
+    파일명 = 폴더 / f"users_{시각}.csv"
 
     계정상태목록 = ["정상", "정지", "탈퇴"]
 
     헤더 = ["유저ID", "닉네임", "이메일", "가입일",
             "최종접속일", "레벨", "플랫폼", "국가", "계정상태"]
 
-    with open(파일명, "w", newline="", encoding="utf-8-sig") as f:
-        writer = csv.writer(f)
-        writer.writerow(헤더)
+    데이터 = []
+    for i in range(1, 건수 + 1):
+        가입일     = 날짜_생성("2025-01-01", 365)
+        최종접속일 = 날짜_생성(가입일, 30)
 
-        for i in range(1, 건수 + 1):
-            가입일     = 날짜_생성("2025-01-01", 365)
-            최종접속일 = 날짜_생성(가입일, 30)
+        데이터.append([
+            f"USR-{i:04d}",
+            fake_ko.user_name(),
+            fake_en.email(),
+            가입일,
+            최종접속일,
+            random.randint(1, 100),
+            random.choice(플랫폼목록),
+            random.choice(["KR", "US", "JP", "CN"]),
+            random.choice(계정상태목록),
+        ])
 
-            writer.writerow([
-                f"USR-{i:04d}",
-                fake_ko.user_name(),              # 한국어 닉네임
-                fake_en.email(),                  # 영어 이메일
-                가입일,
-                최종접속일,
-                random.randint(1, 100),           # 레벨 1~100
-                random.choice(플랫폼목록),
-                random.choice(["KR", "US", "JP", "CN"]),
-                random.choice(계정상태목록),
-            ])
-
+    CSV_쓰기(파일명, 헤더, 데이터)
     print(f"✅ 유저 계정 {건수}건 생성 완료: {파일명}")
+    Latest_복사(파일명, "users")
     return 파일명
 
 
@@ -248,23 +219,10 @@ def 유저계정_생성(건수=30):
 # ④ 테스트 케이스 생성 (CSV)
 # ────────────────────────────────────────
 def 테스트케이스_생성(건수=20):
-    """
-    QA 테스트 케이스 더미 데이터를 CSV로 생성
-    md-report-gen 도구의 입력 파일로 바로 사용 가능
-
-    매개변수:
-    - 건수: 생성할 테스트 케이스 수 (기본 20건)
-
-    컬럼:
-    - TC_ID, 테스트명, 분류, 전제조건
-    - 테스트단계, 예상결과, 실제결과, 결과
-    - 심각도, 우선순위, 플랫폼, 발견자, 발견일
-
-    파일 위치: 결과/testcases_YYYY-MM-DD.csv
-    """
-    폴더   = 결과폴더_생성()
-    오늘   = datetime.now().strftime("%Y-%m-%d")
-    파일명 = 폴더 / f"testcases_{오늘}.csv"
+    """QA 테스트 케이스 더미 데이터를 CSV로 생성"""
+    폴더   = 결과폴더_생성(기준경로)
+    시각   = 타임스탬프()
+    파일명 = 폴더 / f"testcases_{시각}.csv"
 
     분류목록 = ["로그인", "회원가입", "인벤토리", "전투", "퀘스트", "상점", "설정"]
     결과목록 = ["Pass", "Fail", "Block", "Skip"]
@@ -291,35 +249,31 @@ def 테스트케이스_생성(건수=20):
             "테스트단계", "예상결과", "실제결과", "결과",
             "심각도", "우선순위", "플랫폼", "발견자", "발견일"]
 
-    with open(파일명, "w", newline="", encoding="utf-8-sig") as f:
-        writer = csv.writer(f)
-        writer.writerow(헤더)
+    데이터 = []
+    for i in range(1, 건수 + 1):
+        결과 = random.choice(결과목록)
+        예상결과 = "정상 동작 확인"
+        실제결과 = "정상 동작 확인" if 결과 == "Pass" else random.choice(에러메시지목록)
 
-        for i in range(1, 건수 + 1):
-            결과 = random.choice(결과목록)
+        데이터.append([
+            f"TC-{i:03d}",
+            random.choice(테스트명목록),
+            random.choice(분류목록),
+            random.choice(전제조건목록),
+            "1. 앱 실행\n2. 해당 기능 진입\n3. 동작 수행",
+            예상결과,
+            실제결과,
+            결과,
+            random.choice(심각도목록) if 결과 == "Fail" else "",
+            random.choice(우선순위목록) if 결과 == "Fail" else "",
+            random.choice(플랫폼목록),
+            fake_ko.name(),
+            날짜_생성(),
+        ])
 
-            # Pass면 실제결과 = 예상결과와 같음
-            # Fail이면 실제결과 = 오류 내용
-            예상결과 = "정상 동작 확인"
-            실제결과 = "정상 동작 확인" if 결과 == "Pass" else random.choice(에러메시지목록)
-
-            writer.writerow([
-                f"TC-{i:03d}",
-                random.choice(테스트명목록),
-                random.choice(분류목록),
-                random.choice(전제조건목록),
-                "1. 앱 실행\n2. 해당 기능 진입\n3. 동작 수행",
-                예상결과,
-                실제결과,
-                결과,
-                random.choice(심각도목록) if 결과 == "Fail" else "",
-                random.choice(우선순위목록) if 결과 == "Fail" else "",
-                random.choice(플랫폼목록),
-                fake_ko.name(),
-                날짜_생성(),
-            ])
-
+    CSV_쓰기(파일명, 헤더, 데이터)
     print(f"✅ 테스트 케이스 {건수}건 생성 완료: {파일명}")
+    Latest_복사(파일명, "testcases")
     return 파일명
 
 
@@ -327,25 +281,11 @@ def 테스트케이스_생성(건수=20):
 # ⑤ 캐릭터 스탯 생성 (CSV)
 # ────────────────────────────────────────
 def 캐릭터스탯_생성(건수=30):
-    """
-    게임 캐릭터 스탯 더미 데이터를 CSV로 생성
-    캐릭터 밸런스 테스트나 데이터 검증 테스트에 활용
+    """게임 캐릭터 스탯 더미 데이터를 CSV로 생성"""
+    폴더   = 결과폴더_생성(기준경로)
+    시각   = 타임스탬프()
+    파일명 = 폴더 / f"characters_{시각}.csv"
 
-    매개변수:
-    - 건수: 생성할 캐릭터 수 (기본 30명)
-
-    컬럼:
-    - 캐릭터ID, 닉네임, 직업, 레벨, HP, MP
-    - 공격력, 방어력, 속도, 현재맵, 플레이타임(시간)
-
-    파일 위치: 결과/characters_YYYY-MM-DD.csv
-    """
-    폴더   = 결과폴더_생성()
-    오늘   = datetime.now().strftime("%Y-%m-%d")
-    파일명 = 폴더 / f"characters_{오늘}.csv"
-
-    # 직업별 스탯 범위 정의
-    # (HP범위, MP범위, 공격력범위, 방어력범위, 속도범위)
     직업스탯 = {
         "전사" : ((800, 1200), (100, 300),  (80, 150),  (100, 180), (50, 80)),
         "마법사": ((400, 700),  (500, 1000), (150, 250), (30, 70),   (60, 90)),
@@ -358,33 +298,30 @@ def 캐릭터스탯_생성(건수=30):
             "HP", "MP", "공격력", "방어력", "속도",
             "현재맵", "플레이타임(시간)"]
 
-    with open(파일명, "w", newline="", encoding="utf-8-sig") as f:
-        writer = csv.writer(f)
-        writer.writerow(헤더)
+    데이터 = []
+    for i in range(1, 건수 + 1):
+        직업  = random.choice(직업목록)
+        레벨  = random.randint(1, 100)
+        스탯  = 직업스탯[직업]
+        배율 = 1 + (레벨 / 100)
 
-        for i in range(1, 건수 + 1):
-            직업  = random.choice(직업목록)
-            레벨  = random.randint(1, 100)
-            스탯  = 직업스탯[직업]
+        데이터.append([
+            f"CHR-{i:04d}",
+            fake_ko.user_name(),
+            직업,
+            레벨,
+            int(random.randint(*스탯[0]) * 배율),
+            int(random.randint(*스탯[1]) * 배율),
+            int(random.randint(*스탯[2]) * 배율),
+            int(random.randint(*스탯[3]) * 배율),
+            int(random.randint(*스탯[4]) * 배율),
+            random.choice(맵목록),
+            random.randint(1, 500),
+        ])
 
-            # 레벨에 따라 스탯 배율 적용
-            배율 = 1 + (레벨 / 100)
-
-            writer.writerow([
-                f"CHR-{i:04d}",
-                fake_ko.user_name(),
-                직업,
-                레벨,
-                int(random.randint(*스탯[0]) * 배율),  # HP
-                int(random.randint(*스탯[1]) * 배율),  # MP
-                int(random.randint(*스탯[2]) * 배율),  # 공격력
-                int(random.randint(*스탯[3]) * 배율),  # 방어력
-                int(random.randint(*스탯[4]) * 배율),  # 속도
-                random.choice(맵목록),
-                random.randint(1, 500),                # 플레이타임
-            ])
-
+    CSV_쓰기(파일명, 헤더, 데이터)
     print(f"✅ 캐릭터 스탯 {건수}건 생성 완료: {파일명}")
+    Latest_복사(파일명, "characters")
     return 파일명
 
 
@@ -392,68 +329,186 @@ def 캐릭터스탯_생성(건수=30):
 # ⑥ 서버 응답 시간 생성 (CSV)
 # ────────────────────────────────────────
 def 서버응답_생성(건수=100):
-    """
-    게임 서버 응답 시간 더미 데이터를 CSV로 생성
-    성능 테스트 결과 분석이나 임계값 검증에 활용
-
-    매개변수:
-    - 건수: 생성할 응답 기록 수 (기본 100건)
-
-    컬럼:
-    - 요청ID, API명, 요청시간, 응답시간(ms), 상태코드
-    - 성공여부, 서버, 지역
-
-    임계값 기준:
-    - 정상  : 응답시간 200ms 미만
-    - 경고  : 응답시간 200~500ms
-    - 위험  : 응답시간 500ms 이상
-
-    파일 위치: 결과/server_response_YYYY-MM-DD.csv
-    """
-    폴더   = 결과폴더_생성()
-    오늘   = datetime.now().strftime("%Y-%m-%d")
-    파일명 = 폴더 / f"server_response_{오늘}.csv"
+    """게임 서버 응답 시간 더미 데이터를 CSV로 생성"""
+    폴더   = 결과폴더_생성(기준경로)
+    시각   = 타임스탬프()
+    파일명 = 폴더 / f"server_response_{시각}.csv"
 
     API목록 = [
-        "/api/login",
-        "/api/logout",
-        "/api/character/stats",
-        "/api/inventory/list",
-        "/api/quest/accept",
-        "/api/shop/purchase",
-        "/api/battle/start",
-        "/api/ranking/top100",
+        "/api/login", "/api/logout", "/api/character/stats",
+        "/api/inventory/list", "/api/quest/accept", "/api/shop/purchase",
+        "/api/battle/start", "/api/ranking/top100",
     ]
 
-    상태코드목록 = [200, 200, 200, 200, 201, 400, 404, 500]  # 200이 더 자주
+    상태코드목록 = [200, 200, 200, 200, 201, 400, 404, 500]
     서버목록     = ["서버-KR-01", "서버-KR-02", "서버-US-01"]
     지역목록     = ["서울", "부산", "뉴욕"]
 
     헤더 = ["요청ID", "API명", "요청시간", "응답시간(ms)",
             "상태코드", "성공여부", "서버", "지역"]
 
-    with open(파일명, "w", newline="", encoding="utf-8-sig") as f:
-        writer = csv.writer(f)
-        writer.writerow(헤더)
+    데이터 = []
+    for i in range(1, 건수 + 1):
+        응답시간 = random.randint(50, 800)
+        상태코드 = random.choice(상태코드목록)
+        성공여부 = "성공" if 상태코드 < 400 else "실패"
+        요청시간 = f"{random.randint(0,23):02d}:{random.randint(0,59):02d}:{random.randint(0,59):02d}"
 
-        for i in range(1, 건수 + 1):
-            응답시간   = random.randint(50, 800)   # 50~800ms
-            상태코드   = random.choice(상태코드목록)
-            성공여부   = "성공" if 상태코드 < 400 else "실패"
+        데이터.append([
+            f"REQ-{i:05d}",
+            random.choice(API목록),
+            요청시간,
+            응답시간,
+            상태코드,
+            성공여부,
+            random.choice(서버목록),
+            random.choice(지역목록),
+        ])
 
-            # 요청 시간 (오늘 날짜 기준 랜덤 시간)
-            요청시간 = f"{random.randint(0,23):02d}:{random.randint(0,59):02d}:{random.randint(0,59):02d}"
-
-            writer.writerow([
-                f"REQ-{i:05d}",
-                random.choice(API목록),
-                요청시간,
-                응답시간,
-                상태코드,
-                성공여부,
-                random.choice(서버목록),
-                random.choice(지역목록),
-            ])
-
+    CSV_쓰기(파일명, 헤더, 데이터)
     print(f"✅ 서버 응답 기록 {건수}건 생성 완료: {파일명}")
+    Latest_복사(파일명, "server_response")
+    return 파일명
+
+
+# ────────────────────────────────────────
+# ⑦ 아이템 데이터 생성 (CSV) - 기획 데이터
+# ────────────────────────────────────────
+def 아이템_생성(건수=50):
+    """
+    아이템 기획 데이터 더미를 CSV로 생성
+    data-validator 의 rules/items.json 과 매칭
+    """
+    폴더   = 결과폴더_생성(기준경로)
+    시각   = 타임스탬프()
+    파일명 = 폴더 / f"items_{시각}.csv"
+
+    헤더 = ["아이템ID", "이름", "타입", "등급", "가격", "공격력", "방어력", "설명"]
+
+    데이터 = []
+    for i in range(1, 건수 + 1):
+        타입 = random.choice(아이템타입목록)
+
+        # 타입별 이름 매핑
+        if 타입 == "무기":
+            이름 = random.choice(무기이름목록)
+            공격력 = random.randint(10, 5000)
+            방어력 = 0
+        elif 타입 == "방어구":
+            이름 = random.choice(방어구이름목록)
+            공격력 = 0
+            방어력 = random.randint(10, 3000)
+        elif 타입 == "소비":
+            이름 = random.choice(소비이름목록)
+            공격력 = 0
+            방어력 = 0
+        else:
+            이름 = f"{타입} 아이템 {i}"
+            공격력 = random.randint(0, 1000)
+            방어력 = random.randint(0, 1000)
+
+        등급 = random.choice(아이템등급목록)
+        등급배율 = {"일반": 1, "고급": 3, "희귀": 10, "영웅": 30, "전설": 100}
+        가격 = random.randint(100, 1000) * 등급배율[등급]
+
+        데이터.append([
+            f"ITEM-{i:04d}",
+            f"{등급} {이름}",
+            타입,
+            등급,
+            가격,
+            공격력,
+            방어력,
+            f"{등급} 등급의 {이름}",
+        ])
+
+    CSV_쓰기(파일명, 헤더, 데이터)
+    print(f"✅ 아이템 데이터 {건수}건 생성 완료: {파일명}")
+    Latest_복사(파일명, "items")
+    return 파일명
+
+
+# ────────────────────────────────────────
+# ⑧ 스킬 데이터 생성 (CSV) - 기획 데이터
+# ────────────────────────────────────────
+def 스킬_생성(건수=30):
+    """
+    스킬 기획 데이터 더미를 CSV로 생성
+    data-validator 의 rules/skills.json 과 매칭
+    """
+    폴더   = 결과폴더_생성(기준경로)
+    시각   = 타임스탬프()
+    파일명 = 폴더 / f"skills_{시각}.csv"
+
+    헤더 = ["스킬ID", "이름", "타입", "데미지", "마나소모", "쿨타임", "사거리", "직업"]
+
+    데이터 = []
+    for i in range(1, 건수 + 1):
+        타입 = random.choice(스킬타입목록)
+        이름 = random.choice(스킬이름목록)
+
+        # 타입별 데미지/회복량
+        if 타입 == "공격":
+            데미지 = random.randint(50, 9999)
+        elif 타입 == "회복":
+            데미지 = random.randint(20, 5000)
+        else:
+            데미지 = 0
+
+        데이터.append([
+            f"SKL-{i:03d}",
+            f"Lv.{random.randint(1, 10)} {이름}",
+            타입,
+            데미지,
+            random.randint(10, 500),
+            random.randint(1, 300),
+            random.randint(1, 50),
+            random.choice(직업목록),
+        ])
+
+    CSV_쓰기(파일명, 헤더, 데이터)
+    print(f"✅ 스킬 데이터 {건수}건 생성 완료: {파일명}")
+    Latest_복사(파일명, "skills")
+    return 파일명
+
+
+# ────────────────────────────────────────
+# ⑨ 몬스터 데이터 생성 (CSV) - 기획 데이터
+# ────────────────────────────────────────
+def 몬스터_생성(건수=30):
+    """
+    몬스터 기획 데이터 더미를 CSV로 생성
+    data-validator 의 rules/monsters.json 과 매칭
+    """
+    폴더   = 결과폴더_생성(기준경로)
+    시각   = 타임스탬프()
+    파일명 = 폴더 / f"monsters_{시각}.csv"
+
+    헤더 = ["몬스터ID", "이름", "레벨", "HP", "공격력", "방어력", "등급", "출현맵", "경험치"]
+
+    데이터 = []
+    for i in range(1, 건수 + 1):
+        등급 = random.choice(몬스터등급목록)
+        이름 = random.choice(몬스터이름목록)
+        레벨 = random.randint(1, 100)
+
+        # 등급별 스탯 배율
+        등급배율 = {"일반": 1, "정예": 5, "보스": 20, "레이드": 100}
+        배율 = 등급배율[등급] * (1 + 레벨 / 50)
+
+        데이터.append([
+            f"MON-{i:04d}",
+            f"{등급} {이름}",
+            레벨,
+            int(random.randint(100, 1000) * 배율),
+            int(random.randint(10, 100) * 배율),
+            int(random.randint(5, 50) * 배율),
+            등급,
+            random.choice(맵목록),
+            int(random.randint(10, 100) * 배율),
+        ])
+
+    CSV_쓰기(파일명, 헤더, 데이터)
+    print(f"✅ 몬스터 데이터 {건수}건 생성 완료: {파일명}")
+    Latest_복사(파일명, "monsters")
     return 파일명

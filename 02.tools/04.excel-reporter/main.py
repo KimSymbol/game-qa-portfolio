@@ -1,83 +1,120 @@
-# 역할: CSV 버그 데이터를 읽어 엑셀 리포트를 생성하는 실행 파일
-# reporter.py 의 함수들을 호출해서 분석 → 출력 → 엑셀 저장까지 진행
+# 역할: 버그 데이터를 다양한 형식의 리포트로 생성하는 실행 파일
 #
 # 실행 방법:
-#   python main.py bugs.csv                    → 파일 지정
-#   python main.py a.csv b.csv                 → 여러 파일
-#   python main.py data/                       → 폴더 안 csv 전부 분석
+#   python main.py bugs.csv                → 엑셀만 생성 (기본)
+#   python main.py bugs.csv --all          → 엑셀 + JSON + HTML 전부
+#   python main.py bugs.csv --json         → JSON만
+#   python main.py bugs.csv --html         → HTML만
+#   python main.py bugs.csv --excel
+#   python main.py bugs.pdf --pdf          → pdf만 
 
 import sys
 from pathlib import Path
-
-# reporter.py 가 있는 폴더를 Python 경로에 추가
+sys.path.insert(0, str(Path(__file__).parent.parent))
 sys.path.insert(0, str(Path(__file__).parent))
+from common.logger import 로거_생성
 
 import reporter
 
+log = 로거_생성("excel-reporter")
 
-def 리포트_실행(파일명):
-    """
-    CSV 파일 하나를 읽어서 통계 출력 + 엑셀 리포트 저장
-
-    매개변수:
-    - 파일명: 분석할 CSV 파일 이름 또는 경로
-
-    동작 순서:
-    1. CSV 파일 읽기 → DataFrame 생성
-    2. 터미널에 통계 출력 (총 건수, 해결률 등)
-    3. 4시트 엑셀 리포트 생성 및 저장
-    """
+def 리포트_실행(파일명, 옵션):
+    """파일 하나를 분석해서 지정된 형식으로 저장"""
+    log.info(f"리포트 생성 시작: {파일명}")
     print(f"\n📊 [{파일명}] 리포트 생성 시작...")
     print("━" * 30)
 
-    # 1. CSV 읽기 → DataFrame 반환
     df = reporter.데이터_읽기(파일명)
     if df is None:
+        log.error(f"데이터 읽기 실패: {파일명}")
         return
 
-    # 2. 핵심 지표 계산 및 출력
+    # 통계 출력
     총버그 = len(df)
     해결   = len(df[df["상태"] == "해결"])
-    진행중 = len(df[df["상태"] == "진행중"])
-    미해결 = len(df[df["상태"] == "미해결"])
     해결률 = round(해결 / 총버그 * 100, 1) if 총버그 > 0 else 0
 
     print(f"총 버그 수  : {총버그}건")
-    print(f"해결        : {해결}건 ✅")
-    print(f"진행중      : {진행중}건 🟡")
-    print(f"미해결      : {미해결}건 🔴")
     print(f"해결률      : {해결률}%")
     print("━" * 30)
 
-    # 3. 5시트 엑셀 리포트 생성 및 저장
-    저장경로 = reporter.리포트_생성(df)
-    print(f"✅ 저장 완료: {저장경로}")
+    log.info(f"통계 - 총 {총버그}건 / 해결률 {해결률}%")
+
+    # 옵션에 따라 출력 형식 결정
+    생성된파일 = []
+
+    try:
+        if 옵션 in ["--excel", "--all"] or not 옵션.startswith("--"):
+            경로 = reporter.리포트_생성(df)
+            print(f"✅ 엑셀 저장: {경로}")
+            log.info(f"XLSX 저장 완료: {경로}")
+            생성된파일.append(경로)
+
+        if 옵션 in ["--json", "--all"]:
+            경로 = reporter.리포트_생성_JSON(df)
+            print(f"✅ JSON 저장: {경로}")
+            log.info(f"JSON 저장 완료: {경로}")
+            생성된파일.append(경로)
+
+        if 옵션 in ["--html", "--all"]:
+            경로 = reporter.리포트_생성_HTML(df)
+            print(f"✅ HTML 저장: {경로}")
+            log.info(f"HTML 저장 완료: {경로}")
+            생성된파일.append(경로)
+
+        if 옵션 in ["--pdf", "--all"]:
+            경로 = reporter.리포트_생성_PDF(df)
+            print(f"✅ PDF 저장: {경로}")
+            log.info(f"PDF 저장 완료: {경로}")
+            생성된파일.append(경로)
+
+    except Exception as e:
+        log.error(f"리포트 생성 실패: {type(e).__name__}: {e}")
+        print(f"❌ 리포트 생성 중 에러: {e}")
+        return
+
+    log.info(f"전체 완료 - {len(생성된파일)}개 파일 생성")
 
 
-# ── 커맨드라인 인자에 따라 실행 방식 결정 ──
-if len(sys.argv) == 1:
-    # 인자 없음 → 사용법 안내
+# ── 인자 파싱 ──
+파일목록 = []
+옵션 = "--excel"
+
+for 인자 in sys.argv[1:]:
+    if 인자.startswith("--"):
+        옵션 = 인자
+    else:
+        파일목록.append(인자)
+
+if not 파일목록:
     print("❌ 파일을 지정해주세요")
     print("")
     print("사용법:")
-    print("  python main.py bugs.csv")
-    print("  python main.py 03.test-data-gen/결과/bugs_2026-06-17.csv")
-    print("  python main.py a.csv b.csv")
-    print("  python main.py data/")
+    print("  python main.py bugs.csv             → 엑셀만 생성")
+    print("  python main.py bugs.csv --all       → 엑셀 + JSON + HTML + PDF")
+    print("  python main.py bugs.csv --json      → JSON만")
+    print("  python main.py bugs.csv --html      → HTML만")
+    print("  python main.py bugs.csv --pdf       → PDF만")
+    log.warning("실행 인자 없음")
 
 else:
-    인자 = Path(sys.argv[1])
+    log.info(f"실행 시작 - 옵션: {옵션} / 파일: {파일목록}")
+    for 파일명 in 파일목록:
+        인자_경로 = Path(파일명)
+        if 인자_경로.is_dir():
+            csv목록 = list(인자_경로.glob("*.csv"))
+            xlsx목록 = list(인자_경로.glob("*.xlsx"))
+            tsv목록 = list(인자_경로.glob("*.tsv"))
+            json목록 = list(인자_경로.glob("*.json"))
+            전체 = csv목록 + xlsx목록 + tsv목록 + json목록
 
-    if 인자.is_dir():
-        # 폴더 지정 → 폴더 안 모든 .csv 파일 분석
-        파일목록 = list(인자.glob("*.csv"))
-        if not 파일목록:
-            print("❌ 폴더 안에 csv 파일이 없어요:", 인자)
+            if not 전체:
+                print("❌ 폴더 안에 지원하는 파일이 없어요:", 인자_경로)
+                log.warning(f"빈 폴더: {인자_경로}")
+            else:
+                print(f"📂 폴더 분석 시작: {인자_경로} ({len(전체)}개 파일)")
+                log.info(f"폴더 분석: {인자_경로} ({len(전체)}개)")
+                for 파일 in 전체:
+                    리포트_실행(str(파일), 옵션)
         else:
-            print(f"📂 폴더 분석 시작: {인자} ({len(파일목록)}개 파일)")
-            for 파일 in 파일목록:
-                리포트_실행(str(파일))
-    else:
-        # 파일 하나 또는 여러 개 지정
-        for 파일명 in sys.argv[1:]:
-            리포트_실행(파일명)
+            리포트_실행(파일명, 옵션)

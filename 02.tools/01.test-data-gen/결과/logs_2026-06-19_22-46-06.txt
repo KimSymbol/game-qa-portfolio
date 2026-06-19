@@ -1,0 +1,50 @@
+ERROR: 서버 응답 없음 BUG-001 at 06:34:10
+ERROR: 프레임 드랍 발생 BUG-002 at 19:15:03
+INFO: 캐시 업데이트 완료
+INFO: 유저 로그인 성공
+ERROR: 프레임 드랍 발생 BUG-003 at 05:17:30
+WARNING: 메모리 사용량 80% at 13:15:57
+WARNING: 메모리 사용량 80% at 23:46:33
+WARNING: 메모리 사용량 80% at 15:38:26
+WARNING: 네트워크 지연 감지 at 17:51:36
+ERROR: 네트워크 패킷 손실 BUG-004 at 11:32:00
+INFO: 캐시 업데이트 완료
+WARNING: 메모리 사용량 80% at 16:42:08
+INFO: 캐시 업데이트 완료
+WARNING: 메모리 사용량 80% at 20:47:22
+INFO: 데이터 로딩 완료
+WARNING: 네트워크 지연 감지 at 15:09:56
+WARNING: 네트워크 지연 감지 at 19:05:32
+ERROR: 네트워크 패킷 손실 BUG-005 at 06:03:30
+ERROR: 메모리 누수 감지 BUG-006 at 12:29:49
+INFO: 유저 로그인 성공
+WARNING: 네트워크 지연 감지 at 10:55:37
+ERROR: 캐릭터 충돌 감지 BUG-007 at 14:13:20
+ERROR: 캐릭터 충돌 감지 BUG-008 at 09:45:12
+ERROR: 네트워크 패킷 손실 BUG-009 at 23:42:14
+INFO: 서버 연결 정상
+INFO: 세션 유지 중
+ERROR: 메모리 누수 감지 BUG-010 at 21:52:13
+WARNING: 네트워크 지연 감지 at 23:38:12
+ERROR: 프레임 드랍 발생 BUG-011 at 09:21:41
+WARNING: 디스크 용량 부족 at 10:45:07
+WARNING: 디스크 용량 부족 at 13:07:55
+ERROR: 캐릭터 충돌 감지 BUG-012 at 20:58:55
+ERROR: 캐릭터 충돌 감지 BUG-013 at 13:04:23
+INFO: 세션 유지 중
+ERROR: 네트워크 패킷 손실 BUG-014 at 09:15:13
+WARNING: 디스크 용량 부족 at 19:10:20
+WARNING: 네트워크 지연 감지 at 13:34:30
+ERROR: 서버 응답 없음 BUG-015 at 16:40:55
+INFO: 유저 로그인 성공
+WARNING: CPU 사용량 높음 at 10:49:47
+WARNING: 네트워크 지연 감지 at 05:40:46
+WARNING: 디스크 용량 부족 at 17:55:30
+ERROR: 서버 응답 없음 BUG-016 at 16:21:23
+ERROR: 프레임 드랍 발생 BUG-017 at 11:22:16
+WARNING: 디스크 용량 부족 at 04:35:15
+ERROR: 서버 응답 없음 BUG-018 at 18:17:51
+WARNING: CPU 사용량 높음 at 19:14:38
+ERROR: 캐릭터 충돌 감지 BUG-019 at 18:06:56
+ERROR: 메모리 누수 감지 BUG-020 at 02:48:41
+ERROR: 메모리 누수 감지 BUG-021 at 15:42:05

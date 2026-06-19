@@ -1,0 +1,21 @@
+{
+    "결과_폴더명": "결과",
+    "타임스탬프_형식": "%Y-%m-%d_%H-%M-%S",
+    "기본_인코딩": "utf-8-sig",
+    "로그_레벨": "INFO",
+    "로그_폴더명": "logs",
+    "latest_복사_사용": true,
+    "기본_엑셀_시트_최대너비": 60,
+    "한글_폰트_경로": [
+        "C:/Windows/Fonts/malgun.ttf",
+        "C:/Windows/Fonts/gulim.ttc",
+        "/System/Library/Fonts/AppleSDGothicNeo.ttc",
+        "/usr/share/fonts/truetype/nanum/NanumGothic.ttf"
+    ],
+    "도구별_접두사": {
+        "excel-reporter": "report",
+        "data-validator": "validation_report",
+        "log-analyzer": "bug_report",
+        "md-report-gen": "ALL_BUGS"
+    }
+}
