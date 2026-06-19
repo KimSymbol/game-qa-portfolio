@@ -1,0 +1,35 @@
+# QA 도구 결과물 
+결과/
+logs/
+bug_history.json
+
+# 일반 로그 
+*.log
+
+# 임시 파일
+*.tmp
+*.bak
+
+
+# Python 
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# 가상환경
+venv/
+env/
+ENV/
+.venv
+
+# IDE 
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS 
+.DS_Store
+Thumbs.db

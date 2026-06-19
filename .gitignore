@@ -19,6 +19,7 @@ allure-report/
 
 # Debug / 임시
 debug/
+logs/
 *.log
 *.tmp
 
