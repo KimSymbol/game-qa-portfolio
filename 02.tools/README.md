@@ -67,7 +67,7 @@ ISTQB 기반 테스트 케이스 자동 생성부터 데이터 검증, 다양한
 
 ---
 
-## 📁 프로젝트 구조
+## 프로젝트 구조
 
 ```
 02.tools/
@@ -75,11 +75,16 @@ ISTQB 기반 테스트 케이스 자동 생성부터 데이터 검증, 다양한
 ├── README.md                  # 이 파일
 │
 ├── common/                    # 공통 모듈
+│   ├── __init__.py            # 패키지 초기화
 │   ├── file_io.py             # 다양한 입출력 형식 지원
 │   ├── excel_style.py         # 엑셀 공통 스타일
 │   ├── logger.py              # 로깅 시스템
 │   ├── config.py              # 설정 로딩
-│   └── config.json            # 전역 설정
+│   ├── config.json            # 전역 설정
+│   ├── column_mapper.py       # 외부 데이터 컬럼 매핑 변환
+│   ├── column_map.json        # 매핑 규칙 설정
+│   ├── convert.py             # 변환 실행 파일
+│   └── README.md              # 공통 모듈 문서
 │
 ├── 01.test-data-gen/          # 더미 데이터 생성
 ├── 02.data-validator/         # 데이터 무결성 검증
@@ -88,7 +93,7 @@ ISTQB 기반 테스트 케이스 자동 생성부터 데이터 검증, 다양한
 ├── 05.log-analyzer/           # 로그 분석
 ├── 06.tc-generator/           # TC 자동 생성
 │
-└── logs/                      # 실행 로그 (자동 생성)
+└── logs/                      # 실행 로그 (.gitignore 제외, 자동 생성)
 ```
 
 ---
