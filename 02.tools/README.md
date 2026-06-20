@@ -454,6 +454,7 @@ python -c "import md_generator; print(dir(md_generator))"
 
 각 도구의 자세한 사용법은 해당 폴더의 `README.md` 를 참고하세요.
 
+- [common (공통 모듈)](./common/README.md)
 - [01.test-data-gen](./01.test-data-gen/README.md)
 - [02.data-validator](./02.data-validator/README.md)
 - [03.md-report-gen](./03.md-report-gen/README.md)
