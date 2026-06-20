@@ -49,6 +49,8 @@ game-qa-portfolio/
 
 👉 [Flappy Bird QA 자동화 테스트](https://youtu.be/gc4bCL45jqw)
 
+👉 [Qa Tool 전체 시연](https://youtu.be/J9GxlsjLduU)
+
 ## 📋 팀 프로젝트 경험
 
 ### AI 헬피챗 QA 자동화 (부트캠프 팀 프로젝트)

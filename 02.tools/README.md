@@ -122,7 +122,7 @@ pip install pandas openpyxl faker reportlab
 
 QA Tools 시연
 
-> 📺 [YouTube 전체 시연 영상 보기](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
+> 📺 [YouTube 전체 시연 영상 보기](https://youtu.be/J9GxlsjLduU)
 
 **시연 내용**
 
