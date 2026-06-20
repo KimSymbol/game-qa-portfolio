@@ -187,22 +187,41 @@ python 06.tc-generator/main.py --template
 ## 외부 데이터 변환
 
 다른 팀/프로젝트의 TC나 버그 데이터를 내부 형식으로 변환할 수 있습니다.
+JSON 설정 파일로 매핑 규칙을 관리하며, 컬럼명 자동 추천 기능을 지원합니다.
 
 ```bash
 # 매핑 목록 조회
 python common/convert.py --list
 
-# TC 변환
-python common/convert.py external_tc.xlsx --map 예시_TC매핑
+# 매핑 초안 자동 생성 (컬럼명 자동 추천)
+python common/convert.py external_tc.xlsx --generate 우리팀_TC
 
-# 버그 데이터 변환
-python common/convert.py external_bugs.csv --map 예시_버그매핑
+# 매핑 설정 검증
+python common/convert.py --validate
+
+# 변환 미리보기 (저장 없이 확인)
+python common/convert.py external_tc.xlsx --map 우리팀_TC --preview
+
+# 실제 변환 (CSV + XLSX 동시 생성)
+python common/convert.py external_tc.xlsx --map 우리팀_TC
+
+# 버그 데이터 변환도 가능
+python common/convert.py jira_bugs.csv --map 예시_버그매핑
 ```
 
-JSON 설정 파일(`common/column_map.json`)에 매핑 규칙을 추가하면
-어떤 형식의 데이터든 변환할 수 있습니다.
-자세한 사용법은 [common (공통 모듈)](./common/README.md) 을 참고하세요.
+자세한 사용법과 변환 예시는 [common (공통 모듈)](./common/README.md) 을 참고하세요.
 
+## 누락 컬럼 자동 보완
+
+외부 데이터에 필수 컬럼이 없어도 도구가 자동으로 기본값을 채워서 동작합니다.
+
+```
+입력: TC_ID, 테스트명, 결과 (3개 컬럼만)
+  ↓ 자동 보완
+심각도(Medium), 상태(미해결), 플랫폼(PC) 등 누락 컬럼 자동 추가
+  ↓
+xlsx, json, html, pdf 정상 생성
+```
 
 ---
 
