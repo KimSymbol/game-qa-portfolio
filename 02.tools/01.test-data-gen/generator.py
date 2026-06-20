@@ -18,12 +18,15 @@ import random
 from pathlib import Path
 from datetime import datetime, timedelta
 from faker import Faker
+from openpyxl import Workbook
+
 
 # 02.tools 폴더를 Python 경로에 추가
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 # 공통 모듈
 from common.file_io import 결과폴더_생성, 타임스탬프, Latest_복사
+from common.excel_style import 헤더_스타일, 열너비_조정
 
 # 한국어 + 영어 faker 동시 사용
 fake_ko = Faker("ko_KR")
@@ -75,6 +78,75 @@ fake_en = Faker("en_US")
 소비이름목록  = ["체력 포션", "마나 포션", "해독제", "부활약"]
 스킬이름목록  = ["파이어볼", "힐", "방어막", "기절", "광역공격", "강타", "이동속도증가"]
 몬스터이름목록 = ["슬라임", "고블린", "오크", "드래곤", "리치", "골렘", "데몬"]
+
+
+
+def 템플릿_생성(종류="all"):
+    """
+    헤더만 있는 빈 CSV/XLSX 파일 생성
+    QA가 직접 수기로 데이터를 입력할 때 사용
+
+    매개변수:
+    - 종류: "bugs" / "testcases" / "items" / "all" 등
+
+    사용법:
+    python main.py --template             → 전체 템플릿
+    python main.py --template bugs        → 버그 템플릿만
+    """
+    결과폴더 = 결과폴더_생성(기준경로)
+
+    템플릿맵 = {
+        "bugs": ["버그ID", "제목", "심각도", "우선순위", "플랫폼",
+                 "버전", "상태", "발견자", "발견일", "해결일", "재현율"],
+        "testcases": ["TC_ID", "테스트명", "분류", "전제조건",
+                      "테스트단계", "예상결과", "실제결과", "결과",
+                      "심각도", "우선순위", "플랫폼", "발견자", "발견일"],
+        "users": ["유저ID", "닉네임", "이메일", "가입일",
+                  "최종접속일", "레벨", "플랫폼", "국가", "계정상태"],
+        "characters": ["캐릭터ID", "닉네임", "직업", "레벨",
+                       "HP", "MP", "공격력", "방어력", "속도",
+                       "현재맵", "플레이타임(시간)"],
+        "items": ["아이템ID", "이름", "타입", "등급", "가격",
+                  "공격력", "방어력", "설명"],
+        "skills": ["스킬ID", "이름", "타입", "데미지", "마나소모",
+                   "쿨타임", "사거리", "직업"],
+        "monsters": ["몬스터ID", "이름", "레벨", "HP", "공격력",
+                     "방어력", "등급", "출현맵", "경험치"],
+    }
+
+    생성대상 = 템플릿맵.keys() if 종류 == "all" else [종류]
+    생성된파일 = []
+
+    for 이름 in 생성대상:
+        if 이름 not in 템플릿맵:
+            print(f"[WARN] 알 수 없는 종류: {이름}")
+            continue
+
+        헤더 = 템플릿맵[이름]
+
+        # CSV
+        csv파일 = 결과폴더 / f"{이름}_template.csv"
+        with open(csv파일, "w", newline="", encoding="utf-8-sig") as f:
+            writer = csv.writer(f)
+            writer.writerow(헤더)
+
+        # XLSX
+        xlsx파일 = 결과폴더 / f"{이름}_template.xlsx"
+        wb = Workbook()
+        ws = wb.active
+        ws.title = 이름
+        ws.append(헤더)
+
+        from common.excel_style import 헤더_스타일, 열너비_조정
+        헤더_스타일(ws)
+        열너비_조정(ws)
+        wb.save(xlsx파일)
+
+        print(f"  {이름}: {csv파일.name} / {xlsx파일.name}")
+        생성된파일.append((csv파일, xlsx파일))
+
+    return 생성된파일
+
 
 
 def 날짜_생성(시작일="2026-01-01", 범위=180):

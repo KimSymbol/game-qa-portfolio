@@ -50,6 +50,22 @@ python main.py items 100       # 아이템 100건
 
 ---
 
+## 빈 템플릿 생성
+
+헤더만 있는 빈 CSV/XLSX 파일을 생성합니다.
+직접 데이터를 입력할 때 사용합니다.
+
+```bash
+# 전체 템플릿 생성
+python main.py --template
+
+# 특정 종류만
+python main.py --template bugs
+python main.py --template items
+```
+
+---
+
 ## 📋 생성 가능한 데이터 9종
 
 ### QA 관련 데이터

@@ -58,7 +58,26 @@ for 인자 in sys.argv[1:]:
     else:
         파일목록.append(인자)
 
-if not 파일목록:
+# ── 템플릿 모드 ──
+if "--template" in sys.argv:
+    print("빈 규칙 JSON 템플릿 생성 중...")
+    print("━" * 30)
+
+    try:
+        경로 = validator.규칙_템플릿_생성()
+        print(f"  규칙 템플릿: {경로}")
+        print("━" * 30)
+        print("생성 완료!")
+        print("사용법:")
+        print("  1. rules/template.json 을 복사해서 이름 변경 (예: quests.json)")
+        print("  2. 필수_컬럼, 컬럼_규칙 수정")
+        print("  3. validator.py 매핑목록에 키워드 추가")
+    except Exception as e:
+        log.error(f"템플릿 생성 실패: {type(e).__name__}: {e}")
+        print(f"[ERROR] 템플릿 생성 실패: {e}")
+
+# ── 일반 모드 ──
+elif not 파일목록:
     print("[ERROR] 파일을 지정해주세요")
     print("")
     print("사용법:")
@@ -66,6 +85,7 @@ if not 파일목록:
     print("  python main.py bugs.csv --all       → XLSX + JSON + HTML")
     print("  python main.py bugs.csv --json      → JSON만")
     print("  python main.py bugs.csv --html      → HTML만")
+    print("  python main.py --template           → 빈 규칙 JSON 템플릿 생성")
     log.warning("실행 인자 없음")
 
 else:

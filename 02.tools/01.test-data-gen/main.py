@@ -1,14 +1,11 @@
 # 역할: 테스트 데이터 생성 실행 파일
-# generator.py 의 함수들을 호출
 #
 # 실행 방법:
-#   python main.py              → 전체 데이터 기본 건수로 생성
-#   python main.py 50           → 전체 데이터 50건으로 생성
-#   python main.py bugs 30      → 특정 데이터만 생성
-#
-# 데이터 종류:
-#   - QA 관련: bugs, logs, users, testcases, characters, server
-#   - 기획 관련: items, skills, monsters
+#   python main.py                     → 전체 데이터 기본 건수로 생성
+#   python main.py 50                  → 전체 데이터 50건으로 생성
+#   python main.py bugs 30             → 특정 데이터만 생성
+#   python main.py --template          → 전체 빈 템플릿 생성
+#   python main.py --template bugs     → 특정 종류 빈 템플릿만
 
 import sys
 from pathlib import Path
@@ -18,6 +15,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from common.logger import 로거_생성
 log = 로거_생성("test-data-gen")
+from openpyxl import Workbook
 
 import generator
 
@@ -46,47 +44,71 @@ import generator
     "monsters"  : 30,
 }
 
-print("테스트 데이터 생성 시작...")
+print("테스트 데이터 생성기")
 print("━" * 30)
 
 log.info(f"실행 시작 - 인자: {sys.argv[1:]}")
 
-try:
-    if len(sys.argv) == 1:
-        print("전체 데이터 생성 (기본 건수)")
-        print("━" * 30)
-        log.info("전체 데이터 기본 건수로 생성")
-        for 종류, 함수 in 생성함수맵.items():
-            함수(기본건수맵[종류])
-            log.info(f"{종류} 생성 완료")
-
-    elif len(sys.argv) == 2 and sys.argv[1].isdigit():
-        건수 = int(sys.argv[1])
-        print(f"전체 데이터 {건수}건 생성")
-        print("━" * 30)
-        log.info(f"전체 데이터 {건수}건 생성")
-        for 종류, 함수 in 생성함수맵.items():
-            함수(건수)
-            log.info(f"{종류} 생성 완료 ({건수}건)")
-
-    elif len(sys.argv) >= 2:
-        종류 = sys.argv[1].lower()
-
-        if 종류 not in 생성함수맵:
-            print(f"[ERROR] 알 수 없는 종류: {종류}")
-            print(f"   사용 가능: {', '.join(생성함수맵.keys())}")
-            log.error(f"알 수 없는 종류: {종류}")
-        else:
-            건수 = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].isdigit() \
-                   else 기본건수맵[종류]
-            log.info(f"{종류} {건수}건 생성 시작")
-            생성함수맵[종류](건수)
-            log.info(f"{종류} 생성 완료 ({건수}건)")
-
+# ── 템플릿 모드 ──
+if "--template" in sys.argv:
+    print("빈 템플릿 생성 중...")
     print("━" * 30)
-    print("생성 완료! 결과/ 폴더를 확인해봐요.")
-    log.info("전체 생성 완료")
 
-except Exception as e:
-    log.error(f"생성 실패: {type(e).__name__}: {e}")
-    print(f"[ERROR] 생성 중 에러: {e}")
+    template_idx = sys.argv.index("--template")
+    if template_idx + 1 < len(sys.argv) and not sys.argv[template_idx + 1].startswith("--"):
+        종류 = sys.argv[template_idx + 1]
+    else:
+        종류 = "all"
+
+    log.info(f"템플릿 생성: {종류}")
+
+    try:
+        generator.템플릿_생성(종류)
+        print("━" * 30)
+        print("생성 완료! 직접 내용을 채워서 사용하세요.")
+        log.info("템플릿 생성 완료")
+    except Exception as e:
+        log.error(f"템플릿 생성 실패: {type(e).__name__}: {e}")
+        print(f"[ERROR] 템플릿 생성 실패: {e}")
+
+# ── 일반 모드 ──
+else:
+    try:
+        if len(sys.argv) == 1:
+            print("전체 데이터 생성 (기본 건수)")
+            print("━" * 30)
+            log.info("전체 데이터 기본 건수로 생성")
+            for 종류, 함수 in 생성함수맵.items():
+                함수(기본건수맵[종류])
+                log.info(f"{종류} 생성 완료")
+
+        elif len(sys.argv) == 2 and sys.argv[1].isdigit():
+            건수 = int(sys.argv[1])
+            print(f"전체 데이터 {건수}건 생성")
+            print("━" * 30)
+            log.info(f"전체 데이터 {건수}건 생성")
+            for 종류, 함수 in 생성함수맵.items():
+                함수(건수)
+                log.info(f"{종류} 생성 완료 ({건수}건)")
+
+        elif len(sys.argv) >= 2:
+            종류 = sys.argv[1].lower()
+
+            if 종류 not in 생성함수맵:
+                print(f"[ERROR] 알 수 없는 종류: {종류}")
+                print(f"  사용 가능: {', '.join(생성함수맵.keys())}")
+                log.error(f"알 수 없는 종류: {종류}")
+            else:
+                건수 = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].isdigit() \
+                       else 기본건수맵[종류]
+                log.info(f"{종류} {건수}건 생성 시작")
+                생성함수맵[종류](건수)
+                log.info(f"{종류} 생성 완료 ({건수}건)")
+
+        print("━" * 30)
+        print("생성 완료! 결과/ 폴더를 확인하세요.")
+        log.info("전체 생성 완료")
+
+    except Exception as e:
+        log.error(f"생성 실패: {type(e).__name__}: {e}")
+        print(f"[ERROR] 생성 중 에러: {e}")

@@ -29,13 +29,51 @@ log = 로거_생성("tc-generator")
 # tc_generator.py 가 있는 폴더를 기준 경로로 설정
 기준경로 = Path(__file__).parent
 
+
 # ────────────────────────────────────────
-# 출력 설정
+# 깡통 템플릿 생성
 # ────────────────────────────────────────
-# 기법 컬럼을 CSV/XLSX 에 포함할지 여부
-# - True : "기법" 컬럼 포함 (TC 설계 추적용, ISTQB 학습용)
-# - False: 실무 스타일 (테스트명만 보임)
-기법_컬럼_포함 = False
+def 템플릿_생성(형식="csv"):
+    """
+    헤더만 있는 빈 TC 파일 생성
+    QA가 직접 수기로 작성할 때 사용
+
+    매개변수:
+    - 형식: "csv" 또는 "xlsx"
+
+    저장 위치: 결과/tc_template.csv / .xlsx
+    """
+    결과폴더 = 결과폴더_생성(기준경로)
+
+    헤더 = [
+        "TC_ID", "테스트명", "분류", "전제조건",
+        "테스트단계", "예상결과", "실제결과", "결과",
+        "심각도", "우선순위", "플랫폼", "발견자", "발견일"
+    ]
+
+    if 형식 == "csv":
+        파일명 = 결과폴더 / "tc_template.csv"
+        with open(파일명, "w", newline="", encoding="utf-8-sig") as f:
+            writer = csv.writer(f)
+            writer.writerow(헤더)
+        log.info(f"TC 템플릿 생성: {파일명}")
+
+    elif 형식 == "xlsx":
+        파일명 = 결과폴더 / "tc_template.xlsx"
+        wb = Workbook()
+        ws = wb.active
+        ws.title = "테스트 케이스"
+        ws.append(헤더)
+        헤더_스타일(ws)
+        열너비_조정(ws, 최대너비=50)
+        wb.save(파일명)
+        log.info(f"TC 템플릿 생성: {파일명}")
+
+    else:
+        log.error(f"지원하지 않는 형식: {형식}")
+        return None
+
+    return 파일명
 
 
 # ────────────────────────────────────────
@@ -88,7 +126,6 @@ def 동등분할_TC_생성(사양):
         # 유효한 값들
         for 값 in 값분류.get("유효", []):
             TC목록.append({
-                "기법": "동등분할",
                 "테스트명": f"{파라미터명} 정상값 '{값}' 입력 시 동작 확인",   # ← 접두사 제거
                 "파라미터": 파라미터명,
                 "입력값": 값,
@@ -100,7 +137,6 @@ def 동등분할_TC_생성(사양):
         # 무효한 값들
         for 값 in 값분류.get("무효", []):
             TC목록.append({
-                "기법": "동등분할",
                 "테스트명": f"{파라미터명}에 비정상값 '{값}' 입력 시 오류 처리 확인",   # ← 접두사 제거
                 "파라미터": 파라미터명,
                 "입력값": 값,
@@ -139,7 +175,6 @@ def 경계값_TC_생성(사양):
 
         for 값, 구분, 테스트명, 예상결과, 심각도 in 경계점목록:
             TC목록.append({
-                "기법": "경계값",
                 "테스트명": 테스트명,
                 "파라미터": 파라미터명,
                 "입력값": f"{값}{단위}",
@@ -172,7 +207,6 @@ def 결정테이블_TC_생성(사양):
         조건문자열 = " + ".join(조건요약)
 
         TC목록.append({
-            "기법": "결정테이블",
             "테스트명": f"{조건문자열} 조합 시 동작 확인",   # ← 접두사 제거 + 자연어화
             "파라미터": " + ".join(조건.keys()),
             "입력값": ", ".join([f"{k}={v}" for k, v in 조건.items()]),
@@ -266,10 +300,7 @@ def CSV_저장(사양, TC목록):
 # ⑥-2. TC → testcases.xlsx 변환
 # ────────────────────────────────────────
 def XLSX_저장(사양, TC목록):
-    """
-    TC 목록을 testcases.xlsx 형식으로 저장
-    기법_컬럼_포함 설정에 따라 컬럼 구성 변경
-    """
+    """TC 목록을 xlsx 형식으로 저장"""
     결과폴더 = 결과폴더_생성(기준경로)
 
     기능명 = 사양.get("기능명", "unknown")
@@ -291,24 +322,14 @@ def XLSX_저장(사양, TC목록):
         "테스트단계", "예상결과", "실제결과", "결과",
         "심각도", "우선순위", "플랫폼", "발견자", "발견일"
     ]
-    if 기법_컬럼_포함:
-        헤더.append("기법")
-
     ws1.append(헤더)
     헤더_스타일(ws1)
-
-    # 기법별 색상 (기법 컬럼 표시 시에만 사용)
-    기법색상 = {
-        "동등분할"   : "4472C4",
-        "경계값"     : "FF6600",
-        "결정테이블" : "7030A0",
-    }
 
     for i, TC in enumerate(TC목록, 1):
         테스트액션 = f"{TC['파라미터']} 에 '{TC['입력값']}' 입력 후 동작 수행"
         재현절차 = 재현절차_포맷(공통헤더, 테스트액션)
 
-        행 = [
+        ws1.append([
             f"TC-{i:03d}",
             TC["테스트명"],
             분류,
@@ -322,54 +343,20 @@ def XLSX_저장(사양, TC목록):
             "PC",
             "자동생성",
             datetime.now().strftime("%Y-%m-%d"),
-        ]
-        if 기법_컬럼_포함:
-            행.append(TC["기법"])
+        ])
 
-        ws1.append(행)
-
-        # 기법 컬럼이 있으면 색상 적용
-        if 기법_컬럼_포함:
-            현재행 = ws1.max_row
-            배경색 = 기법색상.get(TC["기법"], "BFBFBF")
-            from openpyxl.styles import PatternFill, Font
-            기법_컬럼_위치 = len(헤더)  # 마지막 컬럼
-            ws1.cell(현재행, 기법_컬럼_위치).fill = PatternFill("solid", fgColor=배경색)
-            ws1.cell(현재행, 기법_컬럼_위치).font = Font(color="FFFFFF", bold=True)
-
-    # ── 시트 2: 기법별 통계 (기법 추적용으로 항상 생성) ──
-    ws2 = wb.create_sheet(title="기법별 통계")
-    ws2.append(["기법", "TC 수", "비율"])
+    # ── 시트 2: 사양 요약 ──
+    ws2 = wb.create_sheet(title="사양 요약")
+    ws2.append(["항목", "내용"])
     헤더_스타일(ws2)
 
-    기법별집계 = {}
-    for TC in TC목록:
-        기법 = TC["기법"]
-        기법별집계[기법] = 기법별집계.get(기법, 0) + 1
+    ws2.append(["기능명", 기능명])
+    ws2.append(["분류", 분류])
+    ws2.append(["전제조건", 전제조건])
+    ws2.append(["생성 시각", 시각])
+    ws2.append(["총 TC 수", str(len(TC목록))])
 
-    총합 = len(TC목록)
-    for 기법, 수 in 기법별집계.items():
-        비율 = round(수 / 총합 * 100, 1) if 총합 > 0 else 0
-        ws2.append([기법, 수, f"{비율}%"])
-        현재행 = ws2.max_row
-        배경색 = 기법색상.get(기법, "BFBFBF")
-        행_색상(ws2, 현재행, 배경색)
-
-    ws2.append(["합계", 총합, "100.0%"])
-    행_색상(ws2, ws2.max_row, "4472C4")
-
-    # ── 시트 3: 사양 요약 ──
-    ws3 = wb.create_sheet(title="사양 요약")
-    ws3.append(["항목", "내용"])
-    헤더_스타일(ws3)
-
-    ws3.append(["기능명", 기능명])
-    ws3.append(["분류", 분류])
-    ws3.append(["전제조건", 전제조건])
-    ws3.append(["생성 시각", 시각])
-    ws3.append(["총 TC 수", str(총합)])
-
-    for ws in [ws1, ws2, ws3]:
+    for ws in [ws1, ws2]:
         열너비_조정(ws, 최대너비=50)
 
     wb.save(파일명)
@@ -382,11 +369,7 @@ def XLSX_저장(사양, TC목록):
 # ⑦ 전체 TC 생성 (메인)
 # ────────────────────────────────────────
 def 전체_TC_생성(사양파일):
-    """
-    사양 파일 하나로부터 전체 TC를 자동 생성
-    CSV + XLSX 동시 출력
-    """
-    # 1. 사양 로딩
+    """사양 파일로부터 전체 TC를 자동 생성"""
     사양 = 사양_로딩(사양파일)
     if 사양 is None:
         return None
@@ -394,55 +377,20 @@ def 전체_TC_생성(사양파일):
     기능명 = 사양.get("기능명", "unknown")
     log.info(f"TC 생성 시작: {기능명}")
 
-    # 2. 각 기법으로 TC 생성
     동등분할_TC = 동등분할_TC_생성(사양)
     경계값_TC   = 경계값_TC_생성(사양)
     결정테이블_TC = 결정테이블_TC_생성(사양)
 
     전체 = 동등분할_TC + 경계값_TC + 결정테이블_TC
 
-    # 3. CSV + XLSX 저장
     csv경로  = CSV_저장(사양, 전체)
-    xlsx경로 = XLSX_저장(사양, 전체)        # ← 추가
+    xlsx경로 = XLSX_저장(사양, 전체)
 
     결과 = {
         "csv"  : csv경로,
-        "xlsx" : xlsx경로,                  # ← 추가
+        "xlsx" : xlsx경로,
         "건수" : len(전체),
-        "기법별": {
-            "동등분할": len(동등분할_TC),
-            "경계값"  : len(경계값_TC),
-            "결정테이블": len(결정테이블_TC)
-        }
     }
 
     log.info(f"TC 생성 완료: {기능명} ({len(전체)}건)")
     return 결과
-
-
-def 전체_사양_TC_생성():
-    """
-    specs/ 폴더의 모든 JSON 파일로부터 TC를 자동 생성
-
-    반환값:
-    - 결과 리스트
-    """
-    specs폴더 = 기준경로 / "specs"
-    if not specs폴더.exists():
-        log.error(f"specs 폴더 없음: {specs폴더}")
-        return []
-
-    JSON목록 = list(specs폴더.glob("*.json"))
-    if not JSON목록:
-        log.warning(f"specs 폴더에 JSON 파일 없음")
-        return []
-
-    log.info(f"전체 사양 처리 시작: {len(JSON목록)}개")
-    결과목록 = []
-    for 사양파일 in JSON목록:
-        결과 = 전체_TC_생성(사양파일)
-        if 결과:
-            결과목록.append(결과)
-
-    log.info(f"전체 사양 처리 완료: {len(결과목록)}건")
-    return 결과목록

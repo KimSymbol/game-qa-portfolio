@@ -8,7 +8,6 @@
 #   python main.py a.csv b.xlsx            → 여러 파일 분석
 #   python main.py data/                   → 폴더 안 csv/xlsx 전부 분석
 
-# main.py
 import sys
 from pathlib import Path
 
@@ -40,27 +39,51 @@ def 리포트_실행(파일명):
     print("━" * 30)
     print(f"개별 리포트: {len(결과['개별'])}건")
     print(f"통합 리포트: {결과['통합']}")
-    print(f"bugs.csv: {결과['csv']}")
+    print(f"bugs.csv:   {결과['csv']}")
     print("━" * 30)
     print("생성 완료!")
     print()
     print("다음 단계:")
-    print(f"   excel-reporter 로 엑셀 리포트 생성:")
-    print(f"   python 04.excel-reporter/main.py {결과['csv']}")
+    print(f"  python 04.excel-reporter/main.py {결과['csv']}")
 
     log.info(f"개별 리포트 {len(결과['개별'])}건 생성")
     log.info(f"통합 리포트 생성: {결과['통합']}")
     log.info(f"bugs.csv 생성: {결과['csv']}")
 
 
-# ── 커맨드라인 인자에 따라 실행 방식 결정 ──
-if len(sys.argv) == 1:
+# ── 템플릿 모드 ──
+if "--template" in sys.argv:
+    print("빈 버그 리포트 템플릿 생성 중...")
+    print("━" * 30)
+
+    # --template 뒤에 건수가 있으면 해당 건수만큼
+    template_idx = sys.argv.index("--template")
+    if template_idx + 1 < len(sys.argv) and sys.argv[template_idx + 1].isdigit():
+        건수 = int(sys.argv[template_idx + 1])
+    else:
+        건수 = 5
+
+    try:
+        결과 = md_generator.버그리포트_템플릿_생성(건수)
+        print(f"  개별 템플릿: {결과['건수']}건 ({결과['개별']})")
+        print(f"  통합 템플릿: {결과['통합']}")
+        print(f"  빈 CSV    : {결과['csv']}")
+        print("━" * 30)
+        print("생성 완료! 직접 내용을 채워서 사용하세요.")
+    except Exception as e:
+        log.error(f"템플릿 생성 실패: {type(e).__name__}: {e}")
+        print(f"[ERROR] 템플릿 생성 실패: {e}")
+
+# ── 일반 모드 ──
+elif len(sys.argv) == 1:
     print("[ERROR] 파일을 지정해주세요")
     print("")
     print("사용법:")
-    print("  python main.py testcases.csv")
-    print("  python main.py 01.test-data-gen/결과/testcases_2026-06-17_*.csv")
-    print("  python main.py data/")
+    print("  python main.py testcases.csv             → 마크다운 버그 리포트 생성")
+    print("  python main.py testcases.xlsx            → XLSX 파일도 지원")
+    print("  python main.py data/                     → 폴더 안 전부")
+    print("  python main.py --template                → 빈 버그 리포트 템플릿 5건")
+    print("  python main.py --template 10             → 빈 템플릿 10건")
     log.warning("실행 인자 없음")
 
 else:

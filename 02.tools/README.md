@@ -164,6 +164,26 @@ python pipeline.py --help
 
 ---
 
+## 빈 템플릿 생성
+
+각 도구에서 빈 파일을 생성해 직접 데이터를 입력할 수 있습니다.
+
+```bash
+# 데이터 입력용 빈 CSV/XLSX (bugs, testcases, items 등 9종)
+python 01.test-data-gen/main.py --template
+
+# 검증 규칙 JSON 템플릿
+python 02.data-validator/main.py --template
+
+# 버그 리포트 마크다운 템플릿
+python 03.md-report-gen/main.py --template
+
+# TC 작성용 빈 CSV/XLSX
+python 06.tc-generator/main.py --template
+```
+
+---
+
 ## 🛠️ 개발 순서 (도구가 만들어진 흐름)
 
 각 도구는 다음 순서로 개발되었습니다.

@@ -16,9 +16,12 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 # 공통 모듈
 from common.file_io import 파일_읽기, 결과폴더_생성, 타임스탬프, Latest_복사
+from common.logger import 로거_생성
 
 # md_generator.py 가 있는 폴더를 기준 경로로 설정
 기준경로 = Path(__file__).parent
+
+log = 로거_생성("data-validator")
 
 # 심각도 기준 설명 (마크다운 리포트 하단에 삽입)
 심각도기준 = """
@@ -323,4 +326,108 @@ def 리포트_생성(파일명):
         "개별": 개별경로목록,  # 개별 .md 파일들의 경로 리스트
         "통합": 통합경로,      # ALL_BUGS.md 경로
         "csv" : csv경로        # bugs_YYYY-MM-DD.csv 경로
+    }
+
+# ────────────────────────────────────────
+# 빈 버그 리포트 템플릿 생성
+# ────────────────────────────────────────
+def 버그리포트_템플릿_생성(건수=1):
+    """
+    빈 마크다운 버그 리포트 템플릿 생성
+    QA가 수동으로 버그 작성할 때 사용
+
+    매개변수:
+    - 건수: 생성할 빈 템플릿 수 (기본 1)
+
+    출력:
+    - 개별 .md 파일 (BUG-001.md ~ )
+    - 통합 ALL_BUGS_template.md
+    - bugs_template.csv (빈 CSV)
+    """
+    결과폴더 = 결과폴더_생성(기준경로)
+    저장폴더 = 기준경로 / "결과" / "bug_reports"
+    저장폴더.mkdir(parents=True, exist_ok=True)
+
+    마크다운목록 = []
+
+    for i in range(1, 건수 + 1):
+        버그ID = f"BUG-{i:03d}"
+
+        마크다운 = f"""## [{버그ID}]
+
+| 항목 | 내용 |
+|------|------|
+| **심각도 (Severity)** | |
+| **우선순위 (Priority)** | |
+| **테스트 케이스** | |
+| **분류** | |
+| **발견 날짜** | |
+| **발견자** | |
+| **플랫폼** | |
+| **버전** | |
+| **재현율** | |
+
+---
+
+### 요약 (Summary)
+>
+
+### 재현 절차 (Steps to Reproduce)
+1.
+2.
+3.
+
+### 예상 결과 (Expected Result)
+>
+
+### 실제 결과 (Actual Result)
+>
+
+### 첨부 자료 (Attachments)
+- 스크린샷:
+- 동영상:
+- 로그:
+
+### 참고 사항 (Notes)
+>
+"""
+
+        # 개별 파일 저장
+        파일명 = 저장폴더 / f"{버그ID}_template.md"
+        with open(파일명, "w", encoding="utf-8") as f:
+            f.write(마크다운)
+
+        마크다운목록.append(마크다운)
+        log.info(f"버그 리포트 템플릿 생성: {버그ID}")
+
+    # 통합 파일 저장
+    통합파일 = 결과폴더 / "ALL_BUGS_template.md"
+    헤더 = f"""# 전체 버그 리포트 (템플릿)
+
+총 {건수}건의 빈 버그 리포트
+
+---
+{심각도기준}
+---
+
+"""
+    with open(통합파일, "w", encoding="utf-8") as f:
+        f.write(헤더)
+        f.write("\n\n---\n\n".join(마크다운목록))
+
+    # 빈 bugs.csv 생성
+    csv파일 = 결과폴더 / "bugs_template.csv"
+    헤더 = ["버그ID", "TC_ID", "제목", "심각도", "우선순위",
+            "플랫폼", "버전", "상태", "발견자", "발견일", "해결일", "재현율"]
+    with open(csv파일, "w", newline="", encoding="utf-8-sig") as f:
+        writer = csv.writer(f)
+        writer.writerow(헤더)
+
+    log.info(f"버그 리포트 템플릿 {건수}건 생성 완료")
+
+    return {
+        "개별": 저장폴더,
+        "통합": 통합파일,
+        "csv" : csv파일,
+        "건수": 건수
     }
