@@ -241,10 +241,12 @@ def 재현절차_포맷(공통헤더, 테스트액션):
 # ⑥ TC → testcases.csv 변환
 # ────────────────────────────────────────
 def CSV_저장(사양, TC목록):
-    """
-    TC 목록을 testcases.csv 형식으로 저장
-    기법_컬럼_포함 설정에 따라 컬럼 구성 변경
-    """
+    """TC 목록을 testcases.csv 형식으로 저장"""
+    
+    if not TC목록:
+        log.warning("생성된 TC 가 없습니다")
+        return None
+
     결과폴더 = 결과폴더_생성(기준경로)
 
     기능명 = 사양.get("기능명", "unknown")
@@ -255,14 +257,11 @@ def CSV_저장(사양, TC목록):
     시각 = 타임스탬프()
     파일명 = 결과폴더 / f"testcases_{기능명}_{시각}.csv"
 
-    # 기법 컬럼 포함 여부에 따라 헤더 구성
     헤더 = [
         "TC_ID", "테스트명", "분류", "전제조건",
         "테스트단계", "예상결과", "실제결과", "결과",
         "심각도", "우선순위", "플랫폼", "발견자", "발견일"
     ]
-    if 기법_컬럼_포함:
-        헤더.append("기법")
 
     with open(파일명, "w", newline="", encoding="utf-8-sig") as f:
         writer = csv.writer(f)
@@ -272,7 +271,7 @@ def CSV_저장(사양, TC목록):
             테스트액션 = f"{TC['파라미터']} 에 '{TC['입력값']}' 입력 후 동작 수행"
             재현절차 = 재현절차_포맷(공통헤더, 테스트액션)
 
-            행 = [
+            writer.writerow([
                 f"TC-{i:03d}",
                 TC["테스트명"],
                 분류,
@@ -286,11 +285,7 @@ def CSV_저장(사양, TC목록):
                 "PC",
                 "자동생성",
                 datetime.now().strftime("%Y-%m-%d"),
-            ]
-            if 기법_컬럼_포함:
-                행.append(TC["기법"])
-
-            writer.writerow(행)
+            ])
 
     Latest_복사(파일명, f"testcases_{기능명}")
     log.info(f"CSV 저장 완료: {파일명} ({len(TC목록)}건)")
@@ -301,6 +296,11 @@ def CSV_저장(사양, TC목록):
 # ────────────────────────────────────────
 def XLSX_저장(사양, TC목록):
     """TC 목록을 xlsx 형식으로 저장"""
+
+    if not TC목록:
+        log.warning("생성된 TC 가 없습니다")
+        return None
+
     결과폴더 = 결과폴더_생성(기준경로)
 
     기능명 = 사양.get("기능명", "unknown")

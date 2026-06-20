@@ -108,6 +108,14 @@ def 데이터_읽기(파일명):
     df = 파일_읽기(파일명, 기준경로)
     if df is None:
         return None
+
+    if len(df.columns) == 0:
+        log.error("컬럼이 없는 빈 파일입니다")
+        return None
+
+    if len(df) == 0:
+        log.warning("데이터가 없는 빈 파일입니다 (헤더만 존재)")
+
     return df
 
 

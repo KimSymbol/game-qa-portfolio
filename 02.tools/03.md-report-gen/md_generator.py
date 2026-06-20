@@ -21,7 +21,7 @@ from common.logger import 로거_생성
 # md_generator.py 가 있는 폴더를 기준 경로로 설정
 기준경로 = Path(__file__).parent
 
-log = 로거_생성("data-validator")
+log = 로거_생성("md-report-gen")
 
 # 심각도 기준 설명 (마크다운 리포트 하단에 삽입)
 심각도기준 = """
@@ -40,12 +40,16 @@ log = 로거_생성("data-validator")
 # ① Fail 케이스만 추출
 # ────────────────────────────────────────
 def Fail_추출(df):
-    """
-    전체 테스트 케이스에서 결과가 Fail 인 것만 추출
-    """
+    """결과가 Fail 인 것만 추출 — 결과 컬럼 없으면 전체 반환"""
+
+    if "결과" not in df.columns:
+        log.warning("'결과' 컬럼 없음 - 전체 데이터를 대상으로 처리")
+        print("[WARN] '결과' 컬럼 없음 - 전체 데이터를 대상으로 처리")
+        return df
+
     fail_df = df[df["결과"] == "Fail"].reset_index(drop=True)
     if len(fail_df) == 0:
-        print("Fail 케이스가 없어요!")
+        print("Fail 케이스 없음")
         return None
     print(f"Fail 케이스: {len(fail_df)}건")
     return fail_df
@@ -276,17 +280,36 @@ def 리포트_생성(파일명):
         }
     - None: 파일 읽기 실패 또는 Fail 케이스 없을 때
     """
-    # 1. 파일 읽기 (공통 모듈 사용)
-    #    csv/xlsx 자동 판단, 인코딩 자동 처리
+    # 1. 파일 읽기
     df = 파일_읽기(파일명, 기준경로)
     if df is None:
-        return None  # 파일 없음 / 지원 안 하는 형식
+        return None
 
-    # 2. Fail 케이스만 추출
-    #    결과 컬럼이 "Fail" 인 행만 필터링
+    # 누락 컬럼 자동 보완
+    필수컬럼_기본값 = {
+        "결과"    : "",
+        "심각도"  : "",
+        "우선순위": "",
+        "발견자"  : "",
+        "발견일"  : "",
+        "플랫폼"  : "PC",
+        "버전"    : "",
+        "재현율"  : "",
+        "분류"    : "",
+        "테스트단계": "",
+        "예상결과"  : "",
+        "실제결과"  : "",
+    }
+
+    for 컬럼, 기본값 in 필수컬럼_기본값.items():
+        if 컬럼 not in df.columns:
+            df[컬럼] = 기본값
+            log.info(f"누락 컬럼 자동 추가: {컬럼}")
+
+    # 2. Fail 케이스 추출
     fail_df = Fail_추출(df)
     if fail_df is None:
-        return None  # Fail 케이스 없음
+        return None
 
     # 3. 버그 ID 순번 생성 (BUG-001, BUG-002, ...)
     #    f-string의 :03d → 3자리 0 패딩 (001, 042, 999)

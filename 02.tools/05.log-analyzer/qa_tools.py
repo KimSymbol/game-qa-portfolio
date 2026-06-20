@@ -7,6 +7,7 @@
 import sys
 import re
 import json
+import logging
 from pathlib import Path
 from datetime import datetime
 from collections import Counter
@@ -25,10 +26,11 @@ from common.file_io import (
 from common.excel_style import (
     헤더_스타일, 행_색상, 색상_가져오기, 열너비_조정, 색상
 )
+from common.logger import 로거_생성
 
 # qa_tools.py 가 있는 폴더를 기준 경로로 설정
 기준경로 = Path(__file__).parent
-
+log = 로거_생성("log-analyzer")
 
 # ────────────────────────────────────────
 # ① 로그 파일 읽기
@@ -45,6 +47,8 @@ def 로그_읽기(파일명):
     줄목록 = 파일_읽기(파일명, 기준경로)
     if 줄목록 is None:
         return []
+    if isinstance(줄목록, list) and len(줄목록) == 0:
+        log.warning("빈 로그 파일입니다")
     return 줄목록
 
 

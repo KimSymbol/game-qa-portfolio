@@ -22,10 +22,11 @@ from common.excel_style import (
     헤더_스타일, 행_색상, 색상_가져오기,
     열너비_조정, 색상, 우선순위_색상
 )
-
+from common.logger import 로거_생성
 # reporter.py 가 있는 폴더를 기준 경로로 설정
 기준경로 = Path(__file__).parent
 
+log = 로거_생성("excel-reporter")
 
 # ────────────────────────────────────────
 # ① 데이터 읽기 (csv / xlsx 자동 판단)
@@ -49,12 +50,34 @@ def 데이터_읽기(파일명):
     if df is None:
         return None
 
-    # 해결일 / 재현율 NaN 처리
+    # 필수 컬럼 기본값 정의
+    필수컬럼_기본값 = {
+        "버그ID"  : lambda i: f"BUG-{i+1:03d}",
+        "제목"    : "제목 없음",
+        "심각도"  : "Medium",
+        "우선순위": "Medium",
+        "상태"    : "미해결",
+        "플랫폼"  : "PC",
+        "발견자"  : "",
+        "발견일"  : "",
+        "해결일"  : "",
+        "재현율"  : "",
+        "버전"    : "",
+    }
+
+    # 누락 컬럼 자동 추가
+    for 컬럼, 기본값 in 필수컬럼_기본값.items():
+        if 컬럼 not in df.columns:
+            if callable(기본값):
+                df[컬럼] = [기본값(i) for i in range(len(df))]
+            else:
+                df[컬럼] = 기본값
+            log.info(f"누락 컬럼 자동 추가: {컬럼}")
+
+    # NaN 처리
     if "해결일" in df.columns:
         df["해결일"] = df["해결일"].fillna("")
-    if "재현율" not in df.columns:
-        df["재현율"] = ""
-    else:
+    if "재현율" in df.columns:
         df["재현율"] = df["재현율"].fillna("")
 
     return df
