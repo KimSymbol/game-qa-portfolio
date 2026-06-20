@@ -282,6 +282,262 @@ def XML_쓰기(파일경로, 데이터):
 
 결과: 모든 도구가 `output/` 폴더에 저장
 
+
+---
+### column_mapper.py — 외부 데이터 변환
+
+외부 TC/버그 데이터를 내부 형식으로 자동 변환합니다.
+JSON 설정 파일로 매핑 규칙을 관리합니다.
+
+#### 사용법
+
+```bash
+# 매핑 목록 조회
+python common/convert.py --list
+
+# TC 변환
+python common/convert.py external_tc.xlsx --map 예시_TC매핑
+
+# 버그 데이터 변환
+python common/convert.py external_bugs.csv --map 예시_버그매핑
+
+# 자동 감지
+python common/convert.py any_file.xlsx
+```
+
+#### 변환 예시 1 — 외부 TC 데이터
+
+다른 팀에서 받은 TC 파일이 이런 형식이라면:
+
+**변환 전 (외부 형식)**
+
+| Test ID | Test Name | Category | Precondition | Steps | Expected | Priority |
+|---------|-----------|----------|-------------|-------|----------|----------|
+| LI-001 | 정상 로그인 | 로그인 | 가입한 계정 필요 | ID/PW 입력 후 로그인 | 정상 로그인 | Highest |
+| LI-002 | 빈 ID 로그인 | 로그인 | 미입력 상태 | ID 미입력 후 로그인 | 오류 메시지 | Highest |
+
+```bash
+python common/convert.py external_tc.csv --map 예시_TC매핑
+```
+
+**변환 후 (내부 형식) — 바로 도구에서 사용 가능**
+
+| TC_ID | 테스트명 | 분류 | 전제조건 | 테스트단계 | 예상결과 | 실제결과 | 결과 | 심각도 | 우선순위 | 플랫폼 | 발견자 | 발견일 |
+|-------|---------|------|---------|----------|---------|---------|------|--------|---------|--------|--------|--------|
+| LI-001 | 정상 로그인 | 로그인 | 가입한 계정 필요 | ID/PW 입력 후 로그인 | 정상 로그인 | | | | High | PC | | |
+| LI-002 | 빈 ID 로그인 | 로그인 | 미입력 상태 | ID 미입력 후 로그인 | 오류 메시지 | | | | High | PC | | |
+
+**자동 변환된 항목:**
+- `Test ID` → `TC_ID` (컬럼명 변환)
+- `Test Name` → `테스트명` (컬럼명 변환)
+- `Highest` → `High` (값 변환)
+- `실제결과`, `결과`, `심각도` 등 → 빈 값으로 자동 추가 (누락 컬럼)
+- `플랫폼` → `PC` 자동 입력 (기본값)
+
+**변환 후 바로 사용:**
+```bash
+# 검증
+python 02.data-validator/main.py external_tc_converted_latest.csv
+
+# QA가 결과 컬럼 입력 후 → 버그 리포트 생성
+python 03.md-report-gen/main.py external_tc_converted_latest.csv
+```
+
+---
+
+#### 변환 예시 2 — 외부 버그 데이터
+
+Jira 에서 내보낸 버그 데이터가 이런 형식이라면:
+
+**변환 전 (Jira 형식)**
+
+| Bug ID | Title | Severity | Priority | Status | Platform | Reporter | Found Date |
+|--------|-------|----------|----------|--------|----------|----------|------------|
+| BUG-101 | 캐릭터 충돌 | Critical | Highest | Open | PC | 김상진 | 2026-06-15 |
+| BUG-102 | UI 겹침 | Minor | Lowest | In Progress | Android | 이영희 | 2026-06-16 |
+| BUG-103 | 로그인 오류 | Major | P1 | Closed | iOS | 박민수 | 2026-06-10 |
+
+```bash
+python common/convert.py jira_bugs.csv --map 예시_버그매핑
+```
+
+**변환 후 (내부 형식) — 바로 엑셀 리포트 가능**
+
+| 버그ID | 제목 | 심각도 | 우선순위 | 상태 | 플랫폼 | 발견자 | 발견일 | 해결일 | 재현율 |
+|--------|------|--------|---------|------|--------|--------|--------|--------|--------|
+| BUG-101 | 캐릭터 충돌 | Critical | High | 미해결 | PC | 김상진 | 2026-06-15 | | |
+| BUG-102 | UI 겹침 | Low | Low | 진행중 | Android | 이영희 | 2026-06-16 | | |
+| BUG-103 | 로그인 오류 | High | High | 해결 | iOS | 박민수 | 2026-06-10 | | |
+
+**자동 변환된 항목:**
+- `Bug ID` → `버그ID`, `Title` → `제목` (컬럼명 변환)
+- `Highest` → `High`, `Lowest` → `Low`, `P1` → `High` (우선순위 변환)
+- `Minor` → `Low`, `Major` → `High` (심각도 변환)
+- `Open` → `미해결`, `In Progress` → `진행중`, `Closed` → `해결` (상태 변환)
+- `해결일`, `재현율` → 빈 값으로 자동 추가 (누락 컬럼)
+
+**변환 후 바로 사용:**
+```bash
+# 엑셀 리포트 (xlsx + html + json + pdf)
+python 04.excel-reporter/main.py jira_bugs_converted_latest.csv --all
+```
+
+---
+
+#### 새 매핑 추가하는 방법
+
+`common/column_map.json` 의 `매핑_목록` 에 항목 추가.
+
+1. `예시_TC매핑` 또는 `예시_버그매핑` 을 복사
+2. 이름을 변경 (예: `우리팀_TC`)
+3. `컬럼_매핑` 에서 외부 컬럼명만 수정
+4. `값_변환` 에서 필요한 값만 수정
+5. 저장 후 바로 사용
+
+```json
+"우리팀_TC": {
+    "설명": "우리 팀 TC 형식",
+    "컬럼_매핑": {
+        "케이스ID": "TC_ID",
+        "케이스명": "테스트명",
+        "카테고리": "분류"
+    },
+    "값_변환": {
+        "우선순위": {
+            "긴급": "High",
+            "보통": "Medium",
+            "낮음": "Low"
+        }
+    },
+    "기본값": {
+        "플랫폼": "Android"
+    }
+}
+```
+
+```bash
+python common/convert.py our_tc.xlsx --map 우리팀_TC
+```
+
+#### 지원 입력 형식
+
+csv, xlsx, tsv, json 모두 변환 가능
+
+---
+
+
+#### 매핑 자동 생성 (--generate)
+
+새 외부 파일을 받았을 때 컬럼명을 읽어 매핑 초안을 자동 생성합니다.
+
+```bash
+python common/convert.py external_tc.xlsx --generate 우리팀_TC
+```
+
+생성된 초안:
+```json
+"우리팀_TC": {
+    "설명": "우리팀_TC (자동 생성 - 내부 컬럼명을 채워주세요)",
+    "컬럼_매핑": {
+        "Test ID": "",        ← 빈 값을 내부 컬럼명으로 채우세요
+        "Test Name": "",
+        "Category": ""
+    }
+}
+```
+
+사용 순서:
+1. `--generate` 로 초안 생성
+2. `column_map.json` 열어서 빈 값에 내부 컬럼명 입력
+3. `--validate` 로 설정 검증
+4. `--preview` 로 변환 결과 확인
+5. 실제 변환 실행
+
+#### 변환 미리보기 (--preview)
+
+변환 결과를 저장 없이 터미널에서 먼저 확인합니다.
+
+```bash
+python common/convert.py external_tc.xlsx --map 예시_TC매핑 --preview
+```
+
+출력 예시:
+```
+[미리보기] 변환 결과
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+원본 컬럼 (7개):
+  Test ID, Test Name, Category, Steps, Expected, Priority, Platform
+
+변환 후 컬럼 (13개):
+  TC_ID, 테스트명, 분류, 전제조건, 테스트단계, 예상결과, ...
+
+누락 → 자동 추가된 컬럼:
+  + 심각도 → (빈 값)
+  + 발견자 → (빈 값)
+  + 플랫폼 → 'PC'
+
+값 변환 적용:
+  우선순위: Highest → High (3건)
+
+데이터 미리보기 (상위 5건 / 총 15건)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TC_ID        | 테스트명        | 분류         | 우선순위
+LI-001       | 정상 로그인     | 로그인       | High
+LI-002       | 빈 ID 로그인   | 로그인       | High
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+저장하려면: --preview 옵션을 빼고 다시 실행
+```
+
+#### 매핑 설정 검증 (--validate)
+
+column_map.json 의 모든 매핑 설정에 오류가 없는지 확인합니다.
+
+```bash
+python common/convert.py --validate
+```
+
+출력 예시:
+```
+매핑 설정 검증 시작...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[PASS] 기본
+[PASS] 예시_TC매핑
+[PASS] 예시_버그매핑
+[WARN] 우리팀_TC
+       빈 매핑값: "Test ID": "" ← 내부 컬럼명 입력 필요
+       자동 생성된 매핑 — 아직 수정되지 않음
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+검증 완료: 3개 정상 / 1개 경고 / 0개 실패
+```
+
+#### 전체 사용 시나리오
+
+새 외부 파일을 받았을 때의 전체 흐름:
+
+```bash
+# 1. 매핑 초안 자동 생성
+python common/convert.py external_tc.xlsx --generate 신규팀_TC
+
+# 2. column_map.json 열어서 빈 값 채우기
+
+# 3. 매핑 설정 검증
+python common/convert.py --validate
+
+# 4. 미리보기로 확인
+python common/convert.py external_tc.xlsx --map 신규팀_TC --preview
+
+# 5. 실제 변환
+python common/convert.py external_tc.xlsx --map 신규팀_TC
+
+# 6. 변환된 파일로 도구 사용
+python 02.data-validator/main.py external_tc_converted_latest.csv
+python 03.md-report-gen/main.py external_tc_converted_latest.csv
+python 04.excel-reporter/main.py external_tc_converted_latest.csv --all
+```
+
+
+
 ---
 
 ## 다른 도구에서 사용하는 방법

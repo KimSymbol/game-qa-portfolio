@@ -184,6 +184,28 @@ python 06.tc-generator/main.py --template
 
 ---
 
+## 외부 데이터 변환
+
+다른 팀/프로젝트의 TC나 버그 데이터를 내부 형식으로 변환할 수 있습니다.
+
+```bash
+# 매핑 목록 조회
+python common/convert.py --list
+
+# TC 변환
+python common/convert.py external_tc.xlsx --map 예시_TC매핑
+
+# 버그 데이터 변환
+python common/convert.py external_bugs.csv --map 예시_버그매핑
+```
+
+JSON 설정 파일(`common/column_map.json`)에 매핑 규칙을 추가하면
+어떤 형식의 데이터든 변환할 수 있습니다.
+자세한 사용법은 [common (공통 모듈)](./common/README.md) 을 참고하세요.
+
+
+---
+
 ## 🛠️ 개발 순서 (도구가 만들어진 흐름)
 
 각 도구는 다음 순서로 개발되었습니다.
