@@ -20,27 +20,28 @@ import tc_generator
 def 결과_출력(결과):
     """단일 사양 처리 결과 출력"""
     if 결과 is None:
-        print("❌ TC 생성 실패")
+        print("[ERROR] TC 생성 실패")
         return
 
-    print(f"\n✅ 생성 완료!")
-    print(f"   파일: {결과['파일']}")
+    print(f"\n생성 완료!")
+    print(f"   CSV : {결과['csv']}")
+    print(f"   XLSX: {결과['xlsx']}")           # ← 추가
     print(f"   총 {결과['건수']}건의 TC")
     print(f"   ├── 동등분할:   {결과['기법별']['동등분할']}건")
     print(f"   ├── 경계값:     {결과['기법별']['경계값']}건")
     print(f"   └── 결정테이블: {결과['기법별']['결정테이블']}건")
 
 
-print("🧪 테스트 케이스 자동 생성기")
+print("테스트 케이스 자동 생성기")
 print("━" * 30)
 
 if len(sys.argv) == 1:
     # specs/ 폴더 전체 처리
-    print("📂 specs/ 폴더 전체 사양 처리 시작")
+    print("specs/ 폴더 전체 사양 처리 시작")
     결과목록 = tc_generator.전체_사양_TC_생성()
 
     if not 결과목록:
-        print("❌ 처리된 사양이 없습니다")
+        print("[ERROR] 처리된 사양이 없습니다")
     else:
         print(f"\n{'=' * 50}")
         print(f"📊 전체 처리 완료: {len(결과목록)}개 사양")
@@ -54,6 +55,6 @@ else:
         print("━" * 30)
 
 print()
-print("💡 다음 단계:")
+print("다음 단계:")
 print("   생성된 TC를 data-validator 로 검증:")
 print("   python 02.data-validator/main.py 06.tc-generator/결과/testcases_login_latest.csv")

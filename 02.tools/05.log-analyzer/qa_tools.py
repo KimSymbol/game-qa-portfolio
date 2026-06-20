@@ -85,20 +85,24 @@ def 버그정보_추출(로그):
 def 심각도_분류(로그):
     """
     로그 내용의 키워드로 심각도를 자동 판단
-    Critical / Major / Minor 중 하나 반환
+    체계: Critical / High / Medium / Low
 
-    Major는 공통 색상에 없으므로 내부 매핑 유지
+    키워드 매핑:
+    - Critical: 충돌, crash, 서버 다운, 응답 없음
+    - High    : 프레임 드랍, 렉, 지연, 오류
+    - Medium  : 경고, warning, 메모리
+    - Low     : 기본값 (위 키워드에 해당 없을 때)
     """
     키워드맵 = {
         "Critical": ["충돌", "crash", "서버 다운", "응답 없음"],
-        "Major"   : ["프레임 드랍", "렉", "지연", "오류"],
-        "Minor"   : ["경고", "warning", "메모리"],
+        "High"    : ["프레임 드랍", "렉", "지연", "오류"],
+        "Medium"  : ["경고", "warning", "메모리"],
     }
     for 심각도, 키워드목록 in 키워드맵.items():
         for 키워드 in 키워드목록:
             if 키워드.lower() in 로그.lower():
                 return 심각도
-    return "Minor"
+    return "Low"
 
 
 # ────────────────────────────────────────
@@ -210,8 +214,9 @@ def 엑셀_저장(버그목록, 전체로그, 비교결과, 중복결과):
     # 심각도별 색상 (Major는 공통 색상에 없으므로 별도 매핑)
     심각도색상 = {
         "Critical": 색상_가져오기("Critical"),
-        "Major"   : 색상_가져오기("Medium"),
-        "Minor"   : 색상_가져오기("Low"),
+        "High"    : 색상_가져오기("High"),
+        "Medium"  : 색상_가져오기("Medium"),
+        "Low"     : 색상_가져오기("Low"),
     }
 
     for 버그 in 버그목록:
@@ -247,14 +252,14 @@ def 엑셀_저장(버그목록, 전체로그, 비교결과, 중복결과):
     헤더_스타일(ws4)
 
     for id in 비교결과["신규"]:
-        ws4.append(["🆕 신규", id])
+        ws4.append(["신규", id])
         현재행 = ws4.max_row
         for 셀 in ws4[현재행]:
             셀.fill = PatternFill("solid", fgColor=색상_가져오기("Critical"))
             셀.font = Font(color="FFFFFF")
 
     for id in 비교결과["해결"]:
-        ws4.append(["✅ 해결", id])
+        ws4.append(["해결", id])
         현재행 = ws4.max_row
         for 셀 in ws4[현재행]:
             셀.fill = PatternFill("solid", fgColor=색상_가져오기("해결"))
@@ -345,7 +350,7 @@ def 리포트_HTML_저장(버그목록, 전체로그, 비교결과, 중복결과
         버그리포트 += "<table><tr><th>버그ID</th><th>시간</th><th>심각도</th><th>로그 내용</th></tr>"
         for 버그 in 버그목록:
             심각도 = 심각도_분류(버그["로그"])
-            클래스 = {"Critical": "Critical", "Major": "High", "Minor": "Low"}.get(심각도, "")
+            클래스 = 심각도  # Critical / High / Medium / Low 그대로 사용
             버그리포트 += f'<tr><td>{버그["버그ID"]}</td><td>{버그["시간"]}</td><td class="{클래스}">{심각도}</td><td>{버그["로그"]}</td></tr>'
         버그리포트 += "</table>"
     else:
@@ -356,9 +361,9 @@ def 리포트_HTML_저장(버그목록, 전체로그, 비교결과, 중복결과
     if 비교결과["신규"] or 비교결과["해결"]:
         변경 += "<table><tr><th>구분</th><th>버그ID</th></tr>"
         for id in 비교결과["신규"]:
-            변경 += f'<tr><td class="미해결">🆕 신규</td><td>{id}</td></tr>'
+            변경 += f'<tr><td class="미해결">신규</td><td>{id}</td></tr>'
         for id in 비교결과["해결"]:
-            변경 += f'<tr><td class="해결">✅ 해결</td><td>{id}</td></tr>'
+            변경 += f'<tr><td class="해결">해결</td><td>{id}</td></tr>'
         변경 += "</table>"
     else:
         변경 += "<p>변경 사항이 없습니다.</p>"

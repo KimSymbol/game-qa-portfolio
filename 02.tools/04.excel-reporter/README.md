@@ -1,153 +1,195 @@
-# 📊 Excel Bug Reporter
+# 📊 Excel Reporter
 
-버그 데이터 CSV 파일을 입력하면
-자동으로 전문적인 5시트 엑셀 리포트를 생성하는 도구입니다.
+버그 데이터를 **5시트 엑셀 + JSON + HTML + PDF** 4가지 형식으로 동시 변환하는 통합 리포트 도구입니다.
 
 ---
 
 ## 📁 프로젝트 구조
 
 ```
-02.excel-reporter/
-├── bugs.csv          # 입력 데이터 (기본값)
-├── reporter.py       # 핵심 모듈
-├── main.py           # 실행 파일
+04.excel-reporter/
+├── reporter.py        # 핵심 모듈 (5시트 + 4형식 출력)
+├── main.py            # 실행 파일
 ├── README.md
-└── 결과/
-    └── report_YYYY-MM-DD.xlsx
+└── 결과/              # ⚠️ .gitignore 로 제외됨 (실행 시 자동 생성)
+    ├── report_YYYY-MM-DD_HH-MM-SS.xlsx
+    ├── report_YYYY-MM-DD_HH-MM-SS.json
+    ├── report_YYYY-MM-DD_HH-MM-SS.html
+    ├── report_YYYY-MM-DD_HH-MM-SS.pdf
+    └── report_latest.{xlsx,json,html,pdf}
 ```
+
+> 💡 `결과/` 폴더는 `.gitignore` 에 추가되어 있어 GitHub 에 올라가지 않습니다.
 
 ---
 
 ## ⚙️ 설치
 
 ```bash
-pip install pandas openpyxl
+pip install pandas openpyxl reportlab
 ```
+
+> 💡 `reportlab` 은 PDF 생성에 사용됩니다.
 
 ---
 
 ## 🚀 실행 방법
 
 ```bash
-# 파일 지정
+# 엑셀만 생성 (기본)
 python main.py bugs.csv
 
-# 여러 파일
-python main.py june.csv july.csv
+# 모든 출력 형식
+python main.py bugs.csv --all
 
-# 폴더 지정 → 안의 csv 파일 전부 분석
-python main.py data/
+# 특정 형식만
+python main.py bugs.csv --json
+python main.py bugs.csv --html
+python main.py bugs.csv --pdf
+python main.py bugs.csv --excel
+
+# 폴더 안 csv/xlsx/tsv/json 전부
+python main.py data/ --all
 ```
-
-> ⚠️ 파일을 반드시 지정해야 합니다.
->
-> **test-data-gen 과 연동 시**
-> ```bash
-> # 1. test-data-gen 으로 데이터 생성
-> python 03.test-data-gen/main.py bugs
->
-> # 2. 생성된 파일로 리포트 생성
-> python 02.excel-reporter/main.py 03.test-data-gen/결과/bugs_2026-06-17.csv
-> ```
 
 ---
 
-## 📄 CSV 파일 형식
-
-### 컬럼 목록
-
-| 컬럼명 | 형식 | 예시 | 필수 여부 |
-|--------|------|------|----------|
-| 버그ID | BUG-001 | BUG-001 | ✅ 필수 |
-| 제목 | 문자열 | 캐릭터 벽 통과 | ✅ 필수 |
-| 심각도 | Critical / High / Medium / Low | Critical | ✅ 필수 |
-| 우선순위 | High / Medium / Low | High | ✅ 필수 |
-| 플랫폼 | PC / Android / iOS 등 | PC | ✅ 필수 |
-| 버전 | 문자열 | v1.2.34 | ✅ 필수 |
-| 상태 | 해결 / 진행중 / 미해결 | 해결 | ✅ 필수 |
-| 발견자 | 문자열 | 홍길동 | ✅ 필수 |
-| 발견일 | YYYY-MM-DD | 2026-06-10 | ✅ 필수 |
-| 해결일 | YYYY-MM-DD | 2026-06-12 | ⬜ 선택 |
-| 재현율 | N/10 | 8/10 | ⬜ 선택 |
-
-### 규칙
-
-- 첫 번째 줄은 반드시 헤더
-- 인코딩: UTF-8
-- 해결일은 미해결/진행중이면 비워도 됨
-- 재현율은 없어도 빈 칸으로 처리됨
-- 심각도는 `Critical` / `High` / `Medium` / `Low` 권장
-- 상태는 `해결` / `진행중` / `미해결` 권장
-- 플랫폼/심각도/상태/우선순위에 새 값을 추가해도 자동 반영됨
-
-### 컬럼 추가/확장
-
-기본 컬럼 외에 **자유롭게 컬럼을 추가해도 정상 동작**합니다.
-추가한 컬럼은 `전체 버그 목록` 시트에 자동으로 반영됩니다.
-
-```csv
-# 비고, 테스터 컬럼을 추가해도 OK
-버그ID,제목,심각도,우선순위,플랫폼,버전,상태,발견자,발견일,해결일,재현율,비고,테스터
-BUG-001,캐릭터 벽 통과,Critical,High,PC,v1.2.34,해결,홍길동,2026-06-10,2026-06-12,10/10,긴급처리,이철수
-```
-
-단, 아래 컬럼 이름을 **변경하면 오류**가 발생합니다.
-
-| 변경 불가 컬럼 | 이유 |
-|--------------|------|
-| 심각도 | 색상 분류 기준 |
-| 우선순위 | 통계 집계 기준 |
-| 플랫폼 | 플랫폼별 현황 시트 기준 |
-| 발견자 | 발견자별 현황 시트 기준 |
-| 상태 | 해결률 계산 기준 |
-
-> 심각도/우선순위/플랫폼/상태에 **새로운 값**을 추가하는 건 자유롭게 가능합니다.
-> 예) 심각도에 `Blocker` 추가, 플랫폼에 `콘솔` `Mac` 추가
-> 색상 매핑이 없는 새 값은 **회색**으로 자동 표시됩니다.
-
-### 예시
-
-**기본 형식**
-```csv
-버그ID,제목,심각도,우선순위,플랫폼,버전,상태,발견자,발견일,해결일,재현율
-BUG-001,캐릭터 벽 통과,Critical,High,PC,v1.2.34,해결,홍길동,2026-06-10,2026-06-12,10/10
-BUG-002,인벤토리 아이템 사라짐,High,High,Android,v1.2.34,진행중,이철수,2026-06-11,,8/10
-BUG-003,사운드 끊김,Medium,Medium,PC,v1.2.33,해결,홍길동,2026-06-11,2026-06-13,
-```
-
-**컬럼 추가 예시** (비고, 테스터 추가)
-```csv
-버그ID,제목,심각도,우선순위,플랫폼,버전,상태,발견자,발견일,해결일,재현율,비고,테스터
-BUG-001,캐릭터 벽 통과,Critical,High,PC,v1.2.34,해결,홍길동,2026-06-10,2026-06-12,10/10,긴급처리,이철수
-BUG-002,인벤토리 아이템 사라짐,High,High,Android,v1.2.34,진행중,이철수,2026-06-11,,8/10,,박영희
-```
-
->`test-data-gen` 의 `bugs_YYYY-MM-DD.csv` 를 바로 입력으로 사용 가능
-
----
-
-## 📊 엑셀 리포트 구성
+## 📊 5시트 엑셀 리포트 구성
 
 | 시트 | 내용 |
 |------|------|
-| 전체 버그 목록 | 심각도별 색상 구분 전체 목록 |
-| 발견자별 현황 | 발견자 × 상태 교차 집계 (색상 테이블) |
-| 플랫폼별 현황 | 플랫폼 × 심각도 교차 집계 (색상 테이블) |
-| 심각도·우선순위 | 심각도 / 우선순위별 건수 |
-| 요약 대시보드 | 해결률 / 상태별 / 심각도별 / 플랫폼별 핵심 지표 |
+| 전체 버그 목록 | 모든 버그 (심각도별 색상 구분) |
+| 발견자별 현황 | 발견자 × 상태 교차표 |
+| 플랫폼별 현황 | 플랫폼 × 심각도 교차표 |
+| 심각도·우선순위 | 통계 요약 |
+| 요약 대시보드 | 총 버그/해결률/상태/심각도/우선순위/플랫폼 종합 |
 
-### 색상 기준
+---
 
-| 항목 | 색상 |
-|------|------|
-| Critical | 🔴 빨강 |
-| High | 🟠 주황 |
-| Medium | 🟡 노랑 |
-| Low | 🟢 초록 |
-| 해결 | 🟢 초록 |
-| 진행중 | 🟡 노랑 |
-| 미해결 | 🔴 빨강 |
+## 📄 출력 형식 비교
+
+| 형식 | 용도 | 특징 |
+|------|------|------|
+| **xlsx** | 실무 분석 | 5시트 색상 구분 |
+| **json** | API 연동, 자동화 | 통계 + 상세 데이터 |
+| **html** | 웹 / 메일 | 브라우저 바로 보기 |
+| **pdf** | 공식 보고서 | 한글 폰트 자동 적용 |
+
+---
+
+## 📄 입력 파일 형식
+
+### 지원 형식
+
+| 형식 | 확장자 |
+|------|--------|
+| CSV | `.csv` |
+| TSV | `.tsv` |
+| Excel | `.xlsx` |
+| JSON | `.json` (리스트 형태) |
+
+### 필수 컬럼
+
+| 컬럼명 | 예시 |
+|--------|------|
+| 버그ID | BUG-001 |
+| 제목 | 캐릭터가 벽을 통과함 |
+| 심각도 | Critical / High / Medium / Low |
+| 우선순위 | High / Medium / Low |
+| 플랫폼 | PC / Android / iOS |
+| 상태 | 해결 / 진행중 / 미해결 |
+| 발견자, 발견일 | - |
+
+---
+
+## 🔗 도구 연동
+
+```bash
+# 옵션 1: test-data-gen → excel-reporter
+python 01.test-data-gen/main.py bugs
+python 04.excel-reporter/main.py 01.test-data-gen/결과/bugs_latest.csv --all
+
+# 옵션 2: md-report-gen → excel-reporter (Fail TC → 버그 리포트화)
+python 03.md-report-gen/main.py 01.test-data-gen/결과/testcases_latest.csv
+python 04.excel-reporter/main.py 03.md-report-gen/결과/bugs_latest.csv --all
+```
+
+---
+
+## 🔧 유지보수 & 커스터마이즈 가이드
+
+### 1. 시트 추가하기
+
+#### Step 1. `reporter.py` 에 시트 함수 추가
+
+```python
+def 시트_월별통계(wb, df):
+    """월별 발견 추이 시트 (예시)"""
+    ws = wb.create_sheet(title="월별 통계")
+    ws.append(["월", "버그 수"])
+    헤더_스타일(ws)
+
+    df["월"] = pd.to_datetime(df["발견일"]).dt.month
+    월별 = df.groupby("월").size()
+
+    for 월, 수 in 월별.items():
+        ws.append([f"{월}월", 수])
+        # ... 스타일 ...
+
+    열너비_조정(ws)
+```
+
+#### Step 2. `리포트_생성()` 에 호출 추가
+
+```python
+def 리포트_생성(df):
+    wb = Workbook()
+    시트_전체목록(wb, df)
+    시트_발견자별(wb, df)
+    시트_월별통계(wb, df)    # ← 추가
+    ...
+```
+
+### 2. HTML 스타일 변경
+
+`common/file_io.py` 의 `HTML_쓰기()` 함수 내부 CSS 수정.
+
+### 3. PDF 한글 폰트 변경
+
+`common/file_io.py` 의 `PDF_쓰기()` 함수에서 폰트 경로 변경.
+
+```python
+한글폰트경로목록 = [
+    "C:/Windows/Fonts/NanumGothic.ttf",  # ← 나눔고딕으로 변경
+    ...
+]
+```
+
+---
+
+## 🛠️ 트러블슈팅
+
+### 1. PDF 한글이 □ 로 표시돼요
+
+**원인**: 한글 폰트 등록 실패
+
+**해결**: 시스템에 맑은 고딕(`malgun.ttf`) 또는 나눔고딕 설치 확인
+
+### 2. 차트가 안 보여요
+
+**원인**: openpyxl 차트의 데이터 레이블 표시 제약
+
+**해결**: 차트 대신 **색상 구분 테이블** 사용 (현재 적용됨)
+
+### 3. 병합 셀 에러
+
+**증상**: `AttributeError: 'MergedCell' object`
+
+**해결**: `get_column_letter()` 로 열 이름 가져오기
+```python
+from openpyxl.utils import get_column_letter
+열이름 = get_column_letter(i)
+```
 
 ---
 
@@ -155,7 +197,9 @@ BUG-002,인벤토리 아이템 사라짐,High,High,Android,v1.2.34,진행중,이
 
 | 기술 | 용도 |
 |------|------|
-| `pandas` | CSV 읽기 및 데이터 분석 |
-| `openpyxl` | 엑셀 생성 / 스타일 / 색상 |
-| `pathlib` | 경로 관리 / 폴더 자동 생성 |
-| `datetime` | 날짜별 파일명 자동 생성 |
+| `pandas` | 데이터 분석 |
+| `openpyxl` | 엑셀 생성 |
+| `reportlab` | PDF 생성 (한글 폰트 자동) |
+| `common.file_io` | 공통 입출력 (xlsx/json/html/pdf) |
+| `common.excel_style` | 엑셀 공통 스타일 |
+| `common.logger` | 로깅 시스템 |

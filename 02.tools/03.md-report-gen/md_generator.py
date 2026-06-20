@@ -42,9 +42,9 @@ def Fail_추출(df):
     """
     fail_df = df[df["결과"] == "Fail"].reset_index(drop=True)
     if len(fail_df) == 0:
-        print("✅ Fail 케이스가 없어요!")
+        print("Fail 케이스가 없어요!")
         return None
-    print(f"🔴 Fail 케이스: {len(fail_df)}건")
+    print(f"Fail 케이스: {len(fail_df)}건")
     return fail_df
 
 
@@ -180,7 +180,7 @@ def 통합_저장(마크다운목록):
     시각 = 타임스탬프()
     파일명 = 결과폴더 / f"ALL_BUGS_{시각}.md"
 
-    헤더 = f"""# 🐛 전체 버그 리포트
+    헤더 = f"""# 전체 버그 리포트
 
 생성일: {시각} | 총 {len(마크다운목록)}건
 
@@ -308,7 +308,7 @@ def 리포트_생성(파일명):
         통합용마크다운 = 마크다운_생성(버그ID, TC_ID, 행, 심각도기준_포함=False)
         통합용목록.append(통합용마크다운)
 
-        print(f"✅ {버그ID} 생성 완료 (참조: {TC_ID})")
+        print(f"{버그ID} 생성 완료 (참조: {TC_ID})")
 
     # 5. 통합 마크다운 파일 저장
     #    통합_저장() 함수가 상단에 심각도 기준표를 1번 추가함

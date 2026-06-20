@@ -39,7 +39,7 @@ def _설정_로딩():
     파일이 없으면 기본 설정 반환
     """
     if not _설정파일.exists():
-        print(f"⚠️  설정 파일 없음 → 기본 설정 사용")
+        print(f"[WARN]  설정 파일 없음 → 기본 설정 사용")
         return _기본설정
 
     try:
@@ -51,11 +51,11 @@ def _설정_로딩():
                 로딩된설정[키] = 값
         return 로딩된설정
     except json.JSONDecodeError as e:
-        print(f"⚠️  설정 파일 형식 오류: {e}")
+        print(f"[WARN]  설정 파일 형식 오류: {e}")
         print(f"   기본 설정으로 동작합니다")
         return _기본설정
     except Exception as e:
-        print(f"⚠️  설정 파일 로딩 실패: {e}")
+        print(f"[WARN]  설정 파일 로딩 실패: {e}")
         return _기본설정
 
 

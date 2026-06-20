@@ -21,7 +21,7 @@ log = 로거_생성("excel-reporter")
 def 리포트_실행(파일명, 옵션):
     """파일 하나를 분석해서 지정된 형식으로 저장"""
     log.info(f"리포트 생성 시작: {파일명}")
-    print(f"\n📊 [{파일명}] 리포트 생성 시작...")
+    print(f"\n[{파일명}] 리포트 생성 시작...")
     print("━" * 30)
 
     df = reporter.데이터_읽기(파일명)
@@ -46,31 +46,31 @@ def 리포트_실행(파일명, 옵션):
     try:
         if 옵션 in ["--excel", "--all"] or not 옵션.startswith("--"):
             경로 = reporter.리포트_생성(df)
-            print(f"✅ 엑셀 저장: {경로}")
+            print(f"[XLSX] 저장 완료: {경로}")
             log.info(f"XLSX 저장 완료: {경로}")
             생성된파일.append(경로)
 
         if 옵션 in ["--json", "--all"]:
             경로 = reporter.리포트_생성_JSON(df)
-            print(f"✅ JSON 저장: {경로}")
+            print(f"[JSON] 저장 완료: {경로}")
             log.info(f"JSON 저장 완료: {경로}")
             생성된파일.append(경로)
 
         if 옵션 in ["--html", "--all"]:
             경로 = reporter.리포트_생성_HTML(df)
-            print(f"✅ HTML 저장: {경로}")
+            print(f"[HTML] 저장 완료: {경로}")
             log.info(f"HTML 저장 완료: {경로}")
             생성된파일.append(경로)
 
         if 옵션 in ["--pdf", "--all"]:
             경로 = reporter.리포트_생성_PDF(df)
-            print(f"✅ PDF 저장: {경로}")
+            print(f"[PDF] 저장 완료: {경로}")
             log.info(f"PDF 저장 완료: {경로}")
             생성된파일.append(경로)
 
     except Exception as e:
         log.error(f"리포트 생성 실패: {type(e).__name__}: {e}")
-        print(f"❌ 리포트 생성 중 에러: {e}")
+        print(f"[ERROR] 리포트 생성 중 에러: {e}")
         return
 
     log.info(f"전체 완료 - {len(생성된파일)}개 파일 생성")
@@ -87,7 +87,7 @@ for 인자 in sys.argv[1:]:
         파일목록.append(인자)
 
 if not 파일목록:
-    print("❌ 파일을 지정해주세요")
+    print("[ERROR] 파일을 지정해주세요")
     print("")
     print("사용법:")
     print("  python main.py bugs.csv             → 엑셀만 생성")
@@ -109,10 +109,10 @@ else:
             전체 = csv목록 + xlsx목록 + tsv목록 + json목록
 
             if not 전체:
-                print("❌ 폴더 안에 지원하는 파일이 없어요:", 인자_경로)
+                print("[ERROR] 폴더 안에 지원하는 파일이 없어요:", 인자_경로)
                 log.warning(f"빈 폴더: {인자_경로}")
             else:
-                print(f"📂 폴더 분석 시작: {인자_경로} ({len(전체)}개 파일)")
+                print(f"폴더 분석 시작: {인자_경로} ({len(전체)}개 파일)")
                 log.info(f"폴더 분석: {인자_경로} ({len(전체)}개)")
                 for 파일 in 전체:
                     리포트_실행(str(파일), 옵션)

@@ -46,14 +46,14 @@ import generator
     "monsters"  : 30,
 }
 
-print("🎲 테스트 데이터 생성 시작...")
+print("테스트 데이터 생성 시작...")
 print("━" * 30)
 
 log.info(f"실행 시작 - 인자: {sys.argv[1:]}")
 
 try:
     if len(sys.argv) == 1:
-        print("📋 전체 데이터 생성 (기본 건수)")
+        print("전체 데이터 생성 (기본 건수)")
         print("━" * 30)
         log.info("전체 데이터 기본 건수로 생성")
         for 종류, 함수 in 생성함수맵.items():
@@ -62,7 +62,7 @@ try:
 
     elif len(sys.argv) == 2 and sys.argv[1].isdigit():
         건수 = int(sys.argv[1])
-        print(f"📋 전체 데이터 {건수}건 생성")
+        print(f"전체 데이터 {건수}건 생성")
         print("━" * 30)
         log.info(f"전체 데이터 {건수}건 생성")
         for 종류, 함수 in 생성함수맵.items():
@@ -73,7 +73,7 @@ try:
         종류 = sys.argv[1].lower()
 
         if 종류 not in 생성함수맵:
-            print(f"❌ 알 수 없는 종류: {종류}")
+            print(f"[ERROR] 알 수 없는 종류: {종류}")
             print(f"   사용 가능: {', '.join(생성함수맵.keys())}")
             log.error(f"알 수 없는 종류: {종류}")
         else:
@@ -84,9 +84,9 @@ try:
             log.info(f"{종류} 생성 완료 ({건수}건)")
 
     print("━" * 30)
-    print("✅ 생성 완료! 결과/ 폴더를 확인해봐요.")
+    print("생성 완료! 결과/ 폴더를 확인해봐요.")
     log.info("전체 생성 완료")
 
 except Exception as e:
     log.error(f"생성 실패: {type(e).__name__}: {e}")
-    print(f"❌ 생성 중 에러: {e}")
+    print(f"[ERROR] 생성 중 에러: {e}")

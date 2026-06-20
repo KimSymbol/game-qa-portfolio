@@ -20,7 +20,7 @@ import qa_tools
 
 def 분석_실행(파일명, 옵션):
     """로그 파일 하나를 분석해서 다중 형식으로 저장"""
-    print(f"\n🔍 [{파일명}] 분석 시작...")
+    print(f"\n[{파일명}] 분석 시작...")
     print("━" * 30)
 
     전체로그 = qa_tools.로그_읽기(str(파일명))
@@ -39,26 +39,26 @@ def 분석_실행(파일명, 옵션):
 
     # 통계 출력
     print(f"총 로그 수    : {len(전체로그)}건")
-    print(f"ERROR         : {error수}건 🔴")
-    print(f"WARNING       : {warning수}건 🟡")
-    print(f"INFO          : {info수}건 🟢")
+    print(f"ERROR         : {error수}건 ")
+    print(f"WARNING       : {warning수}건 ")
+    print(f"INFO          : {info수}건 ")
     print(f"버그 ID 목록  : {버그ID목록}")
     print("━" * 30)
 
     # 중복 / 변경 사항 출력
     if 중복결과:
-        print("⚠️  중복 발생 버그:")
+        print("[WARN]  중복 발생 버그:")
         for id, 횟수 in 중복결과.items():
             print(f"   {id} → {횟수}회 발생")
     else:
-        print("✅ 중복 버그 없음")
+        print("중복 버그 없음")
 
     print("━" * 30)
 
     if 비교결과["신규"]:
-        print(f"🆕 신규 버그  : {비교결과['신규']}")
+        print(f"[NEW] 신규 버그: {비교결과['신규']}")
     if 비교결과["해결"]:
-        print(f"✅ 해결 버그  : {비교결과['해결']}")
+        print(f"[RESOLVED] 해결 버그: {비교결과['해결']}")
     if not 비교결과["신규"] and not 비교결과["해결"]:
         print("변경 사항 없음")
 
@@ -67,15 +67,15 @@ def 분석_실행(파일명, 옵션):
     # 옵션에 따라 저장
     if 옵션 in ["--xlsx", "--all"] or not 옵션.startswith("--"):
         경로 = qa_tools.엑셀_저장(버그목록, 전체로그, 비교결과, 중복결과)
-        print(f"✅ XLSX 저장: {경로}")
+        print(f"[XLSX] 저장 완료: {경로}")
 
     if 옵션 in ["--json", "--all"]:
         경로 = qa_tools.리포트_JSON_저장(버그목록, 전체로그, 비교결과, 중복결과)
-        print(f"✅ JSON 저장: {경로}")
+        print(f"[JSON] 저장 완료: {경로}")
 
     if 옵션 in ["--html", "--all"]:
         경로 = qa_tools.리포트_HTML_저장(버그목록, 전체로그, 비교결과, 중복결과)
-        print(f"✅ HTML 저장: {경로}")
+        print(f"[HTML] 저장 완료: {경로}")
 
 
 # ── 인자 파싱 ──
@@ -89,7 +89,7 @@ for 인자 in sys.argv[1:]:
         파일목록.append(인자)
 
 if not 파일목록:
-    print("❌ 파일을 지정하지 않아 기본 파일(bug_log.txt)사용")
+    print("[ERROR] 파일을 지정하지 않아 기본 파일(bug_log.txt)사용")
     파일목록 = ["bug_log.txt"]
     print("")
     print("기존 사용법:")
@@ -102,9 +102,9 @@ for 파일명 in 파일목록:
     if 인자_경로.is_dir():
         파일들 = list(인자_경로.glob("*.txt")) + list(인자_경로.glob("*.log"))
         if not 파일들:
-            print("❌ 폴더 안에 txt/log 파일이 없어요:", 인자_경로)
+            print("[ERROR] 폴더 안에 txt/log 파일이 없어요:", 인자_경로)
         else:
-            print(f"📂 폴더 분석 시작: {인자_경로} ({len(파일들)}개 파일)")
+            print(f"폴더 분석 시작: {인자_경로} ({len(파일들)}개 파일)")
             for 파일 in 파일들:
                 분석_실행(파일, 옵션)
     else:

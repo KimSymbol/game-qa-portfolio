@@ -383,4 +383,4 @@ def Latest_복사(원본경로, 접두사="report"):
     try:
         shutil.copy(원본, Latest경로)
     except Exception as e:
-        print(f"⚠️  Latest 복사 실패: {e}")
+        log.warning(f"Latest 복사 실패: {e}")

@@ -20,7 +20,7 @@ import validator
 
 def 검증_시작(파일명, 옵션):
     """파일 하나를 검증해서 결과 출력 + 다중 형식 저장"""
-    print(f"\n📋 [{파일명}] 데이터 검증 시작...")
+    print(f"\n[{파일명}] 데이터 검증 시작...")
     print("━" * 30)
     log.info(f"검증 시작: {파일명} (옵션: {옵션})")
 
@@ -31,20 +31,20 @@ def 검증_시작(파일명, 옵션):
             return
     except Exception as e:
         log.error(f"검증 중 에러: {type(e).__name__}: {e}")
-        print(f"❌ 검증 실패: {e}")
+        print(f"[ERROR] 검증 실패: {e}")
         return
 
     print("━" * 30)
 
     오류수 = len(결과["오류목록"])
     if 오류수 == 0:
-        print("🎉 문제 없음! 데이터가 깨끗해요!")
+        print("[PASS] 데이터 무결성 검증 통과")
         log.info(f"검증 통과: {파일명}")
     else:
-        print(f"⚠️  총 {오류수}건의 문제 발견")
+        print(f"[FAIL] 총 {오류수}건의 문제 발견")
         log.warning(f"오류 {오류수}건 발견: {파일명}")
 
-    print(f"📁 생성된 리포트: {len(결과['리포트'])}개")
+    print(f"생성된 리포트: {len(결과['리포트'])}개")
     log.info(f"리포트 {len(결과['리포트'])}개 생성 완료")
 
 
@@ -59,7 +59,7 @@ for 인자 in sys.argv[1:]:
         파일목록.append(인자)
 
 if not 파일목록:
-    print("❌ 파일을 지정해주세요")
+    print("[ERROR] 파일을 지정해주세요")
     print("")
     print("사용법:")
     print("  python main.py bugs.csv             → XLSX만 생성")
@@ -75,10 +75,10 @@ else:
         if 인자_경로.is_dir():
             파일들 = list(인자_경로.glob("*.csv")) + list(인자_경로.glob("*.xlsx"))
             if not 파일들:
-                print("❌ 폴더 안에 csv/xlsx 파일이 없어요:", 인자_경로)
+                print("[ERROR] 폴더 안에 csv/xlsx 파일이 없어요:", 인자_경로)
                 log.warning(f"빈 폴더: {인자_경로}")
             else:
-                print(f"📂 폴더 검증 시작: {인자_경로} ({len(파일들)}개 파일)")
+                print(f"폴더 검증 시작: {인자_경로} ({len(파일들)}개 파일)")
                 log.info(f"폴더 검증: {인자_경로} ({len(파일들)}개)")
                 for 파일 in 파일들:
                     검증_시작(str(파일), 옵션)

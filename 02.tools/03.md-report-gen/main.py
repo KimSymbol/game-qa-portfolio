@@ -23,7 +23,7 @@ import md_generator
 
 def 리포트_실행(파일명):
     """파일 하나를 분석해서 마크다운 리포트 + bugs.csv 생성"""
-    print(f"\n📄 [{파일명}] 리포트 생성 시작...")
+    print(f"\n[{파일명}] 리포트 생성 시작...")
     print("━" * 30)
     log.info(f"리포트 생성 시작: {파일명}")
 
@@ -34,17 +34,17 @@ def 리포트_실행(파일명):
             return
     except Exception as e:
         log.error(f"리포트 생성 중 에러: {type(e).__name__}: {e}")
-        print(f"❌ 리포트 생성 실패: {e}")
+        print(f"[ERROR] 리포트 생성 실패: {e}")
         return
 
     print("━" * 30)
-    print(f"📁 개별 리포트: {len(결과['개별'])}건")
-    print(f"📄 통합 리포트: {결과['통합']}")
-    print(f"📊 bugs.csv   : {결과['csv']}")
+    print(f"개별 리포트: {len(결과['개별'])}건")
+    print(f"통합 리포트: {결과['통합']}")
+    print(f"bugs.csv: {결과['csv']}")
     print("━" * 30)
-    print("✅ 생성 완료!")
+    print("생성 완료!")
     print()
-    print("💡 다음 단계:")
+    print("다음 단계:")
     print(f"   excel-reporter 로 엑셀 리포트 생성:")
     print(f"   python 04.excel-reporter/main.py {결과['csv']}")
 
@@ -55,7 +55,7 @@ def 리포트_실행(파일명):
 
 # ── 커맨드라인 인자에 따라 실행 방식 결정 ──
 if len(sys.argv) == 1:
-    print("❌ 파일을 지정해주세요")
+    print("[ERROR] 파일을 지정해주세요")
     print("")
     print("사용법:")
     print("  python main.py testcases.csv")
@@ -70,10 +70,10 @@ else:
     if 인자.is_dir():
         파일목록 = list(인자.glob("*.csv")) + list(인자.glob("*.xlsx"))
         if not 파일목록:
-            print("❌ 폴더 안에 csv/xlsx 파일이 없어요:", 인자)
+            print("[ERROR] 폴더 안에 csv/xlsx 파일이 없어요:", 인자)
             log.warning(f"빈 폴더: {인자}")
         else:
-            print(f"📂 폴더 분석 시작: {인자} ({len(파일목록)}개 파일)")
+            print(f"폴더 분석 시작: {인자} ({len(파일목록)}개 파일)")
             log.info(f"폴더 분석: {인자} ({len(파일목록)}개)")
             for 파일 in 파일목록:
                 리포트_실행(str(파일))

@@ -72,7 +72,7 @@ def 옵션_파싱():
                 옵션["count"] = int(args[i + 1])
                 i += 1
             except ValueError:
-                print(f"⚠️  --count 뒤에 숫자가 와야 해요")
+                print(f"[WARN]  --count 뒤에 숫자가 와야 해요")
         elif 인자 == "--data" and i + 1 < len(args):
             옵션["data"] = args[i + 1]
             i += 1
@@ -82,15 +82,15 @@ def 옵션_파싱():
                 if 0 <= 단계 <= 5:
                     옵션["start_from"] = 단계
                 else:
-                    print(f"⚠️  --start-from 는 0~5 사이의 숫자여야 해요")
+                    print(f"[WARN]  --start-from 는 0~5 사이의 숫자여야 해요")
                 i += 1
             except ValueError:
-                print(f"⚠️  --start-from 뒤에 숫자가 와야 해요")
+                print(f"[WARN]  --start-from 뒤에 숫자가 와야 해요")
         elif 인자 in ["-h", "--help"]:
             도움말_출력()
             sys.exit(0)
         else:
-            print(f"⚠️  알 수 없는 옵션: {인자}")
+            print(f"[WARN]  알 수 없는 옵션: {인자}")
 
         i += 1
 
@@ -102,7 +102,7 @@ def 옵션_파싱():
 def 도움말_출력():
     """사용법 안내"""
     print("""
-🎮 QA 도구 자동 파이프라인
+QA 도구 자동 파이프라인
 
 사용법:
   python pipeline.py [옵션]
@@ -143,7 +143,7 @@ def 명령_실행(설명, 명령어목록):
     터미널에 출력도 그대로 보여주고 결과 반환
     """
     print(f"\n{'━' * 50}")
-    print(f"🚀 {설명}")
+    print(f"{설명}")
     print(f"   명령: {' '.join(명령어목록)}")
     print(f"{'━' * 50}")
 
@@ -163,7 +163,7 @@ def 명령_실행(설명, 명령어목록):
             return False
     except Exception as e:
         log.error(f"실행 중 에러: {설명} - {type(e).__name__}: {e}")
-        print(f"❌ 실행 실패: {e}")
+        print(f"실행 실패: {e}")
         return False
 
 
@@ -244,7 +244,7 @@ def 결과폴더_오픈():
     - Mac     : open
     - Linux   : xdg-open
     """
-    print("\n📂 결과 폴더 자동 오픈 중...")
+    print("\n결과 폴더 자동 오픈 중...")
     log.info("결과 폴더 자동 오픈")
 
     폴더목록 = [
@@ -279,8 +279,8 @@ def 파이프라인_실행():
     시작시간 = datetime.now()
 
     print("\n" + "=" * 50)
-    print("🎮 QA 도구 자동 파이프라인 시작")
-    print(f"⏰ 시작 시각: {시작시간.strftime('%Y-%m-%d %H:%M:%S')}")
+    print("QA 도구 자동 파이프라인 시작")
+    print(f"시작 시각: {시작시간.strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 50)
 
     # 옵션 파싱
@@ -288,7 +288,7 @@ def 파이프라인_실행():
     시작단계 = 옵션.get("start_from", 0)
 
     if 시작단계 > 0:
-        print(f"⏩ 단계 {시작단계} 부터 시작합니다")
+        print(f"단계 {시작단계} 부터 시작합니다")
 
     log.info(f"파이프라인 시작 - 옵션: {옵션}")
 
@@ -301,7 +301,7 @@ def 파이프라인_실행():
 
     # ── 단계 0: TC 생성 ──
     if 시작단계 > 0 or 옵션["skip_tc"]:
-        print("\n⏭️  [단계 0] TC 생성 건너뛰기")
+        print("\n [SKIP] 단계 0: TC 생성 건너뛰기")
         결과["건너뜀"].append("단계 0: TC 생성")
         log.info("단계 0 건너뜀")
     else:
@@ -312,7 +312,7 @@ def 파이프라인_실행():
 
     # ── 단계 1: 데이터 생성 ──
     if 시작단계 > 1 or 옵션["skip_gen"]:
-        print("\n⏭️  [단계 1] 데이터 생성 건너뛰기")
+        print("\n [단계 1] 데이터 생성 건너뛰기")
         결과["건너뜀"].append("단계 1: 데이터 생성")
         log.info("단계 1 건너뜀")
     else:
@@ -320,14 +320,14 @@ def 파이프라인_실행():
             결과["성공"].append("단계 1: 데이터 생성")
         else:
             결과["실패"].append("단계 1: 데이터 생성")
-            print("❌ 데이터 생성 실패 → 파이프라인 중단")
+            print("[FAIL] 데이터 생성 실패 → 파이프라인 중단")
             log.error("단계 1 실패로 파이프라인 중단")
             _최종결과_출력(결과, 시작시간)
             return
 
     # ── 단계 2: 데이터 검증 ──
     if 시작단계 > 2:
-        print("\n⏭️  [단계 2] 데이터 검증 건너뛰기")
+        print("\n [단계 2] 데이터 검증 건너뛰기")
         결과["건너뜀"].append("단계 2: 데이터 검증")
         log.info("단계 2 건너뜀")
     else:
@@ -338,7 +338,7 @@ def 파이프라인_실행():
 
     # ── 단계 3: 마크다운 리포트 ──
     if 시작단계 > 3:
-        print("\n⏭️  [단계 3] 마크다운 리포트 건너뛰기")
+        print("\n [단계 3] 마크다운 리포트 건너뛰기")
         결과["건너뜀"].append("단계 3: 마크다운 리포트")
         log.info("단계 3 건너뜀")
     else:
@@ -349,7 +349,7 @@ def 파이프라인_실행():
 
     # ── 단계 4: 엑셀 리포트 ──
     if 시작단계 > 4:
-        print("\n⏭️  [단계 4] 엑셀 리포트 건너뛰기")
+        print("\n [단계 4] 엑셀 리포트 건너뛰기")
         결과["건너뜀"].append("단계 4: 엑셀 리포트")
         log.info("단계 4 건너뜀")
     else:
@@ -360,7 +360,7 @@ def 파이프라인_실행():
 
     # ── 단계 5: 로그 분석 ──
     if 시작단계 > 5:
-        print("\n⏭️  [단계 5] 로그 분석 건너뛰기")
+        print("\n [단계 5] 로그 분석 건너뛰기")
         결과["건너뜀"].append("단계 5: 로그 분석")
         log.info("단계 5 건너뜀")
     else:
@@ -383,29 +383,29 @@ def _최종결과_출력(결과, 시작시간):
     걸린시간 = (종료시간 - 시작시간).total_seconds()
 
     print("\n" + "=" * 50)
-    print("📊 파이프라인 실행 결과")
+    print("파이프라인 실행 결과")
     print("=" * 50)
-    print(f"⏰ 종료 시각: {종료시간.strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"⏱️  걸린 시간: {걸린시간:.1f}초")
+    print(f"종료 시각: {종료시간.strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"걸린 시간: {걸린시간:.1f}초")
     print()
-    print(f"✅ 성공: {len(결과['성공'])}건")
+    print(f"[PASS] {len(결과['성공'])}건")
     for 단계 in 결과["성공"]:
         print(f"   ✓ {단계}")
 
     if 결과["건너뜀"]:
-        print(f"\n⏭️  건너뜀: {len(결과['건너뜀'])}건")
+        print(f"\n [SKIP] 건너뜀: {len(결과['건너뜀'])}건")
         for 단계 in 결과["건너뜀"]:
             print(f"   - {단계}")
 
     if 결과["실패"]:
-        print(f"\n❌ 실패: {len(결과['실패'])}건")
+        print(f"\n[FAIL] 실패: {len(결과['실패'])}건")
         for 단계 in 결과["실패"]:
             print(f"   ✗ {단계}")
 
     print("=" * 50)
 
     # 결과 폴더 경로 안내
-    print("\n📁 결과 폴더:")
+    print("\n결과 폴더:")
     print("   01.test-data-gen/결과/")
     print("   02.data-validator/결과/")
     print("   03.md-report-gen/결과/")

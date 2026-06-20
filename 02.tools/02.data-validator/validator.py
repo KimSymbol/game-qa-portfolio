@@ -82,7 +82,7 @@ def 규칙_로딩(파일명):
 
     # default.json 도 없으면 내장 기본 규칙
     if not 규칙파일.exists():
-        print("⚠️  규칙 파일 없음 → 기본 규칙으로 검사")
+        print("[WARN]  규칙 파일 없음 → 기본 규칙으로 검사")
         return {
             "설명": "내장 기본 규칙",
             "필수_컬럼": [],
@@ -92,7 +92,7 @@ def 규칙_로딩(파일명):
     with open(규칙파일, "r", encoding="utf-8") as f:
         규칙 = json.load(f)
 
-    print(f"📋 규칙 파일 로딩: {규칙파일.name} ({규칙.get('설명', '')})")
+    print(f"규칙 파일 로딩: {규칙파일.name} ({규칙.get('설명', '')})")
     return 규칙
 
 
@@ -483,7 +483,7 @@ def 리포트_저장_HTML(오류목록, 파일명):
 
     # 요약 섹션
     총오류 = len(오류목록)
-    상태표시 = "✅ 데이터 무결성 통과" if 총오류 == 0 else f"⚠️ {총오류}건의 문제 발견"
+    상태표시 = "✅ 데이터 무결성 통과" if 총오류 == 0 else f"[WARN] {총오류}건의 문제 발견"
 
     요약 = f"""
     <div class="summary">
@@ -495,7 +495,7 @@ def 리포트_저장_HTML(오류목록, 파일명):
     """
 
     # 유형별 요약 테이블
-    유형요약 = "<h2>📋 유형별 요약</h2><table><tr><th>검사 유형</th><th>오류 건수</th><th>결과</th></tr>"
+    유형요약 = "<h2>유형별 요약</h2><table><tr><th>검사 유형</th><th>오류 건수</th><th>결과</th></tr>"
     for 유형 in 검사유형:
         건수 = len([o for o in 오류목록 if o["유형"] == 유형])
         결과 = '<span class="해결">✅ 통과</span>' if 건수 == 0 else f'<span class="미해결">❌ {건수}건</span>'
@@ -558,9 +558,9 @@ def 검증_실행(파일명, 옵션="--xlsx"):
     for 유형 in 검사유형:
         건수 = len([o for o in 전체오류 if o["유형"] == 유형])
         if 건수 == 0:
-            print(f"✅ {유형:8s} : 통과")
+            print(f"[PASS] {유형:8s}")
         else:
-            print(f"❌ {유형:8s} : {건수}건")
+            print(f"[FAIL] {유형:8s} : {건수}건")
             for 오류 in 전체오류:
                 if 오류["유형"] == 유형:
                     print(f"   - {오류['내용']}")
@@ -570,17 +570,17 @@ def 검증_실행(파일명, 옵션="--xlsx"):
 
     if 옵션 in ["--xlsx", "--all"] or not 옵션.startswith("--"):
         경로 = 리포트_저장(전체오류, 파일명)
-        print(f"✅ XLSX 저장: {경로}")
+        print(f"[XLSX] 저장 완료: {경로}")
         리포트목록.append(경로)
 
     if 옵션 in ["--json", "--all"]:
         경로 = 리포트_저장_JSON(전체오류, 파일명)
-        print(f"✅ JSON 저장: {경로}")
+        print(f"[JSON] 저장 완료: {경로}")
         리포트목록.append(경로)
 
     if 옵션 in ["--html", "--all"]:
         경로 = 리포트_저장_HTML(전체오류, 파일명)
-        print(f"✅ HTML 저장: {경로}")
+        print(f"[HTML] 저장 완료: {경로}")
         리포트목록.append(경로)
 
     return {

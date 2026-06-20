@@ -205,7 +205,7 @@ def 시트_대시보드(wb, df):
     해결률   = round(해결수 / 총버그 * 100, 1) if 총버그 > 0 else 0
 
     기본데이터 = [
-        ["📊 QA 버그 리포트 요약", ""],
+        ["QA 버그 리포트 요약", ""],
         ["", ""],
         ["항목",      "수치"],
         ["총 버그 수", 총버그],
@@ -332,7 +332,7 @@ def 리포트_생성_HTML(df):
 
     요약 = f"""
     <div class="summary">
-        <h2>📊 요약</h2>
+        <h2>요약</h2>
         <p><strong>생성일:</strong> {시각}</p>
         <p><strong>총 버그 수:</strong> {총버그}건</p>
         <p><strong>해결률:</strong> <span style="color:#70AD47; font-weight:bold;">{해결률}%</span></p>
