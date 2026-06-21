@@ -312,19 +312,23 @@ def _데이터_타입_판별(매핑이름, df):
 # 컬럼명 자동 추천용 유사어 사전
 # ────────────────────────────────────────
 _유사어_사전 = {
-    # TC 내부 컬럼 → 외부에서 자주 쓰는 이름들
+    #테스트 케이스 내부 컬럼
     "TC_ID":    ["TC_ID", "Test ID", "TestID", "Test_ID", "테스트ID", "테스트케이스ID",
                  "TC ID", "Case ID", "CaseID", "케이스ID", "ID"],
     "테스트명":  ["Test Name", "TestName", "테스트명", "테스트이름", "이름", "케이스명",
-                 "Summary", "Title", "Name", "제목"],
-    "분류":     ["Category", "Type", "분류", "카테고리", "모듈", "Module", "Component"],
-    "전제조건":  ["Precondition", "Pre-condition", "전제조건", "사전조건", "선행조건"],
+                 "Summary", "Title", "Name", "제목",
+                 "Story", "Test"],                                        # ← Allure
+    "분류":     ["Category", "Type", "분류", "카테고리", "모듈", "Module", "Component",
+                 "Suite", "Feature", "Epic"],                              # ← Allure
+    "전제조건":  ["Precondition", "Pre-condition", "전제조건", "사전조건", "선행조건",
+                 "Sub Suite"],                                             # ← Allure
     "테스트단계": ["Steps", "Test Steps", "수행절차", "테스트단계", "재현절차", "절차",
-                  "Description", "Procedure"],
+                  "Description", "Procedure"],                             # ← Allure
     "예상결과":  ["Expected", "Expected Result", "기대결과", "예상결과", "기대값"],
     "실제결과":  ["Actual", "Actual Result", "실제결과", "결과값"],
-    "결과":     ["Result", "Status", "결과", "판정", "Pass/Fail"],
-    "심각도":   ["Severity", "심각도", "중요도", "등급"],
+    "결과":     ["Result", "Status", "결과", "판정", "Pass/Fail"],          # ← Allure
+    "심각도":   ["Severity", "심각도", "중요도", "등급",
+                 "severity_level"],                                        # ← Allure
     "우선순위":  ["Priority", "우선순위", "긴급도"],
     "플랫폼":   ["Platform", "플랫폼", "OS", "Device", "환경", "디바이스"],
     "발견자":   ["Tester", "Reporter", "Author", "발견자", "테스터", "보고자", "작성자",
@@ -332,7 +336,7 @@ _유사어_사전 = {
     "발견일":   ["Date", "Found Date", "Created", "Create Date", "발견일", "작성일",
                 "보고일", "등록일", "생성일"],
 
-    # 버그 내부 컬럼 → 외부에서 자주 쓰는 이름들
+    #버그 내부 컬럼
     "버그ID":   ["Bug ID", "BugID", "Bug_ID", "버그ID", "Defect ID", "Issue ID",
                 "Issue Key", "Key", "이슈ID", "결함ID"],
     "제목":     ["Title", "Summary", "제목", "요약", "버그명", "이슈명", "Name"],

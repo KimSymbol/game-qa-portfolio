@@ -90,6 +90,42 @@
                 "플랫폼": "PC",
                 "재현율": ""
             }
+        },
+        "allure": {
+            "설명": "Allure 리포트 데이터 변환",
+            "컬럼_매핑": {
+                "Name": "테스트명",
+                "Suite": "분류",
+                "Sub Suite": "전제조건",
+                "Status": "결과",
+                "Severity": "심각도",
+                "Duration": "소요시간",
+                "Description": "테스트단계"
+            },
+            "값_변환": {
+                "심각도": {
+                    "blocker": "Critical",
+                    "critical": "High",
+                    "normal": "Medium",
+                    "minor": "Low",
+                    "trivial": "Low"
+                },
+                "결과": {
+                    "passed": "Pass",
+                    "failed": "Fail",
+                    "broken": "Fail",
+                    "skipped": "Skip"
+                }
+            },
+            "기본값": {
+                "TC_ID": "",
+                "플랫폼": "PC",
+                "발견자": "",
+                "발견일": "",
+                "우선순위": "",
+                "예상결과": "",
+                "실제결과": ""
+            }
         }
     },
     "내부_필수_컬럼": {
