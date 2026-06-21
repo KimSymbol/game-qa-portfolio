@@ -5,3 +5,4 @@ venv/
 allure-results/
 debug/
 .env
+bug_reports/
