@@ -72,6 +72,8 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: 01.game-automation/01.flappy-bird/allure-report
+          destination_dir: flappy-bird    # ← 추가
+          keep_files: true                # ← 추가
 
       - name: 작업 폴더 정리
         if: always()

@@ -1,0 +1,103 @@
+# 역할: Flare RPG QA 자동화 CI/CD
+# self-hosted runner 에서 게임 실행 + pytest + Allure 리포트 + GitHub Pages 배포
+
+name: Flare RPG QA Automation CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      # Flare RPG 폴더 내 코드 변경 시에만 실행
+      - '01.game-automation/02.flare-rpg/**'
+      # 단, 문서/템플릿 변경은 제외
+      - '!01.game-automation/02.flare-rpg/**.md'
+      - '!01.game-automation/02.flare-rpg/assets/templates/**'
+  # 수동 실행 가능 (시연/디버깅용)
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: self-hosted
+
+    env:
+      PYTHONIOENCODING: utf-8
+      PYTHONUTF8: 1
+      # GitHub Secrets 에서 환경변수 주입
+      JIRA_URL: ${{ secrets.JIRA_URL }}
+      JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
+      JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+      JIRA_PROJECT_KEY: ${{ secrets.JIRA_PROJECT_KEY }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      FLARE_EXE_PATH: ${{ secrets.FLARE_EXE_PATH }}
+
+    steps:
+      - name: 작업 폴더 사전 정리
+        run: |
+          Remove-Item -Path "01.game-automation/02.flare-rpg/.pytest_cache" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item -Path "01.game-automation/02.flare-rpg/__pycache__" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item -Path "01.game-automation/02.flare-rpg/bug_reports" -Recurse -Force -ErrorAction SilentlyContinue
+        shell: powershell
+
+      - name: 코드 체크아웃
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Python 버전 확인
+        run: python --version
+        shell: powershell
+
+      - name: 의존성 설치
+        run: |
+          cd 01.game-automation/02.flare-rpg
+          python -m pip install -r requirements.txt --no-cache-dir
+        shell: powershell
+
+      - name: Flare RPG 실행
+        run: |
+          $gamePath = $env:FLARE_EXE_PATH
+          Start-Process -FilePath $gamePath
+          # 게임 초기화 + 메인메뉴 대기
+          Start-Sleep -Seconds 5
+        shell: powershell
+
+      - name: 게임 창 확인
+        run: |
+          python -c "import win32gui; hwnd = win32gui.FindWindow(None, 'Flare'); print('OK: Flare 창 발견 (hwnd={})'.format(hwnd)) if hwnd != 0 else (print('ERROR: Flare 창을 찾을 수 없음'), exit(1))"
+        shell: powershell
+
+      - name: pytest 실행
+        run: |
+          cd 01.game-automation/02.flare-rpg
+          python -m pytest tests/ -v --alluredir=allure-results
+        shell: powershell
+
+      - name: 게임 종료
+        if: always()
+        run: |
+          Get-Process -Name "flare" -ErrorAction SilentlyContinue | Stop-Process -Force
+        shell: powershell
+
+      - name: Allure 리포트 생성
+        if: always()
+        run: |
+          cd 01.game-automation/02.flare-rpg
+          allure generate allure-results -o allure-report --clean
+        shell: powershell
+
+      - name: GitHub Pages 배포 (Flare RPG 하위 폴더)
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: 01.game-automation/02.flare-rpg/allure-report
+          destination_dir: flare-rpg
+          keep_files: true  # 다른 게임 리포트 유지 (Flappy Bird 등)
+
+      - name: 작업 폴더 정리
+        if: always()
+        run: |
+          Remove-Item -Path "01.game-automation/02.flare-rpg/allure-results" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item -Path "01.game-automation/02.flare-rpg/allure-report" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item -Path "01.game-automation/02.flare-rpg/bug_reports" -Recurse -Force -ErrorAction SilentlyContinue
+        shell: powershell
