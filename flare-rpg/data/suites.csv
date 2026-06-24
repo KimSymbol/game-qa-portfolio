@@ -1,0 +1,30 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"
+        FR-004: 방향키 입력 시 캐릭터가 정상적으로 이동하는지 확인
+
+        전제조건: 플레이 가능 상태 (대화 종료)
+        테스트 단계: 아래 방향 이동 키(S) 입력
+        기대 결과: 미니맵의 캐릭터 위치 변화로 이동 감지
+        ","0","test_FR004_캐릭터_이동","","2026-06-24","skipped","2026-06-24","","","",""
+"
+        FR-003: 세이브 삭제 후 New Game 클릭 시 캐릭터 생성 화면으로 이동하는지 확인
+
+        전제조건: 세이브 선택 화면
+        테스트 단계: Delete Save → Yes → New Game 클릭
+        기대 결과: 캐릭터 생성 화면 표시 (choose_portrait 템플릿 발견)
+        ","133","test_FR003_캐릭터_생성_화면","tests","2026-06-24","passed","2026-06-24","TestStart","test_1_start","",""
+"
+        FR-002: Play Game 클릭 시 다음 화면으로 정상 이동하는지 확인
+
+        전제조건: 메인메뉴 화면
+        테스트 단계: Play Game 버튼 클릭
+        기대 결과: 세이브 선택 화면 or 캐릭터 생성 화면 표시
+                (세이브 유무에 따라 다름)
+        ","230","test_FR002_play_game_클릭","tests","2026-06-24","passed","2026-06-24","TestStart","test_1_start","",""
+"
+        FR-001: 게임 실행 시 메인메뉴 화면이 정상적으로 표시되는지 확인
+
+        전제조건: 게임이 실행된 상태
+        테스트 단계: 현재 화면에서 메인메뉴 요소 확인
+        기대 결과: logo, play_game 템플릿이 모두 발견됨
+        ","173","test_FR001_메인메뉴_표시","tests","2026-06-24","passed","2026-06-24","TestStart","test_1_start","",""
