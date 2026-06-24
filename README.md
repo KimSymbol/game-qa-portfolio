@@ -24,7 +24,19 @@ game-qa-portfolio/
 | **테스트** | pytest · Allure |
 | **데이터 분석** | re · pandas · openpyxl |
 | **CI/CD** | GitHub Actions (self-hosted runner) |
+| **외부 연동** | Jira REST API v3 · Slack Webhook |
 | **리포트** | Allure Report (GitHub Pages 자동 배포) |
+
+## 🧰 사용 도구
+
+| 분류 | 도구 |
+|------|------|
+| **AI 보조** | Claude |
+| **IDE** | VS Code · Cursor |
+| **터미널** | Warp · PowerShell |
+| **버그 트래킹** | Jira |
+| **알림/협업** | Slack |
+
 
 ## 📊 프로젝트 목록
 
@@ -43,7 +55,12 @@ game-qa-portfolio/
 
 ## 🔗 Allure 리포트
 
-👉 [GitHub Pages에서 보기](https://kimsymbol.github.io/game-qa-portfolio)
+게임별 최신 자동화 테스트 리포트입니다.
+
+| 게임 | Allure 리포트 |
+|------|---------------|
+| 🐦 Flappy Bird | [리포트 보기](https://kimsymbol.github.io/game-qa-portfolio/flappy-bird/) |
+| 🗡️ Flare RPG | [리포트 보기](https://kimsymbol.github.io/game-qa-portfolio/flare-rpg/) |
 
 ## 🎬 시연 영상
 

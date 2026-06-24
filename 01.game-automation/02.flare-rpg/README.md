@@ -20,8 +20,10 @@ PyAutoGUI + OpenCV + pytest 기반 자동화 테스트를 구현했습니다.
 | **창 제어** | pywin32 | 게임 창 탐지 및 포커스 이동 |
 | **테스트** | pytest | 테스트 실행 및 관리 |
 | **리포트** | Allure | 스크린샷 포함 테스트 리포트 생성 |
-| **CI/CD** | GitHub Actions | self-hosted runner로 자동 테스트 실행 (예정) |
-| **알림/티켓** | Jira REST API v3, Slack Webhook | 테스트 실패 시 자동 처리 (예정) |
+| **CI/CD** | GitHub Actions | self-hosted runner로 자동 테스트 실행 |
+| **버그 트래킹** | Jira REST API v3 | 실패 시 자동 티켓 생성 + 중복 시 댓글 추가 + 스크린샷 첨부 |
+| **알림** | Slack Webhook (Block Kit) | 테스트 결과 요약 알림 |
+| **버그 리포트** | CSV/XLSX (openpyxl) | 02.tools 컬럼 호환 자동 생성 |
 
 ## 🧪 테스트 설계
 
@@ -69,23 +71,7 @@ PyAutoGUI + OpenCV + pytest 기반 자동화 테스트를 구현했습니다.
 ```
 02.flare-rpg/
 ├── assets/
-│   └── templates/              # OpenCV 템플릿 이미지
-│       ├── logo.png
-│       ├── play_game.png
-│       ├── load_game.png
-│       ├── delete_save.png
-│       ├── new_game.png
-│       ├── delete_confirm.png
-│       ├── yes_button.png
-│       ├── choose_portrait.png
-│       ├── create_button.png
-│       ├── dialog_arrow.png
-│       ├── dialog_close.png
-│       ├── inventory.png
-│       ├── slot_equipped.png
-│       ├── slot_empty.png
-│       ├── gameover.png
-│       └── continue.png
+│   └── templates/              # OpenCV 템플릿 이미지 (16개)
 ├── pages/
 │   └── game_page.py            # POM - 게임 화면 제어
 ├── tests/
@@ -95,9 +81,13 @@ PyAutoGUI + OpenCV + pytest 기반 자동화 테스트를 구현했습니다.
 │   ├── test_4_combat.py        # FR-008 ~ FR-009 (slow)
 │   └── test_5_gameover.py      # FR-010 (slow)
 ├── utils/
-│   └── screen_utils.py         # 캡처, 템플릿 매칭, Wait 함수
-├── conftest.py                 # pytest fixture (session scope)
+│   ├── screen_utils.py         # 캡처, 템플릿 매칭, Wait 함수
+│   ├── jira_reporter.py        # Jira 티켓 자동 생성 + 댓글 + 스크린샷 첨부
+│   ├── bug_reporter.py         # CSV/XLSX 버그 리포트 자동 생성
+│   └── slack_notifier.py       # Slack Block Kit 결과 요약 알림
+├── conftest.py                 # pytest fixture (session scope) + hook
 ├── pytest.ini                  # pytest 설정 (slow 마커 등록)
+├── .env                        # Jira/Slack/게임경로 환경변수 (.gitignore)
 └── requirements.txt
 ```
 
@@ -141,6 +131,10 @@ allure serve allure-results
 
 ### CI/CD
 
-추후 업데이트 예정 (GitHub Actions self-hosted runner 활용)
+GitHub Actions self-hosted runner 로 자동 실행됩니다.
 
-👉 Allure 리포트: 추후 업데이트 예정
+- 트리거: `01.game-automation/02.flare-rpg/` 폴더 변경 시 자동 + 수동 실행 가능
+- 게임 자동 실행 + 알림창 자동 처리 + pytest 실행 + Allure 리포트 GitHub Pages 배포
+- 실패 시 Jira 티켓 자동 생성, Slack 결과 알림
+
+👉 [Allure 리포트 보기](https://kimsymbol.github.io/game-qa-portfolio/flare-rpg/)
