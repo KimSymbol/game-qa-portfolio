@@ -118,9 +118,9 @@ python 05.log-analyzer/main.py 01.test-data-gen/결과/logs_latest.txt --all
 
 ```python
 키워드맵 = {
-    "Critical": ["충돌", "crash", "서버 다운", "응답 없음", "치명적"],  # ← 추가
-    "Major"   : ["프레임 드랍", "렉", "지연", "오류"],
-    "Minor"   : ["경고", "warning", "메모리"],
+    "Critical": ["충돌", "crash", "서버 다운", "응답 없음", "치명적"],
+    "High"    : ["프레임 드랍", "렉", "지연", "오류"],
+    "Medium"  : ["경고", "warning", "메모리"],
 }
 ```
 

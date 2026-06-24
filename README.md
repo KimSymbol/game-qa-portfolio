@@ -1,16 +1,26 @@
 # 🎮 Game QA Automation Portfolio
 
 게임 QA 자동화 포트폴리오입니다.
-PC 게임 및 모바일 게임을 대상으로 자동화 테스트를 구현했습니다.
+PC 게임 및 모바일 게임을 대상으로 자동화 테스트를 구현하고,
+QA 업무 전반을 자동화하는 실무 도구를 개발했습니다.
 
 ## 📁 프로젝트 구조
+
 ```
 game-qa-portfolio/
 ├── .github/workflows...  # 깃허브 액션 CI/CD 설정
 ├── 01.game-automation/
 │    ├── 01.flappy-bird/  # Flappy Bird QA 자동화
-│    └── 02.flare-rpg/    # Flare Rpg QA 자동화
-├── 02.tools/             # QA 도구 모음
+│    └── 02.flare-rpg/    # Flare RPG QA 자동화
+├── 02.tools/             # QA 도구 모음 (6개 도구 + 파이프라인)
+│    ├── 01.test-data-gen/     # 더미 데이터 생성 (9종)
+│    ├── 02.data-validator/    # 데이터 무결성 검증 (8종 검사)
+│    ├── 03.md-report-gen/     # 마크다운 버그 리포트
+│    ├── 04.excel-reporter/    # 통합 리포트 (xlsx/json/html/pdf)
+│    ├── 05.log-analyzer/      # 로그 분석 + 버그 이력 추적
+│    ├── 06.tc-generator/      # TC 자동 생성
+│    ├── common/               # 공통 모듈 (입출력/스타일/로깅/매핑)
+│    └── pipeline.py           # 통합 자동화 스크립트
 ├── 03.추가 예정          # 분석서, 테스트케이스 등(추가 예정)
 └── .gitmodules           # 서브 모듈 (FlapPybird)
 ```
@@ -22,10 +32,13 @@ game-qa-portfolio/
 | **언어** | Python 3.12 |
 | **게임 자동화** | PyAutoGUI · pydirectinput · OpenCV · pywin32 |
 | **테스트** | pytest · Allure |
-| **데이터 분석** | re · pandas · openpyxl |
+| **데이터 처리** | pandas · openpyxl · csv · json |
+| **리포트 생성** | openpyxl · reportlab (PDF) · HTML |
+| **더미 데이터** | Faker (ko_KR · en_US) |
 | **CI/CD** | GitHub Actions (self-hosted runner) |
 | **외부 연동** | Jira REST API v3 · Slack Webhook |
-| **리포트** | Allure Report (GitHub Pages 자동 배포) |
+| **리포트 배포** | Allure Report (GitHub Pages 자동 배포) |
+| **로깅** | logging (파일 + 콘솔 동시 출력) |
 
 ## 🧰 사용 도구
 
@@ -37,7 +50,6 @@ game-qa-portfolio/
 | **버그 트래킹** | Jira |
 | **알림/협업** | Slack |
 
-
 ## 📊 프로젝트 목록
 
 ### 🎮 01. Game Automation
@@ -47,11 +59,25 @@ game-qa-portfolio/
 | 01 | [Flappy Bird QA 자동화](./01.game-automation/01.flappy-bird) | PyAutoGUI · OpenCV · pytest · Allure | ✅ 완료 |
 | 02 | [Flare RPG QA 자동화](./01.game-automation/02.flare-rpg) | PyAutoGUI · OpenCV · pytest · Allure | ✅ 완료 |
 
-### 🛠️ 02. Tools
+### 🛠️ 02. Tools ([상세 문서](./02.tools/README.md))
 
-| # | 프로젝트 | 기술 스택 | 상태 |
-|---|---------|----------|------|
-| 01 | [로그 자동 분석 시스템](./02.tools/01.log-analyzer) | re · openpyxl · schedule · json | ✅ 완료 |
+| # | 도구 | 역할 | 입력 | 출력 |
+|---|------|------|------|------|
+| 01 | [test-data-gen](./02.tools/01.test-data-gen) | 더미 데이터 생성 (9종) | - | csv, txt |
+| 02 | [data-validator](./02.tools/02.data-validator) | 데이터 무결성 검증 (8종 검사) | csv, xlsx | xlsx, json, html |
+| 03 | [md-report-gen](./02.tools/03.md-report-gen) | 마크다운 버그 리포트 | csv, xlsx | md, csv |
+| 04 | [excel-reporter](./02.tools/04.excel-reporter) | 통합 리포트 생성 | csv, xlsx, tsv, json | xlsx, json, html, pdf |
+| 05 | [log-analyzer](./02.tools/05.log-analyzer) | 로그 분석 + 버그 이력 추적 | txt, log | xlsx, json, html |
+| 06 | [tc-generator](./02.tools/06.tc-generator) | TC 자동 생성 | json | csv, xlsx |
+| - | [common](./02.tools/common) | 공통 모듈 + 외부 데이터 변환 | - | - |
+| - | [pipeline.py](./02.tools/pipeline.py) | 6개 도구 통합 자동 실행 | - | - |
+
+**빠른 실행:**
+```bash
+cd 02.tools
+pip install -r requirements.txt
+python pipeline.py --all --open
+```
 
 ## 🔗 Allure 리포트
 
@@ -66,7 +92,7 @@ game-qa-portfolio/
 
 👉 [Flappy Bird QA 자동화 테스트](https://youtu.be/gc4bCL45jqw)
 
-👉 [Qa Tool 전체 시연](https://youtu.be/J9GxlsjLduU)
+👉 [QA Tool 전체 시연](https://youtu.be/J9GxlsjLduU)
 
 ## 📋 팀 프로젝트 경험
 
