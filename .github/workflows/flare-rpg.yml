@@ -56,9 +56,16 @@ jobs:
       - name: Flare RPG 실행
         run: |
           $gamePath = $env:FLARE_EXE_PATH
+          Write-Host "게임 경로: $gamePath"
+          Write-Host "파일 존재 여부: $(Test-Path $gamePath)"
+          
+          if (-not (Test-Path $gamePath)) {
+            Write-Host "ERROR: 게임 파일이 없습니다"
+            exit 1
+          }
+          
           Start-Process -FilePath $gamePath
-          # 게임 초기화 + 메인메뉴 대기
-          Start-Sleep -Seconds 5
+          Start-Sleep -Seconds 10  # 5초 → 10초
         shell: powershell
 
       - name: 게임 창 확인
