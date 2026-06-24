@@ -53,19 +53,25 @@ jobs:
           python -m pip install -r requirements.txt --no-cache-dir
         shell: powershell
 
+      - name: 이전 Flare 프로세스 강제 종료
+        run: |
+          # 혹시 남아있는 flare 프로세스 모두 종료
+          Get-Process -Name "flare" -ErrorAction SilentlyContinue | Stop-Process -Force
+          Start-Sleep -Seconds 2
+        shell: powershell
+
       - name: Flare RPG 실행
         run: |
           $gamePath = $env:FLARE_EXE_PATH
+          $gameDir = Split-Path $gamePath -Parent
+          
           Write-Host "게임 경로: $gamePath"
-          Write-Host "파일 존재 여부: $(Test-Path $gamePath)"
+          Write-Host "게임 폴더: $gameDir"
+          Write-Host "파일 존재: $(Test-Path $gamePath)"
           
-          if (-not (Test-Path $gamePath)) {
-            Write-Host "ERROR: 게임 파일이 없습니다"
-            exit 1
-          }
-          
-          Start-Process -FilePath $gamePath
-          Start-Sleep -Seconds 10  # 5초 → 10초
+          # 게임 폴더에서 실행
+          Start-Process -FilePath $gamePath -WorkingDirectory $gameDir
+          Start-Sleep -Seconds 10
         shell: powershell
 
       - name: 게임 창 확인
