@@ -60,38 +60,27 @@ jobs:
           Start-Sleep -Seconds 2
         shell: powershell
 
-      - name: Flare RPG 실행 + 알림창 처리
+      - name: Flare RPG 실행
+        shell: powershell
         run: |
           $gamePath = $env:FLARE_EXE_PATH
           $gameDir = Split-Path $gamePath -Parent
-          
           Write-Host "게임 경로: $gamePath"
-          Write-Host "게임 폴더: $gameDir"
-          
-          # 게임 실행
           Start-Process -FilePath $gamePath -WorkingDirectory $gameDir
-          
-          # 알림창 뜰 시간 대기
           Start-Sleep -Seconds 3
-          
-          # 알림창의 Continue 버튼 클릭 (Tab x3 + Enter)
-          Add-Type -AssemblyName System.Windows.Forms
-          [System.Windows.Forms.SendKeys]::SendWait("{TAB}")
-          Start-Sleep -Milliseconds 200
-          [System.Windows.Forms.SendKeys]::SendWait("{TAB}")
-          Start-Sleep -Milliseconds 200
-          [System.Windows.Forms.SendKeys]::SendWait("{TAB}")
-          Start-Sleep -Milliseconds 200
-          [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
-          
-          # 게임 로딩 대기
-          Start-Sleep -Seconds 10
+
+      - name: 알림창 자동 처리
         shell: powershell
+        run: .\.github\workflows\dismiss-flare-popup.ps1
+
+      - name: 게임 로딩 대기
+        shell: powershell
+        run: Start-Sleep -Seconds 10
 
       - name: 게임 창 확인
+        shell: powershell
         run: |
           python -c "import win32gui; hwnd = win32gui.FindWindow(None, 'Flare'); print('OK: Flare 창 발견 (hwnd={})'.format(hwnd)) if hwnd != 0 else (print('ERROR: Flare 창을 찾을 수 없음'), exit(1))"
-        shell: powershell
 
       - name: pytest 실행
         run: |
