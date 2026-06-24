@@ -21,4 +21,5 @@ class TestMovement:
         # 아래쪽으로 1초간 이동
         result = game_playing.move_character("down", duration=1.0)
         attach_screenshot("이동_후_화면")
-        assert result, "캐릭터가 이동하지 않았습니다"
+        # assert result, "캐릭터가 이동하지 않았습니다"
+        assert False, "버그 시연용 실패"
