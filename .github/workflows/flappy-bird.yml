@@ -23,10 +23,11 @@ jobs:
 
     steps:
       - name: 작업 폴더 사전 정리
-        run: |
-          Remove-Item -Path "01.game-automation/01.flappy-bird/.pytest_cache" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item -Path "01.game-automation/01.flappy-bird/__pycache__" -Recurse -Force -ErrorAction SilentlyContinue
         shell: powershell
+        run: |
+          # 모든 게임 폴더의 캐시 폴더 삭제 (권한 충돌 방지)
+          Get-ChildItem -Path "." -Filter ".pytest_cache" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+          Get-ChildItem -Path "." -Filter "__pycache__" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
 
       - name: 코드 체크아웃
         uses: actions/checkout@v3
