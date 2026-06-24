@@ -92,6 +92,8 @@ python pipeline.py --all --open
 
 👉 [Flappy Bird QA 자동화 테스트](https://youtu.be/gc4bCL45jqw)
 
+👉 [Flare RPG QA 자동화 시연](https://youtu.be/SkB1OpMsIvU)
+
 👉 [QA Tool 전체 시연](https://youtu.be/J9GxlsjLduU)
 
 ## 📋 팀 프로젝트 경험

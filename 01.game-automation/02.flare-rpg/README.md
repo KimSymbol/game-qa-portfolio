@@ -8,7 +8,7 @@ PyAutoGUI + OpenCV + pytest 기반 자동화 테스트를 구현했습니다.
 
 ## 🎬 시연 영상
 
-👉 추후 업데이트 예정
+👉 [YouTube에서 보기](https://youtu.be/SkB1OpMsIvU)
 
 ## 🛠️ 기술 스택
 
