@@ -59,23 +59,28 @@ jobs:
       - name: 부팅 완료 대기
         shell: powershell
         run: |
-          adb wait-for-device
+          # 네이티브 명령의 stderr 를 PowerShell 에러로 승격시키지 않음
+          $ErrorActionPreference = "Continue"
+
+          adb -s $env:DEVICE_SERIAL wait-for-device
+
           # sys.boot_completed 가 1 이 될 때까지 최대 3분 대기
           $booted = $false
           for ($i = 0; $i -lt 90; $i++) {
-            $result = adb -s $env:DEVICE_SERIAL shell getprop sys.boot_completed 2>$null
-            if ($result -match "1") {
+              $result = (adb -s $env:DEVICE_SERIAL shell getprop sys.boot_completed 2>&1) -join ""
+              if ($result -match "1") {
               $booted = $true
               break
-            }
-            Start-Sleep -Seconds 2
+              }
+              Start-Sleep -Seconds 2
           }
+
           if (-not $booted) {
-            Write-Host "ERROR: 에뮬레이터 부팅 실패"
-            exit 1
+              Write-Host "ERROR: 에뮬레이터 부팅 실패"
+              exit 1
           }
+
           Write-Host "에뮬레이터 부팅 완료"
-          # 화면 잠금 해제
           adb -s $env:DEVICE_SERIAL shell input keyevent 82
 
       - name: 앱 설치
@@ -91,7 +96,7 @@ jobs:
         shell: powershell
         run: |
           cd 01.game-automation/03.2048-mobile
-          python -m uiautomator2 init
+          python -m uiautomator2 init --serial $env:DEVICE_SERIAL
 
       - name: pytest 실행
         shell: powershell
