@@ -18,6 +18,7 @@ uiautomator2 + pytest 기반 모바일 자동화 테스트를 구현했습니다
 | **모바일 자동화** | uiautomator2 | resource-id 기반 UI 요소 접근 및 제스처 |
 | **기기 제어** | ADB | 기기 연결, 앱 설치, 에뮬레이터 제어 |
 | **이미지 비교** | Pillow, numpy | UI 속성으로 검증 불가한 영역 판정 |
+| **화면 미러링** | scrcpy | 실기기 화면을 PC로 미러링하여 테스트 과정 확인 및 시연 녹화 |
 | **테스트** | pytest | 테스트 실행 및 관리 |
 | **리포트** | Allure | 스크린샷 포함 테스트 리포트 |
 | **CI/CD** | GitHub Actions | self-hosted runner에서 에뮬레이터 부팅부터 자동화 |

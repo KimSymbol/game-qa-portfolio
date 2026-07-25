@@ -33,6 +33,7 @@ game-qa-portfolio/
 | **언어** | Python 3.12 |
 | **게임 자동화** | PyAutoGUI · pydirectinput · OpenCV · pywin32 |
 | **모바일 자동화** | uiautomator2 · ADB |
+| **기기 미러링** | scrcpy |
 | **테스트** | pytest · Allure |
 | **데이터 처리** | pandas · openpyxl · csv · json |
 | **리포트 생성** | openpyxl · reportlab (PDF) · HTML |
