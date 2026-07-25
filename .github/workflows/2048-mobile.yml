@@ -1,0 +1,132 @@
+# 역할: 2048 Mobile QA 자동화 CI/CD
+# self-hosted runner 에서 에뮬레이터 부팅 → 앱 설치 → pytest → Allure 배포
+
+name: 2048 Mobile QA Automation CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '01.game-automation/03.2048-mobile/**'
+      - '!01.game-automation/03.2048-mobile/**.md'
+      - '.github/workflows/2048-mobile.yml'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: self-hosted
+
+    env:
+      PYTHONIOENCODING: utf-8
+      PYTHONUTF8: 1
+      # CI 는 에뮬레이터로 실행 (실기기는 로컬 검증용)
+      DEVICE_SERIAL: emulator-5554
+      AVD_NAME: Pixel_6
+      JIRA_URL: ${{ secrets.JIRA_URL }}
+      JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
+      JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+      JIRA_PROJECT_KEY: ${{ secrets.JIRA_PROJECT_KEY }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    steps:
+      - name: 작업 폴더 사전 정리
+        shell: powershell
+        run: |
+          Get-ChildItem -Path "." -Filter ".pytest_cache" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+          Get-ChildItem -Path "." -Filter "__pycache__" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item -Path "01.game-automation/03.2048-mobile/bug_reports" -Recurse -Force -ErrorAction SilentlyContinue
+
+      - name: 코드 체크아웃
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: 의존성 설치
+        shell: powershell
+        run: |
+          cd 01.game-automation/03.2048-mobile
+          python -m pip install -r requirements.txt --no-cache-dir
+
+      - name: 에뮬레이터 실행
+        shell: powershell
+        run: |
+          $emulator = "$env:LOCALAPPDATA\Android\Sdk\emulator\emulator.exe"
+          Write-Host "AVD: $env:AVD_NAME"
+          # -no-snapshot-load: 항상 깨끗한 상태로 부팅
+          Start-Process -FilePath $emulator -ArgumentList "-avd", "$env:AVD_NAME", "-no-snapshot-load"
+          Start-Sleep -Seconds 10
+
+      - name: 부팅 완료 대기
+        shell: powershell
+        run: |
+          adb wait-for-device
+          # sys.boot_completed 가 1 이 될 때까지 최대 3분 대기
+          $booted = $false
+          for ($i = 0; $i -lt 90; $i++) {
+            $result = adb -s $env:DEVICE_SERIAL shell getprop sys.boot_completed 2>$null
+            if ($result -match "1") {
+              $booted = $true
+              break
+            }
+            Start-Sleep -Seconds 2
+          }
+          if (-not $booted) {
+            Write-Host "ERROR: 에뮬레이터 부팅 실패"
+            exit 1
+          }
+          Write-Host "에뮬레이터 부팅 완료"
+          # 화면 잠금 해제
+          adb -s $env:DEVICE_SERIAL shell input keyevent 82
+
+      - name: 앱 설치
+        shell: powershell
+        run: |
+          cd 01.game-automation/03.2048-mobile
+          $apk = Get-ChildItem -Path "apk" -Filter "*.apk" | Select-Object -First 1
+          Write-Host "설치할 APK: $($apk.Name)"
+          # -r: 이미 설치되어 있으면 재설치
+          adb -s $env:DEVICE_SERIAL install -r $apk.FullName
+
+      - name: uiautomator2 초기화
+        shell: powershell
+        run: |
+          cd 01.game-automation/03.2048-mobile
+          python -m uiautomator2 init
+
+      - name: pytest 실행
+        shell: powershell
+        run: |
+          cd 01.game-automation/03.2048-mobile
+          python -m pytest tests/ -v -s --alluredir=allure-results
+
+      - name: 에뮬레이터 종료
+        if: always()
+        shell: powershell
+        run: |
+          adb -s $env:DEVICE_SERIAL emu kill
+          Start-Sleep -Seconds 3
+          Get-Process -Name "qemu-system-x86_64*" -ErrorAction SilentlyContinue | Stop-Process -Force
+
+      - name: Allure 리포트 생성
+        if: always()
+        shell: powershell
+        run: |
+          cd 01.game-automation/03.2048-mobile
+          allure generate allure-results -o allure-report --clean
+
+      - name: GitHub Pages 배포
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: 01.game-automation/03.2048-mobile/allure-report
+          destination_dir: 2048-mobile
+          keep_files: true
+
+      - name: 작업 폴더 정리
+        if: always()
+        shell: powershell
+        run: |
+          Remove-Item -Path "01.game-automation/03.2048-mobile/allure-results" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item -Path "01.game-automation/03.2048-mobile/allure-report" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item -Path "01.game-automation/03.2048-mobile/bug_reports" -Recurse -Force -ErrorAction SilentlyContinue
