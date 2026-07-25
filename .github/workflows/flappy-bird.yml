@@ -12,6 +12,7 @@ on:
       # 단, 문서/템플릿 변경은 제외
       - '!01.game-automation/01.flappy-bird/**.md'
       - '!01.game-automation/01.flappy-bird/assets/templates/**'
+  workflow_dispatch:
 
 jobs:
   test:
