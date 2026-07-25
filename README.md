@@ -12,7 +12,8 @@ game-qa-portfolio/
 ├── 01.game-automation/
 │    ├── 01.flappy-bird/  # Flappy Bird QA 자동화
 │    ├── 02.flare-rpg/    # Flare RPG QA 자동화
-│    └── 03.2048-mobile/  # 2048 Mobile QA 자동화
+│    ├── 03.2048-mobile/  # 2048 Mobile QA 자동화
+│    └── 04.unity-utf/    # Unity QA 자동화 (Test Framework)
 ├── 02.tools/             # QA 도구 모음 (6개 도구 + 파이프라인)
 │    ├── 01.test-data-gen/     # 더미 데이터 생성 (9종)
 │    ├── 02.data-validator/    # 데이터 무결성 검증 (8종 검사)
@@ -33,6 +34,7 @@ game-qa-portfolio/
 | **언어** | Python 3.12 |
 | **게임 자동화** | PyAutoGUI · pydirectinput · OpenCV · pywin32 |
 | **모바일 자동화** | uiautomator2 · ADB |
+| **게임 엔진 테스트** | Unity Test Framework (C# · NUnit) |
 | **기기 미러링** | scrcpy |
 | **테스트** | pytest · Allure |
 | **데이터 처리** | pandas · openpyxl · csv · json |
@@ -62,6 +64,7 @@ game-qa-portfolio/
 | 01 | [Flappy Bird QA 자동화](./01.game-automation/01.flappy-bird) | PyAutoGUI · OpenCV · pytest · Allure | ✅ 완료 |
 | 02 | [Flare RPG QA 자동화](./01.game-automation/02.flare-rpg) | PyAutoGUI · OpenCV · pytest · Allure | ✅ 완료 |
 | 03 | [2048 Mobile QA 자동화](./01.game-automation/03.2048-mobile) | uiautomator2 · ADB · pytest · Allure | ✅ 완료 |
+| 04 | [Unity QA 자동화](./01.game-automation/04.unity-utf) | Unity Test Framework · C# · Python · Allure | ✅ 완료 |
 
 ### 🛠️ 02. Tools ([상세 문서](./02.tools/README.md))
 
@@ -92,6 +95,7 @@ python pipeline.py --all --open
 | 🐦 Flappy Bird | [리포트 보기](https://kimsymbol.github.io/game-qa-portfolio/flappy-bird/) |
 | 🗡️ Flare RPG | [리포트 보기](https://kimsymbol.github.io/game-qa-portfolio/flare-rpg/) |
 | 📱 2048 Mobile | [보기](https://kimsymbol.github.io/game-qa-portfolio/2048-mobile/) |
+| 🎮 Unity | [보기](https://kimsymbol.github.io/game-qa-portfolio/unity-utf/) |
 
 ## 🎬 시연 영상
 
