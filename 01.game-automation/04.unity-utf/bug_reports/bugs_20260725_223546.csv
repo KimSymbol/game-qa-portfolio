@@ -1,2 +1,0 @@
-﻿버그ID,TC_ID,제목,심각도,우선순위,플랫폼,버전,상태,발견자,발견일,해결일,재현율
-BUG-001,UT-006,데미지 업그레이드 레벨1,High,P2,PC (Unity PlayMode),Sentaur Survivors,미해결,QA Bot,2026-07-25,,100%

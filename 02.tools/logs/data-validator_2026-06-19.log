@@ -1,7 +1,0 @@
-2026-06-19 23:02:43 [INFO] [data-validator] 실행 시작 - 옵션: --all / 파일: ['01.test-data-gen/결과/bugs_*.csv']
-2026-06-19 23:02:43 [INFO] [data-validator] 검증 시작: 01.test-data-gen/결과/bugs_*.csv (옵션: --all)
-2026-06-19 23:02:43 [ERROR] [data-validator] 검증 실패: 01.test-data-gen/결과/bugs_*.csv
-2026-06-19 23:06:31 [INFO] [data-validator] 실행 시작 - 옵션: --all / 파일: ['01.test-data-gen/결과/bugs_latest.csv']
-2026-06-19 23:06:31 [INFO] [data-validator] 검증 시작: 01.test-data-gen/결과/bugs_latest.csv (옵션: --all)
-2026-06-19 23:06:31 [INFO] [data-validator] 검증 통과: 01.test-data-gen/결과/bugs_latest.csv
-2026-06-19 23:06:31 [INFO] [data-validator] 리포트 3개 생성 완료
