@@ -105,6 +105,8 @@ python pipeline.py --all --open
 
 👉 [2048 Mobile QA 자동화 시연](https://youtu.be/1gs1ShVXCl8)
 
+👉 [Unity 게임 QA 자동화 시연](https://youtu.be/hX_F6osNSUg)
+
 👉 [QA Tool 전체 시연](https://youtu.be/J9GxlsjLduU)
 
 ## 📋 팀 프로젝트 경험

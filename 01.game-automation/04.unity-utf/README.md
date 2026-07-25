@@ -8,7 +8,7 @@ Unity Test Framework 기반 PlayMode 자동화 테스트를 구현했습니다.
 
 ## 🎬 시연 영상
 
-👉 추후 업데이트 예정
+👉 [Unity 게임 QA 자동화 시연](https://youtu.be/hX_F6osNSUg)
 
 ## 🛠️ 기술 스택
 
