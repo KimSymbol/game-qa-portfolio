@@ -98,6 +98,8 @@ python pipeline.py --all --open
 
 👉 [Flare RPG QA 자동화 시연](https://youtu.be/SkB1OpMsIvU)
 
+👉 [2048 Mobile QA 자동화 시연](https://youtu.be/1gs1ShVXCl8)
+
 👉 [QA Tool 전체 시연](https://youtu.be/J9GxlsjLduU)
 
 ## 📋 팀 프로젝트 경험

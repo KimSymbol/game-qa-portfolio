@@ -8,7 +8,7 @@ uiautomator2 + pytest 기반 모바일 자동화 테스트를 구현했습니다
 
 ## 🎬 시연 영상
 
-👉 추후 업데이트 예정
+👉 [2048 Mobile QA 자동화 시연](https://youtu.be/1gs1ShVXCl8)
 
 ## 🛠️ 기술 스택
 
