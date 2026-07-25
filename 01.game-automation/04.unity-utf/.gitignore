@@ -1,0 +1,7 @@
+__pycache__/
+venv/
+*.pyc
+.env
+results/
+bug_reports/
+allure-results/

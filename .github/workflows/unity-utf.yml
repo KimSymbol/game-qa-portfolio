@@ -1,0 +1,101 @@
+# 역할: Unity Test Framework QA 자동화 CI/CD
+# self-hosted runner 에서 게임 소스에 테스트를 주입하고 batchmode 로 실행
+
+name: Unity UTF QA Automation CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '01.game-automation/04.unity-utf/**'
+      - '!01.game-automation/04.unity-utf/**.md'
+      - '.github/workflows/unity-utf.yml'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: self-hosted
+
+    env:
+      PYTHONIOENCODING: utf-8
+      PYTHONUTF8: 1
+      UNITY_EDITOR_PATH: ${{ secrets.UNITY_EDITOR_PATH }}
+      UNITY_VERSION: '6000.3.8f1'
+      JIRA_URL: ${{ secrets.JIRA_URL }}
+      JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
+      JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+      JIRA_PROJECT_KEY: ${{ secrets.JIRA_PROJECT_KEY }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    steps:
+      - name: 작업 폴더 사전 정리
+        shell: powershell
+        run: |
+          Get-ChildItem -Path "." -Filter ".pytest_cache" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+          Get-ChildItem -Path "." -Filter "__pycache__" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item -Path "01.game-automation/04.unity-utf/results" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item -Path "01.game-automation/04.unity-utf/bug_reports" -Recurse -Force -ErrorAction SilentlyContinue
+
+      - name: 코드 체크아웃
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: 의존성 설치
+        shell: powershell
+        run: |
+          cd 01.game-automation/04.unity-utf
+          python -m pip install -r requirements.txt --no-cache-dir
+
+      - name: 게임 프로젝트에 테스트 코드 주입
+        shell: powershell
+        run: |
+          $game = "${{ github.workspace }}\sentaur-survivors"
+          $source = "${{ github.workspace }}\01.game-automation\04.unity-utf\tests-source"
+
+          # 게임 코드용 asmdef (원본 저장소에는 없으므로 추가)
+          Copy-Item "$source\Scripts\SentaurSurvivors.asmdef" "$game\Assets\Scripts\" -Force
+
+          # 테스트 코드 + 테스트 어셈블리 정의
+          New-Item -Path "$game\Assets\Tests" -ItemType Directory -Force | Out-Null
+          Copy-Item "$source\Tests\*" "$game\Assets\Tests\" -Force
+
+          Write-Host "주입된 파일:"
+          Get-ChildItem "$game\Assets\Tests" | Select-Object -ExpandProperty Name
+
+      - name: Unity 프로젝트 경로 설정
+        shell: powershell
+        run: |
+          # 러너가 submodule 로 받은 게임을 대상으로 실행하도록 경로 주입
+          echo "UNITY_PROJECT_PATH=${{ github.workspace }}\sentaur-survivors" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: 테스트 실행 및 리포팅
+        shell: powershell
+        run: |
+          cd 01.game-automation/04.unity-utf
+          python runner/run_tests.py
+
+      - name: Allure 리포트 생성
+        if: always()
+        shell: powershell
+        run: |
+          cd 01.game-automation/04.unity-utf
+          allure generate allure-results -o allure-report --clean
+
+      - name: GitHub Pages 배포
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: 01.game-automation/04.unity-utf/allure-report
+          destination_dir: unity-utf
+          keep_files: true
+
+      - name: 작업 폴더 정리
+        if: always()
+        shell: powershell
+        run: |
+          Remove-Item -Path "01.game-automation/04.unity-utf/allure-results" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item -Path "01.game-automation/04.unity-utf/allure-report" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item -Path "01.game-automation/04.unity-utf/results" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item -Path "01.game-automation/04.unity-utf/bug_reports" -Recurse -Force -ErrorAction SilentlyContinue
