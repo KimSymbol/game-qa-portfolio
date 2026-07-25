@@ -11,7 +11,8 @@ game-qa-portfolio/
 ├── .github/workflows...  # 깃허브 액션 CI/CD 설정
 ├── 01.game-automation/
 │    ├── 01.flappy-bird/  # Flappy Bird QA 자동화
-│    └── 02.flare-rpg/    # Flare RPG QA 자동화
+│    ├── 02.flare-rpg/    # Flare RPG QA 자동화
+│    └── 03.2048-mobile/  # 2048 Mobile QA 자동화
 ├── 02.tools/             # QA 도구 모음 (6개 도구 + 파이프라인)
 │    ├── 01.test-data-gen/     # 더미 데이터 생성 (9종)
 │    ├── 02.data-validator/    # 데이터 무결성 검증 (8종 검사)
@@ -31,6 +32,7 @@ game-qa-portfolio/
 |------|------|
 | **언어** | Python 3.12 |
 | **게임 자동화** | PyAutoGUI · pydirectinput · OpenCV · pywin32 |
+| **모바일 자동화** | uiautomator2 · ADB |
 | **테스트** | pytest · Allure |
 | **데이터 처리** | pandas · openpyxl · csv · json |
 | **리포트 생성** | openpyxl · reportlab (PDF) · HTML |
@@ -58,6 +60,7 @@ game-qa-portfolio/
 |---|---------|----------|------|
 | 01 | [Flappy Bird QA 자동화](./01.game-automation/01.flappy-bird) | PyAutoGUI · OpenCV · pytest · Allure | ✅ 완료 |
 | 02 | [Flare RPG QA 자동화](./01.game-automation/02.flare-rpg) | PyAutoGUI · OpenCV · pytest · Allure | ✅ 완료 |
+| 03 | [2048 Mobile QA 자동화](./01.game-automation/03.2048-mobile) | uiautomator2 · ADB · pytest · Allure | ✅ 완료 |
 
 ### 🛠️ 02. Tools ([상세 문서](./02.tools/README.md))
 
@@ -87,6 +90,7 @@ python pipeline.py --all --open
 |------|---------------|
 | 🐦 Flappy Bird | [리포트 보기](https://kimsymbol.github.io/game-qa-portfolio/flappy-bird/) |
 | 🗡️ Flare RPG | [리포트 보기](https://kimsymbol.github.io/game-qa-portfolio/flare-rpg/) |
+| 📱 2048 Mobile | [보기](https://kimsymbol.github.io/game-qa-portfolio/2048-mobile/) |
 
 ## 🎬 시연 영상
 
