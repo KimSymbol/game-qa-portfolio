@@ -1,0 +1,40 @@
+{
+  "uuid": "e096c6e1-1512-4189-a409-b634d4fad5bd",
+  "historyId": "b150b1dbfb5434377cf3e7fba82252d1",
+  "name": "UT-006 데미지 업그레이드 레벨1",
+  "fullName": "WeaponUpgradeTest.UT006_데미지_업그레이드_레벨1",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1784987701771,
+  "stop": 1784987702835,
+  "labels": [
+    {
+      "name": "epic",
+      "value": "Unity QA"
+    },
+    {
+      "name": "feature",
+      "value": "WeaponUpgradeTest"
+    },
+    {
+      "name": "story",
+      "value": "UT-006 데미지 업그레이드 레벨1"
+    },
+    {
+      "name": "suite",
+      "value": "WeaponUpgradeTest"
+    },
+    {
+      "name": "testClass",
+      "value": "WeaponUpgradeTest"
+    },
+    {
+      "name": "framework",
+      "value": "Unity Test Framework"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    }
+  ]
+}

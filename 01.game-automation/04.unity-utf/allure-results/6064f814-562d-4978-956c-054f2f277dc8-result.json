@@ -1,0 +1,40 @@
+{
+  "uuid": "6064f814-562d-4978-956c-054f2f277dc8",
+  "historyId": "d948af219e066a0135cd350c2d1354fd",
+  "name": "UT-009 피격시 체력바 감소",
+  "fullName": "PlayerStatusTest.UT009_피격시_체력바_감소",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1784987701771,
+  "stop": 1784987703108,
+  "labels": [
+    {
+      "name": "epic",
+      "value": "Unity QA"
+    },
+    {
+      "name": "feature",
+      "value": "PlayerStatusTest"
+    },
+    {
+      "name": "story",
+      "value": "UT-009 피격시 체력바 감소"
+    },
+    {
+      "name": "suite",
+      "value": "PlayerStatusTest"
+    },
+    {
+      "name": "testClass",
+      "value": "PlayerStatusTest"
+    },
+    {
+      "name": "framework",
+      "value": "Unity Test Framework"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    }
+  ]
+}

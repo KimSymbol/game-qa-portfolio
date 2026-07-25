@@ -1,0 +1,40 @@
+{
+  "uuid": "eedde7eb-f67b-435f-9667-ab1ef61c6e49",
+  "historyId": "51f4b4c2e203fb94d5cf7a9cd5eb15c6",
+  "name": "UT-005 적 사망시 오브젝트 제거",
+  "fullName": "EnemyCombatTest.UT005_적_사망시_오브젝트_제거",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1784987701771,
+  "stop": 1784987705102,
+  "labels": [
+    {
+      "name": "epic",
+      "value": "Unity QA"
+    },
+    {
+      "name": "feature",
+      "value": "EnemyCombatTest"
+    },
+    {
+      "name": "story",
+      "value": "UT-005 적 사망시 오브젝트 제거"
+    },
+    {
+      "name": "suite",
+      "value": "EnemyCombatTest"
+    },
+    {
+      "name": "testClass",
+      "value": "EnemyCombatTest"
+    },
+    {
+      "name": "framework",
+      "value": "Unity Test Framework"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+2026-06-19 23:02:43 [ERROR] [common.file_io] 파일을 찾을 수 없음: 01.test-data-gen/결과/bugs_*.csv
+2026-06-19 23:06:31 [INFO] [common.file_io] 파일 로딩 완료: 20건 (.csv) - bugs_latest.csv
+2026-06-19 23:08:18 [INFO] [common.file_io] 파일 로딩 완료: 20건 (.csv) - testcases_latest.csv
+2026-06-19 23:08:33 [INFO] [common.file_io] 파일 로딩 완료: 8줄 (.txt) - bug_log.txt

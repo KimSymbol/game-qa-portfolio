@@ -1,0 +1,75 @@
+2026-06-20 01:31:25 [INFO] [data-validator] 실행 시작 - 옵션: --xlsx / 파일: ['06.tc-generator/결과/testcases_로그인_latest.csv']
+2026-06-20 01:31:25 [INFO] [data-validator] 검증 시작: 06.tc-generator/결과/testcases_로그인_latest.csv (옵션: --xlsx)
+2026-06-20 01:31:25 [WARNING] [data-validator] 오류 23건 발견: 06.tc-generator/결과/testcases_로그인_latest.csv
+2026-06-20 01:31:25 [INFO] [data-validator] 리포트 1개 생성 완료
+2026-06-20 01:33:35 [INFO] [data-validator] 실행 시작 - 옵션: --xlsx / 파일: ['06.tc-generator/결과/testcases_로그인_latest.csv']
+2026-06-20 01:33:35 [INFO] [data-validator] 검증 시작: 06.tc-generator/결과/testcases_로그인_latest.csv (옵션: --xlsx)
+2026-06-20 01:33:35 [INFO] [data-validator] 검증 통과: 06.tc-generator/결과/testcases_로그인_latest.csv
+2026-06-20 01:33:35 [INFO] [data-validator] 리포트 1개 생성 완료
+2026-06-20 01:34:53 [INFO] [data-validator] 실행 시작 - 옵션: --xlsx / 파일: ['01.test-data-gen/결과/bugs_latest.csv']
+2026-06-20 01:34:53 [INFO] [data-validator] 검증 시작: 01.test-data-gen/결과/bugs_latest.csv (옵션: --xlsx)
+2026-06-20 01:34:54 [INFO] [data-validator] 검증 통과: 01.test-data-gen/결과/bugs_latest.csv
+2026-06-20 01:34:54 [INFO] [data-validator] 리포트 1개 생성 완료
+2026-06-20 01:35:49 [INFO] [data-validator] 실행 시작 - 옵션: --all / 파일: ['01.test-data-gen/결과/bugs_latest.csv']
+2026-06-20 01:35:49 [INFO] [data-validator] 검증 시작: 01.test-data-gen/결과/bugs_latest.csv (옵션: --all)
+2026-06-20 01:35:50 [INFO] [data-validator] 검증 통과: 01.test-data-gen/결과/bugs_latest.csv
+2026-06-20 01:35:50 [INFO] [data-validator] 리포트 3개 생성 완료
+2026-06-20 01:36:17 [INFO] [data-validator] 실행 시작 - 옵션: --all / 파일: ['01.test-data-gen/결과/bugs_latest.csv']
+2026-06-20 01:36:17 [INFO] [data-validator] 검증 시작: 01.test-data-gen/결과/bugs_latest.csv (옵션: --all)
+2026-06-20 01:36:17 [INFO] [data-validator] 검증 통과: 01.test-data-gen/결과/bugs_latest.csv
+2026-06-20 01:36:17 [INFO] [data-validator] 리포트 3개 생성 완료
+2026-06-20 01:36:34 [INFO] [data-validator] 실행 시작 - 옵션: --all / 파일: ['01.test-data-gen/결과/bugs_latest.csv']
+2026-06-20 01:36:34 [INFO] [data-validator] 검증 시작: 01.test-data-gen/결과/bugs_latest.csv (옵션: --all)
+2026-06-20 01:36:34 [INFO] [data-validator] 검증 통과: 01.test-data-gen/결과/bugs_latest.csv
+2026-06-20 01:36:34 [INFO] [data-validator] 리포트 3개 생성 완료
+2026-06-20 14:14:27 [INFO] [data-validator] 실행 시작 - 옵션: --all / 파일: ['01.test-data-gen/결과/bugs_latest.csv']
+2026-06-20 14:14:27 [INFO] [data-validator] 검증 시작: 01.test-data-gen/결과/bugs_latest.csv (옵션: --all)
+2026-06-20 14:14:27 [INFO] [data-validator] 검증 통과: 01.test-data-gen/결과/bugs_latest.csv
+2026-06-20 14:14:27 [INFO] [data-validator] 리포트 3개 생성 완료
+2026-06-20 14:30:29 [INFO] [data-validator] 실행 시작 - 옵션: --xlsx / 파일: ['01.test-data-gen/결과/bugs_latest.csv']
+2026-06-20 14:30:29 [INFO] [data-validator] 검증 시작: 01.test-data-gen/결과/bugs_latest.csv (옵션: --xlsx)
+2026-06-20 14:30:29 [INFO] [data-validator] 검증 통과: 01.test-data-gen/결과/bugs_latest.csv
+2026-06-20 14:30:29 [INFO] [data-validator] 리포트 1개 생성 완료
+2026-06-20 14:33:02 [INFO] [data-validator] 실행 시작 - 옵션: --xlsx / 파일: ['01.test-data-gen/결과/bugs_latest.csv']
+2026-06-20 14:33:02 [INFO] [data-validator] 검증 시작: 01.test-data-gen/결과/bugs_latest.csv (옵션: --xlsx)
+2026-06-20 14:33:02 [INFO] [data-validator] 검증 통과: 01.test-data-gen/결과/bugs_latest.csv
+2026-06-20 14:33:02 [INFO] [data-validator] 리포트 1개 생성 완료
+2026-06-20 14:34:23 [INFO] [data-validator] 실행 시작 - 옵션: --all / 파일: ['01.test-data-gen/결과/bugs_latest.csv']
+2026-06-20 14:34:23 [INFO] [data-validator] 검증 시작: 01.test-data-gen/결과/bugs_latest.csv (옵션: --all)
+2026-06-20 14:34:23 [INFO] [data-validator] 검증 통과: 01.test-data-gen/결과/bugs_latest.csv
+2026-06-20 14:34:23 [INFO] [data-validator] 리포트 3개 생성 완료
+2026-06-20 14:38:14 [INFO] [data-validator] 실행 시작 - 옵션: --all / 파일: ['01.test-data-gen/결과/bugs_latest.csv']
+2026-06-20 14:38:14 [INFO] [data-validator] 검증 시작: 01.test-data-gen/결과/bugs_latest.csv (옵션: --all)
+2026-06-20 14:38:14 [INFO] [data-validator] 검증 통과: 01.test-data-gen/결과/bugs_latest.csv
+2026-06-20 14:38:14 [INFO] [data-validator] 리포트 3개 생성 완료
+2026-06-20 14:43:00 [INFO] [data-validator] 실행 시작 - 옵션: --all / 파일: ['01.test-data-gen/결과/bugs_latest.csv']
+2026-06-20 14:43:00 [INFO] [data-validator] 검증 시작: 01.test-data-gen/결과/bugs_latest.csv (옵션: --all)
+2026-06-20 14:43:00 [INFO] [data-validator] 검증 통과: 01.test-data-gen/결과/bugs_latest.csv
+2026-06-20 14:43:00 [INFO] [data-validator] 리포트 3개 생성 완료
+2026-06-20 14:44:48 [INFO] [data-validator] 실행 시작 - 옵션: --all / 파일: ['01.test-data-gen/결과/bugs_latest.csv']
+2026-06-20 14:44:48 [INFO] [data-validator] 검증 시작: 01.test-data-gen/결과/bugs_latest.csv (옵션: --all)
+2026-06-20 14:44:48 [INFO] [data-validator] 검증 통과: 01.test-data-gen/결과/bugs_latest.csv
+2026-06-20 14:44:48 [INFO] [data-validator] 리포트 3개 생성 완료
+2026-06-20 18:18:12 [ERROR] [data-validator] 템플릿 생성 실패: NameError: name 'log' is not defined
+2026-06-20 18:19:04 [INFO] [data-validator] 규칙 템플릿 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\02.data-validator\rules\template.json
+2026-06-20 18:20:32 [INFO] [data-validator] 버그 리포트 템플릿 생성: BUG-001
+2026-06-20 18:20:32 [INFO] [data-validator] 버그 리포트 템플릿 생성: BUG-002
+2026-06-20 18:20:32 [INFO] [data-validator] 버그 리포트 템플릿 생성: BUG-003
+2026-06-20 18:20:32 [INFO] [data-validator] 버그 리포트 템플릿 생성: BUG-004
+2026-06-20 18:20:32 [INFO] [data-validator] 버그 리포트 템플릿 생성: BUG-005
+2026-06-20 18:20:32 [INFO] [data-validator] 버그 리포트 템플릿 5건 생성 완료
+2026-06-20 18:21:37 [INFO] [data-validator] 버그 리포트 템플릿 생성: BUG-001
+2026-06-20 18:21:37 [INFO] [data-validator] 버그 리포트 템플릿 생성: BUG-002
+2026-06-20 18:21:37 [INFO] [data-validator] 버그 리포트 템플릿 생성: BUG-003
+2026-06-20 18:21:37 [INFO] [data-validator] 버그 리포트 템플릿 3건 생성 완료
+2026-06-20 23:14:30 [INFO] [data-validator] 누락 컬럼 자동 추가: 심각도
+2026-06-20 23:14:30 [INFO] [data-validator] 누락 컬럼 자동 추가: 우선순위
+2026-06-20 23:14:30 [INFO] [data-validator] 누락 컬럼 자동 추가: 발견자
+2026-06-20 23:14:30 [INFO] [data-validator] 누락 컬럼 자동 추가: 발견일
+2026-06-20 23:14:30 [INFO] [data-validator] 누락 컬럼 자동 추가: 플랫폼
+2026-06-20 23:14:30 [INFO] [data-validator] 누락 컬럼 자동 추가: 버전
+2026-06-20 23:14:30 [INFO] [data-validator] 누락 컬럼 자동 추가: 재현율
+2026-06-20 23:14:30 [INFO] [data-validator] 누락 컬럼 자동 추가: 분류
+2026-06-20 23:14:30 [INFO] [data-validator] 누락 컬럼 자동 추가: 테스트단계
+2026-06-20 23:14:30 [INFO] [data-validator] 누락 컬럼 자동 추가: 예상결과
+2026-06-20 23:14:30 [INFO] [data-validator] 누락 컬럼 자동 추가: 실제결과

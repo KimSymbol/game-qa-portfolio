@@ -1,0 +1,40 @@
+{
+  "uuid": "0de50a5a-ab1b-4a24-80d2-93c59dc43f67",
+  "historyId": "e7a4452ef9967e1aa6945b38303ad46d",
+  "name": "UT-001 타이틀씬 로드",
+  "fullName": "SceneLoadTest.UT001_타이틀씬_로드",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1784987701771,
+  "stop": 1784987702608,
+  "labels": [
+    {
+      "name": "epic",
+      "value": "Unity QA"
+    },
+    {
+      "name": "feature",
+      "value": "SceneLoadTest"
+    },
+    {
+      "name": "story",
+      "value": "UT-001 타이틀씬 로드"
+    },
+    {
+      "name": "suite",
+      "value": "SceneLoadTest"
+    },
+    {
+      "name": "testClass",
+      "value": "SceneLoadTest"
+    },
+    {
+      "name": "framework",
+      "value": "Unity Test Framework"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    }
+  ]
+}

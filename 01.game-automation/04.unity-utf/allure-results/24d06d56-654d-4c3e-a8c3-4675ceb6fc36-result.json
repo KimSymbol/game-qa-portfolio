@@ -1,0 +1,40 @@
+{
+  "uuid": "24d06d56-654d-4c3e-a8c3-4675ceb6fc36",
+  "historyId": "8f43ef3781d38abe487d5462a3a1bb21",
+  "name": "UT-003 적 피격시 체력 감소",
+  "fullName": "EnemyCombatTest.UT003_적_피격시_체력_감소",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1784987701771,
+  "stop": 1784987705057,
+  "labels": [
+    {
+      "name": "epic",
+      "value": "Unity QA"
+    },
+    {
+      "name": "feature",
+      "value": "EnemyCombatTest"
+    },
+    {
+      "name": "story",
+      "value": "UT-003 적 피격시 체력 감소"
+    },
+    {
+      "name": "suite",
+      "value": "EnemyCombatTest"
+    },
+    {
+      "name": "testClass",
+      "value": "EnemyCombatTest"
+    },
+    {
+      "name": "framework",
+      "value": "Unity Test Framework"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+2026-06-20 01:31:40 [INFO] [md-report-gen] 실행 시작 - 인자: ['06.tc-generator/결과/testcases_로그인_latest.csv']
+2026-06-20 01:31:40 [INFO] [md-report-gen] 리포트 생성 시작: 06.tc-generator/결과/testcases_로그인_latest.csv
+2026-06-20 01:31:40 [ERROR] [md-report-gen] 리포트 생성 실패: 06.tc-generator/결과/testcases_로그인_latest.csv
+2026-06-20 01:34:55 [INFO] [md-report-gen] 실행 시작 - 인자: ['01.test-data-gen/결과/testcases_latest.csv']
+2026-06-20 01:34:55 [INFO] [md-report-gen] 리포트 생성 시작: 01.test-data-gen/결과/testcases_latest.csv
+2026-06-20 01:34:55 [INFO] [md-report-gen] 개별 리포트 8건 생성
+2026-06-20 01:34:55 [INFO] [md-report-gen] 통합 리포트 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\ALL_BUGS_2026-06-20_01-34-55.md
+2026-06-20 01:34:55 [INFO] [md-report-gen] bugs.csv 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\bugs_2026-06-20_01-34-55.csv
+2026-06-20 01:35:51 [INFO] [md-report-gen] 실행 시작 - 인자: ['01.test-data-gen/결과/testcases_latest.csv']
+2026-06-20 01:35:51 [INFO] [md-report-gen] 리포트 생성 시작: 01.test-data-gen/결과/testcases_latest.csv
+2026-06-20 01:35:51 [INFO] [md-report-gen] 개별 리포트 1건 생성
+2026-06-20 01:35:51 [INFO] [md-report-gen] 통합 리포트 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\ALL_BUGS_2026-06-20_01-35-51.md
+2026-06-20 01:35:51 [INFO] [md-report-gen] bugs.csv 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\bugs_2026-06-20_01-35-51.csv
+2026-06-20 01:36:18 [INFO] [md-report-gen] 실행 시작 - 인자: ['01.test-data-gen/결과/testcases_latest.csv']
+2026-06-20 01:36:18 [INFO] [md-report-gen] 리포트 생성 시작: 01.test-data-gen/결과/testcases_latest.csv
+2026-06-20 01:36:19 [INFO] [md-report-gen] 개별 리포트 1건 생성
+2026-06-20 01:36:19 [INFO] [md-report-gen] 통합 리포트 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\ALL_BUGS_2026-06-20_01-36-18.md
+2026-06-20 01:36:19 [INFO] [md-report-gen] bugs.csv 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\bugs_2026-06-20_01-36-19.csv
+2026-06-20 01:36:36 [INFO] [md-report-gen] 실행 시작 - 인자: ['01.test-data-gen/결과/testcases_latest.csv']
+2026-06-20 01:36:36 [INFO] [md-report-gen] 리포트 생성 시작: 01.test-data-gen/결과/testcases_latest.csv
+2026-06-20 01:36:36 [INFO] [md-report-gen] 개별 리포트 3건 생성
+2026-06-20 01:36:36 [INFO] [md-report-gen] 통합 리포트 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\ALL_BUGS_2026-06-20_01-36-36.md
+2026-06-20 01:36:36 [INFO] [md-report-gen] bugs.csv 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\bugs_2026-06-20_01-36-36.csv
+2026-06-20 14:14:28 [INFO] [md-report-gen] 실행 시작 - 인자: ['01.test-data-gen/결과/testcases_latest.csv']
+2026-06-20 14:14:28 [INFO] [md-report-gen] 리포트 생성 시작: 01.test-data-gen/결과/testcases_latest.csv
+2026-06-20 14:14:28 [INFO] [md-report-gen] 개별 리포트 4건 생성
+2026-06-20 14:14:28 [INFO] [md-report-gen] 통합 리포트 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\ALL_BUGS_2026-06-20_14-14-28.md
+2026-06-20 14:14:28 [INFO] [md-report-gen] bugs.csv 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\bugs_2026-06-20_14-14-28.csv
+2026-06-20 14:30:30 [INFO] [md-report-gen] 실행 시작 - 인자: ['01.test-data-gen/결과/testcases_latest.csv']
+2026-06-20 14:30:30 [INFO] [md-report-gen] 리포트 생성 시작: 01.test-data-gen/결과/testcases_latest.csv
+2026-06-20 14:30:30 [INFO] [md-report-gen] 개별 리포트 8건 생성
+2026-06-20 14:30:30 [INFO] [md-report-gen] 통합 리포트 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\ALL_BUGS_2026-06-20_14-30-30.md
+2026-06-20 14:30:30 [INFO] [md-report-gen] bugs.csv 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\bugs_2026-06-20_14-30-30.csv
+2026-06-20 14:33:02 [INFO] [md-report-gen] 실행 시작 - 인자: ['01.test-data-gen/결과/testcases_latest.csv']
+2026-06-20 14:33:02 [INFO] [md-report-gen] 리포트 생성 시작: 01.test-data-gen/결과/testcases_latest.csv
+2026-06-20 14:33:02 [INFO] [md-report-gen] 개별 리포트 7건 생성
+2026-06-20 14:33:02 [INFO] [md-report-gen] 통합 리포트 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\ALL_BUGS_2026-06-20_14-33-02.md
+2026-06-20 14:33:02 [INFO] [md-report-gen] bugs.csv 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\bugs_2026-06-20_14-33-02.csv
+2026-06-20 14:34:24 [INFO] [md-report-gen] 실행 시작 - 인자: ['01.test-data-gen/결과/testcases_latest.csv']
+2026-06-20 14:34:24 [INFO] [md-report-gen] 리포트 생성 시작: 01.test-data-gen/결과/testcases_latest.csv
+2026-06-20 14:34:24 [INFO] [md-report-gen] 개별 리포트 3건 생성
+2026-06-20 14:34:24 [INFO] [md-report-gen] 통합 리포트 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\ALL_BUGS_2026-06-20_14-34-24.md
+2026-06-20 14:34:24 [INFO] [md-report-gen] bugs.csv 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\bugs_2026-06-20_14-34-24.csv
+2026-06-20 14:38:15 [INFO] [md-report-gen] 실행 시작 - 인자: ['01.test-data-gen/결과/testcases_latest.csv']
+2026-06-20 14:38:15 [INFO] [md-report-gen] 리포트 생성 시작: 01.test-data-gen/결과/testcases_latest.csv
+2026-06-20 14:38:15 [INFO] [md-report-gen] 개별 리포트 3건 생성
+2026-06-20 14:38:15 [INFO] [md-report-gen] 통합 리포트 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\ALL_BUGS_2026-06-20_14-38-15.md
+2026-06-20 14:38:15 [INFO] [md-report-gen] bugs.csv 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\bugs_2026-06-20_14-38-15.csv
+2026-06-20 14:43:01 [INFO] [md-report-gen] 실행 시작 - 인자: ['01.test-data-gen/결과/testcases_latest.csv']
+2026-06-20 14:43:01 [INFO] [md-report-gen] 리포트 생성 시작: 01.test-data-gen/결과/testcases_latest.csv
+2026-06-20 14:43:01 [INFO] [md-report-gen] 개별 리포트 3건 생성
+2026-06-20 14:43:01 [INFO] [md-report-gen] 통합 리포트 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\ALL_BUGS_2026-06-20_14-43-01.md
+2026-06-20 14:43:01 [INFO] [md-report-gen] bugs.csv 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\bugs_2026-06-20_14-43-01.csv
+2026-06-20 14:44:49 [INFO] [md-report-gen] 실행 시작 - 인자: ['01.test-data-gen/결과/testcases_latest.csv']
+2026-06-20 14:44:49 [INFO] [md-report-gen] 리포트 생성 시작: 01.test-data-gen/결과/testcases_latest.csv
+2026-06-20 14:44:49 [INFO] [md-report-gen] 개별 리포트 6건 생성
+2026-06-20 14:44:49 [INFO] [md-report-gen] 통합 리포트 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\ALL_BUGS_2026-06-20_14-44-49.md
+2026-06-20 14:44:49 [INFO] [md-report-gen] bugs.csv 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\bugs_2026-06-20_14-44-49.csv
+2026-06-20 18:19:51 [ERROR] [md-report-gen] 템플릿 생성 실패: NameError: name 'log' is not defined
+2026-06-20 23:14:30 [INFO] [md-report-gen] 실행 시작 - 인자: ['test_minimal.csv']
+2026-06-20 23:14:30 [INFO] [md-report-gen] 리포트 생성 시작: test_minimal.csv
+2026-06-20 23:14:30 [INFO] [md-report-gen] 개별 리포트 1건 생성
+2026-06-20 23:14:30 [INFO] [md-report-gen] 통합 리포트 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\ALL_BUGS_2026-06-20_23-14-30.md
+2026-06-20 23:14:30 [INFO] [md-report-gen] bugs.csv 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\bugs_2026-06-20_23-14-30.csv
+2026-06-20 23:17:45 [INFO] [md-report-gen] 실행 시작 - 인자: ['test_minimal.csv']
+2026-06-20 23:17:45 [INFO] [md-report-gen] 리포트 생성 시작: test_minimal.csv
+2026-06-20 23:17:45 [INFO] [md-report-gen] 누락 컬럼 자동 추가: 심각도
+2026-06-20 23:17:45 [INFO] [md-report-gen] 누락 컬럼 자동 추가: 우선순위
+2026-06-20 23:17:45 [INFO] [md-report-gen] 누락 컬럼 자동 추가: 발견자
+2026-06-20 23:17:45 [INFO] [md-report-gen] 누락 컬럼 자동 추가: 발견일
+2026-06-20 23:17:45 [INFO] [md-report-gen] 누락 컬럼 자동 추가: 플랫폼
+2026-06-20 23:17:45 [INFO] [md-report-gen] 누락 컬럼 자동 추가: 버전
+2026-06-20 23:17:45 [INFO] [md-report-gen] 누락 컬럼 자동 추가: 재현율
+2026-06-20 23:17:45 [INFO] [md-report-gen] 누락 컬럼 자동 추가: 분류
+2026-06-20 23:17:45 [INFO] [md-report-gen] 누락 컬럼 자동 추가: 테스트단계
+2026-06-20 23:17:45 [INFO] [md-report-gen] 누락 컬럼 자동 추가: 예상결과
+2026-06-20 23:17:45 [INFO] [md-report-gen] 누락 컬럼 자동 추가: 실제결과
+2026-06-20 23:17:45 [INFO] [md-report-gen] 개별 리포트 1건 생성
+2026-06-20 23:17:45 [INFO] [md-report-gen] 통합 리포트 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\ALL_BUGS_2026-06-20_23-17-45.md
+2026-06-20 23:17:45 [INFO] [md-report-gen] bugs.csv 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\03.md-report-gen\결과\bugs_2026-06-20_23-17-45.csv

@@ -1,0 +1,40 @@
+{
+  "uuid": "beb924ca-cdf6-47ce-8247-c98925e3cd2c",
+  "historyId": "b61cfbc937e7137afb608e4195cb5bd4",
+  "name": "UT-011 데미지 저항 적용",
+  "fullName": "PlayerStatusTest.UT011_데미지_저항_적용",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1784987701771,
+  "stop": 1784987703155,
+  "labels": [
+    {
+      "name": "epic",
+      "value": "Unity QA"
+    },
+    {
+      "name": "feature",
+      "value": "PlayerStatusTest"
+    },
+    {
+      "name": "story",
+      "value": "UT-011 데미지 저항 적용"
+    },
+    {
+      "name": "suite",
+      "value": "PlayerStatusTest"
+    },
+    {
+      "name": "testClass",
+      "value": "PlayerStatusTest"
+    },
+    {
+      "name": "framework",
+      "value": "Unity Test Framework"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    }
+  ]
+}

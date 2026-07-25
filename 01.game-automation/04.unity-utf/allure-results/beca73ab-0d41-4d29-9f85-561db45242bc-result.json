@@ -1,0 +1,40 @@
+{
+  "uuid": "beca73ab-0d41-4d29-9f85-561db45242bc",
+  "historyId": "309c4ec813d67351e1ff17f5accf0445",
+  "name": "UT-007 쿨다운 업그레이드 레벨3",
+  "fullName": "WeaponUpgradeTest.UT007_쿨다운_업그레이드_레벨3",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1784987701771,
+  "stop": 1784987702679,
+  "labels": [
+    {
+      "name": "epic",
+      "value": "Unity QA"
+    },
+    {
+      "name": "feature",
+      "value": "WeaponUpgradeTest"
+    },
+    {
+      "name": "story",
+      "value": "UT-007 쿨다운 업그레이드 레벨3"
+    },
+    {
+      "name": "suite",
+      "value": "WeaponUpgradeTest"
+    },
+    {
+      "name": "testClass",
+      "value": "WeaponUpgradeTest"
+    },
+    {
+      "name": "framework",
+      "value": "Unity Test Framework"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    }
+  ]
+}

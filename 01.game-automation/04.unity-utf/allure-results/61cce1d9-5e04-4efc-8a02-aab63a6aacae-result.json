@@ -1,0 +1,40 @@
+{
+  "uuid": "61cce1d9-5e04-4efc-8a02-aab63a6aacae",
+  "historyId": "c68eb8f7bc0397b70eb02543cbf7b121",
+  "name": "UT-004 적 체력 음수 방지",
+  "fullName": "EnemyCombatTest.UT004_적_체력_음수_방지",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1784987701771,
+  "stop": 1784987704307,
+  "labels": [
+    {
+      "name": "epic",
+      "value": "Unity QA"
+    },
+    {
+      "name": "feature",
+      "value": "EnemyCombatTest"
+    },
+    {
+      "name": "story",
+      "value": "UT-004 적 체력 음수 방지"
+    },
+    {
+      "name": "suite",
+      "value": "EnemyCombatTest"
+    },
+    {
+      "name": "testClass",
+      "value": "EnemyCombatTest"
+    },
+    {
+      "name": "framework",
+      "value": "Unity Test Framework"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    }
+  ]
+}

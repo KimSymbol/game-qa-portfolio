@@ -1,0 +1,277 @@
+2026-06-20 01:31:00 [INFO] [tc-generator] 전체 사양 처리 시작: 4개
+2026-06-20 01:31:00 [INFO] [tc-generator] 사양 로딩 완료: battle.json (전투)
+2026-06-20 01:31:00 [INFO] [tc-generator] TC 생성 시작: 전투
+2026-06-20 01:31:00 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_01-31-00.csv (21건)
+2026-06-20 01:31:00 [INFO] [tc-generator] TC 생성 완료: 전투 (21건)
+2026-06-20 01:31:00 [INFO] [tc-generator] 사양 로딩 완료: inventory.json (인벤토리)
+2026-06-20 01:31:00 [INFO] [tc-generator] TC 생성 시작: 인벤토리
+2026-06-20 01:31:00 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_01-31-00.csv (22건)
+2026-06-20 01:31:00 [INFO] [tc-generator] TC 생성 완료: 인벤토리 (22건)
+2026-06-20 01:31:00 [INFO] [tc-generator] 사양 로딩 완료: login.json (로그인)
+2026-06-20 01:31:00 [INFO] [tc-generator] TC 생성 시작: 로그인
+2026-06-20 01:31:00 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_01-31-00.csv (23건)
+2026-06-20 01:31:00 [INFO] [tc-generator] TC 생성 완료: 로그인 (23건)
+2026-06-20 01:31:00 [INFO] [tc-generator] 사양 로딩 완료: shop.json (상점 구매)
+2026-06-20 01:31:00 [INFO] [tc-generator] TC 생성 시작: 상점 구매
+2026-06-20 01:31:00 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_01-31-00.csv (22건)
+2026-06-20 01:31:00 [INFO] [tc-generator] TC 생성 완료: 상점 구매 (22건)
+2026-06-20 01:31:00 [INFO] [tc-generator] 전체 사양 처리 완료: 4건
+2026-06-20 01:31:17 [INFO] [tc-generator] 사양 로딩 완료: login.json (로그인)
+2026-06-20 01:31:17 [INFO] [tc-generator] TC 생성 시작: 로그인
+2026-06-20 01:31:17 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_01-31-17.csv (23건)
+2026-06-20 01:31:17 [INFO] [tc-generator] TC 생성 완료: 로그인 (23건)
+2026-06-20 01:34:48 [INFO] [tc-generator] 전체 사양 처리 시작: 4개
+2026-06-20 01:34:48 [INFO] [tc-generator] 사양 로딩 완료: battle.json (전투)
+2026-06-20 01:34:48 [INFO] [tc-generator] TC 생성 시작: 전투
+2026-06-20 01:34:48 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_01-34-48.csv (21건)
+2026-06-20 01:34:48 [INFO] [tc-generator] TC 생성 완료: 전투 (21건)
+2026-06-20 01:34:48 [INFO] [tc-generator] 사양 로딩 완료: inventory.json (인벤토리)
+2026-06-20 01:34:48 [INFO] [tc-generator] TC 생성 시작: 인벤토리
+2026-06-20 01:34:48 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_01-34-48.csv (22건)
+2026-06-20 01:34:48 [INFO] [tc-generator] TC 생성 완료: 인벤토리 (22건)
+2026-06-20 01:34:48 [INFO] [tc-generator] 사양 로딩 완료: login.json (로그인)
+2026-06-20 01:34:48 [INFO] [tc-generator] TC 생성 시작: 로그인
+2026-06-20 01:34:48 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_01-34-48.csv (23건)
+2026-06-20 01:34:48 [INFO] [tc-generator] TC 생성 완료: 로그인 (23건)
+2026-06-20 01:34:48 [INFO] [tc-generator] 사양 로딩 완료: shop.json (상점 구매)
+2026-06-20 01:34:48 [INFO] [tc-generator] TC 생성 시작: 상점 구매
+2026-06-20 01:34:48 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_01-34-48.csv (22건)
+2026-06-20 01:34:48 [INFO] [tc-generator] TC 생성 완료: 상점 구매 (22건)
+2026-06-20 01:34:48 [INFO] [tc-generator] 전체 사양 처리 완료: 4건
+2026-06-20 01:35:45 [INFO] [tc-generator] 전체 사양 처리 시작: 4개
+2026-06-20 01:35:45 [INFO] [tc-generator] 사양 로딩 완료: battle.json (전투)
+2026-06-20 01:35:45 [INFO] [tc-generator] TC 생성 시작: 전투
+2026-06-20 01:35:45 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_01-35-45.csv (21건)
+2026-06-20 01:35:45 [INFO] [tc-generator] TC 생성 완료: 전투 (21건)
+2026-06-20 01:35:45 [INFO] [tc-generator] 사양 로딩 완료: inventory.json (인벤토리)
+2026-06-20 01:35:45 [INFO] [tc-generator] TC 생성 시작: 인벤토리
+2026-06-20 01:35:45 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_01-35-45.csv (22건)
+2026-06-20 01:35:45 [INFO] [tc-generator] TC 생성 완료: 인벤토리 (22건)
+2026-06-20 01:35:45 [INFO] [tc-generator] 사양 로딩 완료: login.json (로그인)
+2026-06-20 01:35:45 [INFO] [tc-generator] TC 생성 시작: 로그인
+2026-06-20 01:35:45 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_01-35-45.csv (23건)
+2026-06-20 01:35:45 [INFO] [tc-generator] TC 생성 완료: 로그인 (23건)
+2026-06-20 01:35:45 [INFO] [tc-generator] 사양 로딩 완료: shop.json (상점 구매)
+2026-06-20 01:35:45 [INFO] [tc-generator] TC 생성 시작: 상점 구매
+2026-06-20 01:35:45 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_01-35-45.csv (22건)
+2026-06-20 01:35:45 [INFO] [tc-generator] TC 생성 완료: 상점 구매 (22건)
+2026-06-20 01:35:45 [INFO] [tc-generator] 전체 사양 처리 완료: 4건
+2026-06-20 01:36:15 [INFO] [tc-generator] 전체 사양 처리 시작: 4개
+2026-06-20 01:36:15 [INFO] [tc-generator] 사양 로딩 완료: battle.json (전투)
+2026-06-20 01:36:15 [INFO] [tc-generator] TC 생성 시작: 전투
+2026-06-20 01:36:16 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_01-36-16.csv (21건)
+2026-06-20 01:36:16 [INFO] [tc-generator] TC 생성 완료: 전투 (21건)
+2026-06-20 01:36:16 [INFO] [tc-generator] 사양 로딩 완료: inventory.json (인벤토리)
+2026-06-20 01:36:16 [INFO] [tc-generator] TC 생성 시작: 인벤토리
+2026-06-20 01:36:16 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_01-36-16.csv (22건)
+2026-06-20 01:36:16 [INFO] [tc-generator] TC 생성 완료: 인벤토리 (22건)
+2026-06-20 01:36:16 [INFO] [tc-generator] 사양 로딩 완료: login.json (로그인)
+2026-06-20 01:36:16 [INFO] [tc-generator] TC 생성 시작: 로그인
+2026-06-20 01:36:16 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_01-36-16.csv (23건)
+2026-06-20 01:36:16 [INFO] [tc-generator] TC 생성 완료: 로그인 (23건)
+2026-06-20 01:36:16 [INFO] [tc-generator] 사양 로딩 완료: shop.json (상점 구매)
+2026-06-20 01:36:16 [INFO] [tc-generator] TC 생성 시작: 상점 구매
+2026-06-20 01:36:16 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_01-36-16.csv (22건)
+2026-06-20 01:36:16 [INFO] [tc-generator] TC 생성 완료: 상점 구매 (22건)
+2026-06-20 01:36:16 [INFO] [tc-generator] 전체 사양 처리 완료: 4건
+2026-06-20 01:36:30 [INFO] [tc-generator] 전체 사양 처리 시작: 4개
+2026-06-20 01:36:30 [INFO] [tc-generator] 사양 로딩 완료: battle.json (전투)
+2026-06-20 01:36:30 [INFO] [tc-generator] TC 생성 시작: 전투
+2026-06-20 01:36:30 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_01-36-30.csv (21건)
+2026-06-20 01:36:30 [INFO] [tc-generator] TC 생성 완료: 전투 (21건)
+2026-06-20 01:36:30 [INFO] [tc-generator] 사양 로딩 완료: inventory.json (인벤토리)
+2026-06-20 01:36:30 [INFO] [tc-generator] TC 생성 시작: 인벤토리
+2026-06-20 01:36:30 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_01-36-30.csv (22건)
+2026-06-20 01:36:30 [INFO] [tc-generator] TC 생성 완료: 인벤토리 (22건)
+2026-06-20 01:36:30 [INFO] [tc-generator] 사양 로딩 완료: login.json (로그인)
+2026-06-20 01:36:30 [INFO] [tc-generator] TC 생성 시작: 로그인
+2026-06-20 01:36:30 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_01-36-30.csv (23건)
+2026-06-20 01:36:30 [INFO] [tc-generator] TC 생성 완료: 로그인 (23건)
+2026-06-20 01:36:30 [INFO] [tc-generator] 사양 로딩 완료: shop.json (상점 구매)
+2026-06-20 01:36:30 [INFO] [tc-generator] TC 생성 시작: 상점 구매
+2026-06-20 01:36:30 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_01-36-30.csv (22건)
+2026-06-20 01:36:30 [INFO] [tc-generator] TC 생성 완료: 상점 구매 (22건)
+2026-06-20 01:36:30 [INFO] [tc-generator] 전체 사양 처리 완료: 4건
+2026-06-20 01:51:54 [INFO] [tc-generator] 전체 사양 처리 시작: 4개
+2026-06-20 01:51:54 [INFO] [tc-generator] 사양 로딩 완료: battle.json (전투)
+2026-06-20 01:51:54 [INFO] [tc-generator] TC 생성 시작: 전투
+2026-06-20 01:51:54 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_01-51-54.csv (21건)
+2026-06-20 01:51:54 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_01-51-54.xlsx (21건)
+2026-06-20 01:51:54 [INFO] [tc-generator] TC 생성 완료: 전투 (21건)
+2026-06-20 01:51:54 [INFO] [tc-generator] 사양 로딩 완료: inventory.json (인벤토리)
+2026-06-20 01:51:54 [INFO] [tc-generator] TC 생성 시작: 인벤토리
+2026-06-20 01:51:54 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_01-51-54.csv (22건)
+2026-06-20 01:51:54 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_01-51-54.xlsx (22건)
+2026-06-20 01:51:54 [INFO] [tc-generator] TC 생성 완료: 인벤토리 (22건)
+2026-06-20 01:51:54 [INFO] [tc-generator] 사양 로딩 완료: login.json (로그인)
+2026-06-20 01:51:54 [INFO] [tc-generator] TC 생성 시작: 로그인
+2026-06-20 01:51:54 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_01-51-54.csv (23건)
+2026-06-20 01:51:54 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_01-51-54.xlsx (23건)
+2026-06-20 01:51:54 [INFO] [tc-generator] TC 생성 완료: 로그인 (23건)
+2026-06-20 01:51:54 [INFO] [tc-generator] 사양 로딩 완료: shop.json (상점 구매)
+2026-06-20 01:51:54 [INFO] [tc-generator] TC 생성 시작: 상점 구매
+2026-06-20 01:51:54 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_01-51-54.csv (22건)
+2026-06-20 01:51:54 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_01-51-54.xlsx (22건)
+2026-06-20 01:51:54 [INFO] [tc-generator] TC 생성 완료: 상점 구매 (22건)
+2026-06-20 01:51:54 [INFO] [tc-generator] 전체 사양 처리 완료: 4건
+2026-06-20 13:45:39 [INFO] [tc-generator] 사양 로딩 완료: login.json (로그인)
+2026-06-20 13:45:39 [INFO] [tc-generator] TC 생성 시작: 로그인
+2026-06-20 13:45:39 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_13-45-39.csv (23건)
+2026-06-20 13:45:39 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_13-45-39.xlsx (23건)
+2026-06-20 13:45:39 [INFO] [tc-generator] TC 생성 완료: 로그인 (23건)
+2026-06-20 14:14:24 [INFO] [tc-generator] 전체 사양 처리 시작: 4개
+2026-06-20 14:14:24 [INFO] [tc-generator] 사양 로딩 완료: battle.json (전투)
+2026-06-20 14:14:24 [INFO] [tc-generator] TC 생성 시작: 전투
+2026-06-20 14:14:24 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_14-14-24.csv (21건)
+2026-06-20 14:14:24 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_14-14-24.xlsx (21건)
+2026-06-20 14:14:24 [INFO] [tc-generator] TC 생성 완료: 전투 (21건)
+2026-06-20 14:14:24 [INFO] [tc-generator] 사양 로딩 완료: inventory.json (인벤토리)
+2026-06-20 14:14:24 [INFO] [tc-generator] TC 생성 시작: 인벤토리
+2026-06-20 14:14:24 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_14-14-24.csv (22건)
+2026-06-20 14:14:24 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_14-14-24.xlsx (22건)
+2026-06-20 14:14:24 [INFO] [tc-generator] TC 생성 완료: 인벤토리 (22건)
+2026-06-20 14:14:24 [INFO] [tc-generator] 사양 로딩 완료: login.json (로그인)
+2026-06-20 14:14:24 [INFO] [tc-generator] TC 생성 시작: 로그인
+2026-06-20 14:14:24 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_14-14-24.csv (23건)
+2026-06-20 14:14:24 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_14-14-24.xlsx (23건)
+2026-06-20 14:14:24 [INFO] [tc-generator] TC 생성 완료: 로그인 (23건)
+2026-06-20 14:14:24 [INFO] [tc-generator] 사양 로딩 완료: shop.json (상점 구매)
+2026-06-20 14:14:24 [INFO] [tc-generator] TC 생성 시작: 상점 구매
+2026-06-20 14:14:24 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_14-14-24.csv (22건)
+2026-06-20 14:14:24 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_14-14-24.xlsx (22건)
+2026-06-20 14:14:24 [INFO] [tc-generator] TC 생성 완료: 상점 구매 (22건)
+2026-06-20 14:14:24 [INFO] [tc-generator] 전체 사양 처리 완료: 4건
+2026-06-20 14:30:26 [INFO] [tc-generator] 전체 사양 처리 시작: 4개
+2026-06-20 14:30:26 [INFO] [tc-generator] 사양 로딩 완료: battle.json (전투)
+2026-06-20 14:30:26 [INFO] [tc-generator] TC 생성 시작: 전투
+2026-06-20 14:30:26 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_14-30-26.csv (21건)
+2026-06-20 14:30:26 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_14-30-26.xlsx (21건)
+2026-06-20 14:30:26 [INFO] [tc-generator] TC 생성 완료: 전투 (21건)
+2026-06-20 14:30:26 [INFO] [tc-generator] 사양 로딩 완료: inventory.json (인벤토리)
+2026-06-20 14:30:26 [INFO] [tc-generator] TC 생성 시작: 인벤토리
+2026-06-20 14:30:26 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_14-30-26.csv (22건)
+2026-06-20 14:30:26 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_14-30-26.xlsx (22건)
+2026-06-20 14:30:26 [INFO] [tc-generator] TC 생성 완료: 인벤토리 (22건)
+2026-06-20 14:30:26 [INFO] [tc-generator] 사양 로딩 완료: login.json (로그인)
+2026-06-20 14:30:26 [INFO] [tc-generator] TC 생성 시작: 로그인
+2026-06-20 14:30:26 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_14-30-26.csv (23건)
+2026-06-20 14:30:26 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_14-30-26.xlsx (23건)
+2026-06-20 14:30:26 [INFO] [tc-generator] TC 생성 완료: 로그인 (23건)
+2026-06-20 14:30:26 [INFO] [tc-generator] 사양 로딩 완료: shop.json (상점 구매)
+2026-06-20 14:30:26 [INFO] [tc-generator] TC 생성 시작: 상점 구매
+2026-06-20 14:30:26 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_14-30-26.csv (22건)
+2026-06-20 14:30:26 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_14-30-26.xlsx (22건)
+2026-06-20 14:30:26 [INFO] [tc-generator] TC 생성 완료: 상점 구매 (22건)
+2026-06-20 14:30:26 [INFO] [tc-generator] 전체 사양 처리 완료: 4건
+2026-06-20 14:32:58 [INFO] [tc-generator] 전체 사양 처리 시작: 4개
+2026-06-20 14:32:58 [INFO] [tc-generator] 사양 로딩 완료: battle.json (전투)
+2026-06-20 14:32:58 [INFO] [tc-generator] TC 생성 시작: 전투
+2026-06-20 14:32:58 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_14-32-58.csv (21건)
+2026-06-20 14:32:58 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_14-32-58.xlsx (21건)
+2026-06-20 14:32:58 [INFO] [tc-generator] TC 생성 완료: 전투 (21건)
+2026-06-20 14:32:58 [INFO] [tc-generator] 사양 로딩 완료: inventory.json (인벤토리)
+2026-06-20 14:32:58 [INFO] [tc-generator] TC 생성 시작: 인벤토리
+2026-06-20 14:32:58 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_14-32-58.csv (22건)
+2026-06-20 14:32:58 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_14-32-58.xlsx (22건)
+2026-06-20 14:32:58 [INFO] [tc-generator] TC 생성 완료: 인벤토리 (22건)
+2026-06-20 14:32:58 [INFO] [tc-generator] 사양 로딩 완료: login.json (로그인)
+2026-06-20 14:32:58 [INFO] [tc-generator] TC 생성 시작: 로그인
+2026-06-20 14:32:58 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_14-32-58.csv (23건)
+2026-06-20 14:32:58 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_14-32-58.xlsx (23건)
+2026-06-20 14:32:58 [INFO] [tc-generator] TC 생성 완료: 로그인 (23건)
+2026-06-20 14:32:58 [INFO] [tc-generator] 사양 로딩 완료: shop.json (상점 구매)
+2026-06-20 14:32:58 [INFO] [tc-generator] TC 생성 시작: 상점 구매
+2026-06-20 14:32:58 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_14-32-58.csv (22건)
+2026-06-20 14:32:59 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_14-32-58.xlsx (22건)
+2026-06-20 14:32:59 [INFO] [tc-generator] TC 생성 완료: 상점 구매 (22건)
+2026-06-20 14:32:59 [INFO] [tc-generator] 전체 사양 처리 완료: 4건
+2026-06-20 14:34:20 [INFO] [tc-generator] 전체 사양 처리 시작: 4개
+2026-06-20 14:34:20 [INFO] [tc-generator] 사양 로딩 완료: battle.json (전투)
+2026-06-20 14:34:20 [INFO] [tc-generator] TC 생성 시작: 전투
+2026-06-20 14:34:20 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_14-34-20.csv (21건)
+2026-06-20 14:34:20 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_14-34-20.xlsx (21건)
+2026-06-20 14:34:20 [INFO] [tc-generator] TC 생성 완료: 전투 (21건)
+2026-06-20 14:34:20 [INFO] [tc-generator] 사양 로딩 완료: inventory.json (인벤토리)
+2026-06-20 14:34:20 [INFO] [tc-generator] TC 생성 시작: 인벤토리
+2026-06-20 14:34:20 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_14-34-20.csv (22건)
+2026-06-20 14:34:20 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_14-34-20.xlsx (22건)
+2026-06-20 14:34:20 [INFO] [tc-generator] TC 생성 완료: 인벤토리 (22건)
+2026-06-20 14:34:20 [INFO] [tc-generator] 사양 로딩 완료: login.json (로그인)
+2026-06-20 14:34:20 [INFO] [tc-generator] TC 생성 시작: 로그인
+2026-06-20 14:34:20 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_14-34-20.csv (23건)
+2026-06-20 14:34:20 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_14-34-20.xlsx (23건)
+2026-06-20 14:34:20 [INFO] [tc-generator] TC 생성 완료: 로그인 (23건)
+2026-06-20 14:34:20 [INFO] [tc-generator] 사양 로딩 완료: shop.json (상점 구매)
+2026-06-20 14:34:20 [INFO] [tc-generator] TC 생성 시작: 상점 구매
+2026-06-20 14:34:20 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_14-34-20.csv (22건)
+2026-06-20 14:34:21 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_14-34-20.xlsx (22건)
+2026-06-20 14:34:21 [INFO] [tc-generator] TC 생성 완료: 상점 구매 (22건)
+2026-06-20 14:34:21 [INFO] [tc-generator] 전체 사양 처리 완료: 4건
+2026-06-20 14:38:11 [INFO] [tc-generator] 전체 사양 처리 시작: 4개
+2026-06-20 14:38:11 [INFO] [tc-generator] 사양 로딩 완료: battle.json (전투)
+2026-06-20 14:38:11 [INFO] [tc-generator] TC 생성 시작: 전투
+2026-06-20 14:38:11 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_14-38-11.csv (21건)
+2026-06-20 14:38:11 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_14-38-11.xlsx (21건)
+2026-06-20 14:38:11 [INFO] [tc-generator] TC 생성 완료: 전투 (21건)
+2026-06-20 14:38:11 [INFO] [tc-generator] 사양 로딩 완료: inventory.json (인벤토리)
+2026-06-20 14:38:11 [INFO] [tc-generator] TC 생성 시작: 인벤토리
+2026-06-20 14:38:11 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_14-38-11.csv (22건)
+2026-06-20 14:38:11 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_14-38-11.xlsx (22건)
+2026-06-20 14:38:11 [INFO] [tc-generator] TC 생성 완료: 인벤토리 (22건)
+2026-06-20 14:38:11 [INFO] [tc-generator] 사양 로딩 완료: login.json (로그인)
+2026-06-20 14:38:11 [INFO] [tc-generator] TC 생성 시작: 로그인
+2026-06-20 14:38:11 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_14-38-11.csv (23건)
+2026-06-20 14:38:12 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_14-38-11.xlsx (23건)
+2026-06-20 14:38:12 [INFO] [tc-generator] TC 생성 완료: 로그인 (23건)
+2026-06-20 14:38:12 [INFO] [tc-generator] 사양 로딩 완료: shop.json (상점 구매)
+2026-06-20 14:38:12 [INFO] [tc-generator] TC 생성 시작: 상점 구매
+2026-06-20 14:38:12 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_14-38-12.csv (22건)
+2026-06-20 14:38:12 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_14-38-12.xlsx (22건)
+2026-06-20 14:38:12 [INFO] [tc-generator] TC 생성 완료: 상점 구매 (22건)
+2026-06-20 14:38:12 [INFO] [tc-generator] 전체 사양 처리 완료: 4건
+2026-06-20 14:42:57 [INFO] [tc-generator] 전체 사양 처리 시작: 4개
+2026-06-20 14:42:57 [INFO] [tc-generator] 사양 로딩 완료: battle.json (전투)
+2026-06-20 14:42:57 [INFO] [tc-generator] TC 생성 시작: 전투
+2026-06-20 14:42:57 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_14-42-57.csv (21건)
+2026-06-20 14:42:57 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_14-42-57.xlsx (21건)
+2026-06-20 14:42:57 [INFO] [tc-generator] TC 생성 완료: 전투 (21건)
+2026-06-20 14:42:57 [INFO] [tc-generator] 사양 로딩 완료: inventory.json (인벤토리)
+2026-06-20 14:42:57 [INFO] [tc-generator] TC 생성 시작: 인벤토리
+2026-06-20 14:42:57 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_14-42-57.csv (22건)
+2026-06-20 14:42:57 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_14-42-57.xlsx (22건)
+2026-06-20 14:42:57 [INFO] [tc-generator] TC 생성 완료: 인벤토리 (22건)
+2026-06-20 14:42:57 [INFO] [tc-generator] 사양 로딩 완료: login.json (로그인)
+2026-06-20 14:42:57 [INFO] [tc-generator] TC 생성 시작: 로그인
+2026-06-20 14:42:57 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_14-42-57.csv (23건)
+2026-06-20 14:42:57 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_14-42-57.xlsx (23건)
+2026-06-20 14:42:57 [INFO] [tc-generator] TC 생성 완료: 로그인 (23건)
+2026-06-20 14:42:57 [INFO] [tc-generator] 사양 로딩 완료: shop.json (상점 구매)
+2026-06-20 14:42:57 [INFO] [tc-generator] TC 생성 시작: 상점 구매
+2026-06-20 14:42:57 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_14-42-57.csv (22건)
+2026-06-20 14:42:57 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_14-42-57.xlsx (22건)
+2026-06-20 14:42:57 [INFO] [tc-generator] TC 생성 완료: 상점 구매 (22건)
+2026-06-20 14:42:57 [INFO] [tc-generator] 전체 사양 처리 완료: 4건
+2026-06-20 14:44:45 [INFO] [tc-generator] 전체 사양 처리 시작: 4개
+2026-06-20 14:44:45 [INFO] [tc-generator] 사양 로딩 완료: battle.json (전투)
+2026-06-20 14:44:45 [INFO] [tc-generator] TC 생성 시작: 전투
+2026-06-20 14:44:45 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_14-44-45.csv (21건)
+2026-06-20 14:44:45 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_전투_2026-06-20_14-44-45.xlsx (21건)
+2026-06-20 14:44:45 [INFO] [tc-generator] TC 생성 완료: 전투 (21건)
+2026-06-20 14:44:45 [INFO] [tc-generator] 사양 로딩 완료: inventory.json (인벤토리)
+2026-06-20 14:44:45 [INFO] [tc-generator] TC 생성 시작: 인벤토리
+2026-06-20 14:44:45 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_14-44-45.csv (22건)
+2026-06-20 14:44:45 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_인벤토리_2026-06-20_14-44-45.xlsx (22건)
+2026-06-20 14:44:45 [INFO] [tc-generator] TC 생성 완료: 인벤토리 (22건)
+2026-06-20 14:44:45 [INFO] [tc-generator] 사양 로딩 완료: login.json (로그인)
+2026-06-20 14:44:45 [INFO] [tc-generator] TC 생성 시작: 로그인
+2026-06-20 14:44:45 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_14-44-45.csv (23건)
+2026-06-20 14:44:45 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_로그인_2026-06-20_14-44-45.xlsx (23건)
+2026-06-20 14:44:45 [INFO] [tc-generator] TC 생성 완료: 로그인 (23건)
+2026-06-20 14:44:45 [INFO] [tc-generator] 사양 로딩 완료: shop.json (상점 구매)
+2026-06-20 14:44:45 [INFO] [tc-generator] TC 생성 시작: 상점 구매
+2026-06-20 14:44:45 [INFO] [tc-generator] CSV 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_14-44-45.csv (22건)
+2026-06-20 14:44:45 [INFO] [tc-generator] XLSX 저장 완료: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\testcases_상점 구매_2026-06-20_14-44-45.xlsx (22건)
+2026-06-20 14:44:45 [INFO] [tc-generator] TC 생성 완료: 상점 구매 (22건)
+2026-06-20 14:44:45 [INFO] [tc-generator] 전체 사양 처리 완료: 4건
+2026-06-20 18:09:47 [INFO] [tc-generator] TC 템플릿 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\tc_template.csv
+2026-06-20 18:09:47 [INFO] [tc-generator] TC 템플릿 생성: D:\바탕화면\study\03.portfolio\game-qa-portfolio\02.tools\06.tc-generator\결과\tc_template.xlsx
