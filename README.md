@@ -1,8 +1,7 @@
 # 🎮 Game QA Automation Portfolio
 
-게임 QA 자동화 포트폴리오입니다.
-PC 게임 및 모바일 게임을 대상으로 자동화 테스트를 구현하고,
-QA 업무 전반을 자동화하는 실무 도구를 개발했습니다.
+게임 QA 자동화 포트폴리오.
+PC와 모바일 게임을 대상으로 자동화 테스트를 짰고, QA 업무 전반을 자동화하는 실무 도구도 직접 만들었다.
 
 ## 📁 프로젝트 구조
 
@@ -88,18 +87,18 @@ python pipeline.py --all --open
 
 ## 🔗 Allure 리포트
 
-게임별 최신 자동화 테스트 리포트입니다.
+게임별 최신 자동화 테스트 리포트.
 
 | 게임 | Allure 리포트 |
 |------|---------------|
 | 🐦 Flappy Bird | [리포트 보기](https://kimsymbol.github.io/game-qa-portfolio/flappy-bird/) |
 | 🗡️ Flare RPG | [리포트 보기](https://kimsymbol.github.io/game-qa-portfolio/flare-rpg/) |
-| 📱 2048 Mobile | [보기](https://kimsymbol.github.io/game-qa-portfolio/2048-mobile/) |
-| 🎮 Unity | [보기](https://kimsymbol.github.io/game-qa-portfolio/unity-utf/) |
+| 📱 2048 Mobile | [리포트 보기](https://kimsymbol.github.io/game-qa-portfolio/2048-mobile/) |
+| 🎮 Unity | [리포트 보기](https://kimsymbol.github.io/game-qa-portfolio/unity-utf/) |
 
 ## 🎬 시연 영상
 
-👉 [Flappy Bird QA 자동화 테스트](https://youtu.be/gc4bCL45jqw)
+👉 [Flappy Bird QA 자동화 시연](https://youtu.be/gc4bCL45jqw)
 
 👉 [Flare RPG QA 자동화 시연](https://youtu.be/SkB1OpMsIvU)
 

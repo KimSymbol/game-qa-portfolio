@@ -1,7 +1,7 @@
 # 공통 모듈 (common)
 
-모든 QA 도구에서 공유하는 핵심 모듈입니다.
-파일 입출력, 엑셀 스타일, 로깅, 설정 관리를 담당합니다.
+모든 QA 도구가 함께 쓰는 핵심 모듈.
+파일 입출력, 엑셀 스타일, 로깅, 설정 관리를 맡는다.
 
 ---
 
@@ -24,7 +24,7 @@ common/
 
 ### file_io.py — 파일 입출력
 
-모든 도구에서 공통으로 사용하는 읽기/쓰기 함수입니다.
+모든 도구에서 공통으로 사용하는 읽기/쓰기 함수.
 
 #### 사용법
 
@@ -70,7 +70,7 @@ from common.file_io import JSON_쓰기, HTML_쓰기, PDF_쓰기
 
 ### excel_style.py — 엑셀 스타일
 
-모든 엑셀 리포트에서 공유하는 색상, 스타일 함수입니다.
+모든 엑셀 리포트에서 공유하는 색상, 스타일 함수.
 
 #### 사용법
 
@@ -126,7 +126,7 @@ from common.excel_style import 색상_가져오기, 열너비_조정
 
 ### logger.py — 로깅 시스템
 
-모든 도구의 실행 이력을 파일 + 콘솔에 동시 출력합니다.
+모든 도구의 실행 이력을 파일 + 콘솔에 동시 출력한다.
 
 #### 사용법
 
@@ -171,8 +171,8 @@ log.debug("디버그 정보")
 
 ### config.py + config.json — 설정 관리
 
-전역 설정을 JSON 파일로 관리합니다.
-config.json 이 없으면 기본값으로 동작합니다.
+전역 설정을 JSON 파일로 관리한다.
+config.json 이 없으면 기본값으로 동작한다.
 
 #### config.json 항목
 
@@ -244,7 +244,7 @@ def XML_쓰기(파일경로, 데이터):
 ### 5. HTML 리포트 스타일 변경
 
 `file_io.py` 의 `HTML_쓰기()` 함수 내부 CSS 수정.
-한 곳만 수정하면 모든 도구의 HTML 출력에 일괄 반영됩니다.
+한 곳만 수정하면 모든 도구의 HTML 출력에 일괄 반영된다.
 
 ### 6. PDF 한글 폰트 변경
 
@@ -285,7 +285,7 @@ def XML_쓰기(파일경로, 데이터):
 ### 내부 필수 컬럼 변경
 
 `column_map.json` 의 `내부_필수_컬럼` 을 수정하면
-외부 데이터 변환 시 자동 추가되는 컬럼이 변경됩니다.
+외부 데이터 변환 시 자동 추가되는 컬럼이 변경된다.
 
 #### 컬럼 제거 (예: "발견자", "발견일" 제거)
 
@@ -315,8 +315,8 @@ def XML_쓰기(파일경로, 데이터):
 ---
 ### column_mapper.py — 외부 데이터 변환
 
-외부 TC/버그 데이터를 내부 형식으로 자동 변환합니다.
-JSON 설정 파일로 매핑 규칙을 관리하며, 컬럼명 자동 추천 기능을 지원합니다.
+외부 TC/버그 데이터를 내부 형식으로 자동 변환한다.
+JSON 설정 파일로 매핑 규칙을 관리하며, 컬럼명 자동 추천을 지원한다.
 
 #### 사용법
 
@@ -396,8 +396,8 @@ python common/convert.py jira_bugs.csv --map 예시_버그매핑
 
 #### 매핑 자동 생성 (--generate)
 
-새 외부 파일을 받았을 때 컬럼명을 읽어 매핑 초안을 자동 생성합니다.
-유사어 사전으로 내부 컬럼명을 자동 추천합니다.
+새 외부 파일을 받았을 때 컬럼명을 읽어 매핑 초안을 자동 생성한다.
+유사어 사전으로 내부 컬럼명을 자동 추천한다.
 
 ```bash
 python common/convert.py external_tc.xlsx --generate 우리팀_TC
@@ -436,7 +436,7 @@ python common/convert.py external_tc.xlsx --generate 우리팀_TC
 
 #### 변환 미리보기 (--preview)
 
-변환 결과를 저장 없이 터미널에서 먼저 확인합니다.
+변환 결과를 저장 없이 터미널에서 먼저 확인.
 
 ```bash
 python common/convert.py external_tc.xlsx --map 우리팀_TC --preview
@@ -471,7 +471,7 @@ LI-002       | 빈 ID 로그인   | 로그인       | High
 
 #### 매핑 설정 검증 (--validate)
 
-column_map.json 의 모든 매핑 설정에 오류가 없는지 확인합니다.
+column_map.json 의 모든 매핑 설정에 오류가 없는지 확인.
 
 ```bash
 python common/convert.py --validate
@@ -518,7 +518,7 @@ python 04.excel-reporter/main.py external_tc_converted_latest.csv --all
 #### 새 매핑 추가하는 방법 (수동)
 
 `common/column_map.json` 의 `매핑_목록` 에 항목 추가.
-`예시_TC매핑` 또는 `예시_버그매핑` 을 복사해서 수정하면 됩니다.
+`예시_TC매핑` 또는 `예시_버그매핑` 을 복사해서 수정하면 된다.
 
 ```json
 "우리팀_TC": {
@@ -544,7 +544,7 @@ python 04.excel-reporter/main.py external_tc_converted_latest.csv --all
 #### 유사어 사전 확장
 
 `column_mapper.py` 의 `_유사어_사전` 에 키워드를 추가하면
-자동 추천 정확도가 높아집니다.
+자동 추천 정확도가 높아진다.
 
 ```python
 _유사어_사전 = {
@@ -558,7 +558,7 @@ _유사어_사전 = {
 
 #### 매핑 자동 생성 (--generate)
 
-새 외부 파일을 받았을 때 컬럼명을 읽어 매핑 초안을 자동 생성합니다.
+새 외부 파일을 받았을 때 컬럼명을 읽어 매핑 초안을 자동 생성한다.
 
 ```bash
 python common/convert.py external_tc.xlsx --generate 우리팀_TC
@@ -585,7 +585,7 @@ python common/convert.py external_tc.xlsx --generate 우리팀_TC
 
 #### 변환 미리보기 (--preview)
 
-변환 결과를 저장 없이 터미널에서 먼저 확인합니다.
+변환 결과를 저장 없이 터미널에서 먼저 확인.
 
 ```bash
 python common/convert.py external_tc.xlsx --map 예시_TC매핑 --preview
@@ -621,7 +621,7 @@ LI-002       | 빈 ID 로그인   | 로그인       | High
 
 #### 매핑 설정 검증 (--validate)
 
-column_map.json 의 모든 매핑 설정에 오류가 없는지 확인합니다.
+column_map.json 의 모든 매핑 설정에 오류가 없는지 확인.
 
 ```bash
 python common/convert.py --validate
@@ -724,5 +724,5 @@ Remove-Item -Recurse -Force common/__pycache__
 
 ### 3. config.json 형식 오류
 
-JSON 문법 오류 시 기본값으로 자동 동작합니다.
-정상 동작하지만 `[WARN] 설정 파일 형식 오류` 메시지가 출력됩니다.
+JSON 문법 오류 시 기본값으로 자동 동작한다.
+정상 동작하지만 `[WARN] 설정 파일 형식 오류` 메시지가 출력된다.

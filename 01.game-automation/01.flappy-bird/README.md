@@ -1,7 +1,7 @@
 # 🐦 Flappy Bird QA 자동화
 
 오픈소스 Flappy Bird 클론([FlapPyBird](https://github.com/sourabhv/FlapPyBird))을
-대상으로 PyAutoGUI + OpenCV + pytest 기반 자동화 테스트를 구현했습니다.
+대상으로 PyAutoGUI + OpenCV + pytest 기반 자동화 테스트를 구현했다.
 
 ## 🎬 시연 영상
 
@@ -105,6 +105,6 @@ allure serve allure-results
 
 ### CI/CD
 
-GitHub main 브랜치에 push 하면 자동으로 실행돼요.
+GitHub main 브랜치에 push 하면 자동 실행.
 
 👉 [Allure 리포트 보기](https://kimsymbol.github.io/game-qa-portfolio)

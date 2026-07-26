@@ -1,10 +1,8 @@
 # 🗡️ Flare RPG QA 자동화
 
-오픈소스 PC RPG 게임 [Flare RPG](https://flarerpg.org/)를 대상으로 
-PyAutoGUI + OpenCV + pytest 기반 자동화 테스트를 구현했습니다.
+오픈소스 PC RPG 게임 [Flare RPG](https://flarerpg.org/)를 대상으로 PyAutoGUI + OpenCV + pytest 기반 자동화 테스트를 구현했다.
 
-게임 시작부터 캐릭터 생성, 이동, 인벤토리, 전투, 사망 후 재시작까지 
-**전체 플레이 사이클을 자동화**한 포트폴리오 프로젝트입니다.
+게임 실행과 캐릭터 생성부터 이동, 인벤토리, 전투, 사망 후 재시작까지 **한 판을 처음부터 끝까지 자동으로 돌린다.**
 
 ## 🎬 시연 영상
 
@@ -131,7 +129,7 @@ allure serve allure-results
 
 ### CI/CD
 
-GitHub Actions self-hosted runner 로 자동 실행됩니다.
+GitHub Actions self-hosted runner 로 자동 실행.
 
 - 트리거: `01.game-automation/02.flare-rpg/` 폴더 변경 시 자동 + 수동 실행 가능
 - 게임 자동 실행 + 알림창 자동 처리 + pytest 실행 + Allure 리포트 GitHub Pages 배포
