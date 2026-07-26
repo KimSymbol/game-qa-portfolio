@@ -22,8 +22,7 @@ game-qa-portfolio/
 │    ├── 06.tc-generator/      # TC 자동 생성
 │    ├── common/               # 공통 모듈 (입출력/스타일/로깅/매핑)
 │    └── pipeline.py           # 통합 자동화 스크립트
-├── 03.추가 예정          # 분석서, 테스트케이스 등(추가 예정)
-└── .gitmodules           # 서브 모듈 (FlapPybird)
+└── .gitmodules           # 서브 모듈 (FlapPybird,Sentaur-survivors)
 ```
 
 ## 🛠️ 기술 스택
