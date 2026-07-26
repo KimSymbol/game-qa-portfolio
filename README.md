@@ -117,3 +117,12 @@ python pipeline.py --all --open
 | **기술 스택** | Selenium · pytest · GitLab CI/CD · Allure · Jira API |
 | **주요 구현** | 회원가입(SI) · 로그인(LI) · 수업지도안(TS) 플로우 UI 자동화 |
 | **특이사항** | Jira REST API v3 연동으로 버그 티켓 자동 생성 및 중복 방지 처리, 실 서비스 품질 향상에 영향을 줌 |
+
+### LXP 학습 서비스 QA 자동화 (부트캠프 팀 프로젝트)
+
+| 항목 | 내용 |
+|------|------|
+| **대상 서비스** | 엘리스트랙 LXP 학습 서비스 |
+| **기술 스택** | pytest · Postman · GitLab CI/CD · Allure · Jira API · Apache JMeter |
+| **주요 구현** | 게시판(CRUD·좋아요·댓글·공지) API 기능 자동화, 학습자/교육자 권한 경계 검증, 시험 응시 시나리오 부하테스트 |
+| **특이사항** | 팀장 역할 · 학습자가 타인 게시글을 삭제할 수 있는 P0급 권한 검증 누락 버그 발견 및 이슈 등록, 자동화 TC 107개 중 96% 이상 Pass 달성 |
